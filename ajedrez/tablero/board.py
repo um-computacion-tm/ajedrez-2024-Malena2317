@@ -1,5 +1,4 @@
-
-
+from piezas.rook import Rook
 
 class Board:
     def __init__(self):
