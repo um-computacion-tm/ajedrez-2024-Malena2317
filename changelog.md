@@ -1,6 +1,18 @@
 # Changelog
 
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
+## [1.5.0] - 2024-08-19
+
+### Añadido
+-**Implementada la clase Pawn (Peón) que hereda de Piece**.
+  -**Métodos**:
+      -**'__init__(self, color)'**: Inicializa un peón con un color específico ("WHITE" o "BLACK"). El símbolo del peón se asigna como "P" para blanco y "p" para negro.
+      -**'mover(self, tablero, start_row, start_col, to_row, to_col)'**: Permite mover el peón en el tablero. Las reglas de movimiento aplicadas son:
+        El peón no puede moverse en la misma fila (start_row debe ser diferente de to_row).
+        El peón solo puede moverse verticalmente en la misma columna (start_col debe ser igual a to_col). 
+        El peón blanco solo se mueve hacia adelante (a un número mayor de fila).
+        El peón negro solo se mueve hacia adelante (a un número menor de fila).
+        El peón es movido en el tablero y la posición original se libera.
 
 ## [1.4.0] - 2024-08-18
 
@@ -31,3 +43,5 @@ Todos los cambios importantes en este proyecto serán documentados en este archi
   
 - **Interfaz Gráfica con Pygame**: Implementación inicial de la interfaz gráfica para visualizar el tablero de ajedrez usando Pygame.
   - **Dibujo del Tabler
+
+
