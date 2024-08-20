@@ -1,6 +1,22 @@
 # Changelog
 
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
+
+## [1.6.0] - 2024-08-20
+### Añadido 
+-**Funcionalidad Principal**:
+    Implementación de la clase TestPawn para realizar pruebas unitarias sobre los movimientos 
+    de la pieza de ajedrez Pawn en un tablero de ajedrez.
+-**Nuevas Características**:
+  -**Pruebas de Movimiento Adelante**:
+    Se agregó la prueba para verificar que un peón blanco y negro pueda moverse hacia adelante en el tablero.
+-**Pruebas de Movimiento Hacia Atrás**:
+    Se agregó la prueba para asegurar que un peón blanco y negor no pueda moverse hacia atrás en el tablero.
+-**Pruebas de Movimiento en la Misma Fila**:
+    Se agregó la prueba para confirmar que un peón no pueda moverse lateralmente en la misma fila.
+-**Pruebas de Movimiento a una Columna Diferente**:
+    Se agregó la prueeba para validar que un peón no pueda moverse diagonalmente a una columna diferente
+
 ## [1.5.0] - 2024-08-19
 
 ### Añadido
