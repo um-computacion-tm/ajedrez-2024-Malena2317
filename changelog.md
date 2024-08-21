@@ -2,6 +2,20 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
+
+## [1.7.0] - 2024-08-21
+-**Agregado**: 
+  -Método get_piece(row, col) para acceder a la pieza en una posición específica del tablero.
+  -Clase de pruebas TestCli utilizando unittest y unittest.mock.patch para simular entradas y verificar el comportamiento de la función play en diferentes escenarios:
+        -test_happy_path: Verifica un flujo exitoso donde el usuario introduce valores válidos.
+        -test_not_happy_path: Maneja el caso donde la entrada inicial no es válida.
+        -test_more_not_happy_path: Maneja el caso donde una entrada inválida ocurre después de algunas entradas válidas.
+  -Clase Alfil con métodos para inicializar la posición y color de la pieza, moverla en el tablero si el movimiento es válido, y obtener la posición actual (get_row() y get_col()).
+-**Modificado**:
+  - Método __str__() para generar una representación visual del tablero en forma de cadena, mostrando las piezas y celdas vacías.
+-**Nuevo**: 
+  -Implementación de una clase de prueba TestBoard utilizando unittest para verificar que el método __str__() del tablero produce la salida esperada en formato de cadena.
+
 ## [1.6.0] - 2024-08-20
 ### Añadido 
 -**Funcionalidad Principal**:
