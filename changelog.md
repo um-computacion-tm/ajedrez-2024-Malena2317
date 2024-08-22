@@ -3,6 +3,32 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
 
+## [1.8.0] - 2024-08-22
+
+-**Cambios en la Configuración de Importaciones**
+  -**Configuración del Path**: 
+    Se ha agregado código para configurar el path de importación en el archivo de pruebas 
+    import sys
+    import os
+    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+    Esto resuelve problemas con las importaciones relativas, asegurando que los módulos y clases necesarios se importen correctamente desde el directorio padre.
+
+
+-**Método de Prueba**: test_mover_diagonal_libre
+      Verifica que el alfil puede moverse correctamente en diagonal a una posición libre.
+      Se asegura de que el alfil se mueva a la posición (3, 3) y que la operación sea exitosa.
+
+-**Método de Prueba**: test_mover_no_diagonal
+
+      Verifica que el alfil no puede moverse a una posición que no está en diagonal.
+      Se asegura de que el alfil permanezca en la posición original (1, 1) si el movimiento no es válido.
+
+-**Método de Prueba**:test_mover_posicion_ocupada
+
+      Verifica que el alfil no puede moverse a una posición ocupada por otra pieza.
+      Se asegura de que el alfil permanezca en la posición original (1, 1) si la posición destino está ocupada.
+
+
 ## [1.7.0] - 2024-08-21
 -**Agregado**: 
   -Método get_piece(row, col) para acceder a la pieza en una posición específica del tablero.
