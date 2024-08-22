@@ -1,4 +1,4 @@
-from piezas import Piece
+from piezas.pawn import Piece
 
 
 class Pawn(Piece):

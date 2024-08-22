@@ -1,8 +1,9 @@
 import unittest
-from ajedrez.piezas.rook import Rook
-from ajedrez.tablero.board import Board
-
-
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from piezas.rook import Rook
+from tablero.board import Board
 
 
 class TestRook(unittest.TestCase):
@@ -16,7 +17,9 @@ class TestRook(unittest.TestCase):
         self.board.__positions__[0][0] = self.rook_blanco
         resultado = self.rook_blanco.move(self.board, 0, 0, 4, 0)
         self.assertEqual(resultado, True, "La torre blanca debería poder moverse en línea recta vertical")
-
+        self.assertIsNone(self.board.get_piece(0, 0), "La posición inicial debería estar vacía")
+        self.assertEqual(self.board.get_piece(4, 0), self.rook_blanco, "La torre blanca debería estar en la nueva posición (4, 0)")
+    
     def test_mover_torre_en_linea_recta_horizontal(self):
         self.board.__positions__[0][0] = self.rook_negro
         resultado = self.rook_negro.move(self.board, 0, 0, 0, 5)
