@@ -1,3 +1,4 @@
+from piezas.piezas import Piece
 
 class Alfil:
     def __init__(self, row, col, color):
@@ -14,10 +15,10 @@ class Alfil:
         return False  
     
     def get_row(self):
-        return self._row
+        return self.__row__
     
     def get_col(self):
-        return self._col
+        return self.__col__
     
 tablero = [[None for _ in range(8)] for _ in range(8)]
 alfil = Alfil(1, 1, "blanco")
