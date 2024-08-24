@@ -1,4 +1,6 @@
-from piezas.pawn import Piece
+import sys
+sys.path.insert(0, '/home/meli/Escritorio/computacion/ajedrez-2024-Malena2317/ajedrez')
+from piezas.pieza import Piece
 
 
 class Pawn(Piece):

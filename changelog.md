@@ -3,6 +3,25 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
 
+
+## [1.10.0] - 2024-08-24
+
+-**Clase Knight**: Implementada la clase para representar al caballo en el juego de ajedrez.
+      __init__: Inicializa el caballo con una fila (start_row), una columna (start_col), y un color.
+      move: Implementado el método para mover el caballo.
+      Calcula la diferencia en filas y columnas para verificar movimientos en forma de "L" (2 casillas en una dirección y 1 en la otra).
+      Verifica si la casilla destino está vacía o ocupada por una pieza del otro color.
+      Mueve el caballo a la nueva posición si el movimiento es válido.
+
+## [1.9.0] - 2024-08-23
+
+-**Método is_valid_move**: Implementado el método para verificar si un movimiento de la torre es válido.
+      -**Verificación de línea recta**: La torre solo puede moverse en línea recta, ya sea vertical u horizontal. Si el movimiento no es en línea recta, se devuelve False.
+      -**Movimiento vertical**:Si la columna de inicio es igual a la columna de destino, se verifica que no haya piezas en la ruta vertical entre el punto de inicio y el punto de destino. Si se encuentra alguna pieza, se devuelve False.
+      -**Movimiento horizontal**:Si la fila de inicio es igual a la fila de destino, se verifica que no haya piezas en la ruta horizontal entre el punto de inicio y el punto de destino. Si se encuentra alguna pieza, se devuelve False.
+      -**Movimiento al mismo lugar**: Se verifica que el punto de destino no sea el mismo que el punto de inicio. Si el punto de destino es el mismo, se devuelve False.
+
+
 ## [1.8.0] - 2024-08-22
 
 -**Cambios en la Configuración de Importaciones**

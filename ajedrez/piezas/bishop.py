@@ -1,4 +1,6 @@
-from piezas.piezas import Piece
+import sys
+sys.path.insert(0, '/home/meli/Escritorio/computacion/ajedrez-2024-Malena2317/ajedrez')
+from piezas.pieza import Piece
 
 class Alfil:
     def __init__(self, row, col, color):
