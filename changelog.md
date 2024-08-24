@@ -3,7 +3,6 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
 
-
 ## [1.10.0] - 2024-08-24
 
 -**Clase Knight**: Implementada la clase para representar al caballo en el juego de ajedrez.
