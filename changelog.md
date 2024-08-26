@@ -3,7 +3,7 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
 
-## [1.11.0] - 2024-08-25
+## [1.11.0] - 2024-08-26
 
 -**Pruebas unitarias para la clase Knight**:
       test_move_L_shape: Verifica movimiento en "L" válido.
