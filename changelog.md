@@ -3,6 +3,14 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
 
+## [1.11.0] - 2024-08-25
+
+-**Pruebas unitarias para la clase Knight**:
+      test_move_L_shape: Verifica movimiento en "L" válido.
+      test_move_not_L_shape: Asegura que no se permite un movimiento inválido.
+      test_move_to_same_color_piece: Impide moverse a una casilla ocupada por una pieza del mismo color.
+      test_move_to_opponent_piece: Permite moverse a una casilla ocupada por una pieza del color opuesto.
+
 ## [1.10.0] - 2024-08-24
 
 -**Clase Knight**: Implementada la clase para representar al caballo en el juego de ajedrez.
