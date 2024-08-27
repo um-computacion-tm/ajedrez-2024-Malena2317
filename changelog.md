@@ -3,6 +3,28 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
 
+
+## [1.12.0] - 2024-08-26
+
+-**Inicialización de la clase Queen**:
+        Se agregó el constructor __init__ para definir la posición inicial (row, col) y el color (color) de la Reina en el tablero.
+
+-**Implementación del método move**:
+        Se añadió la lógica para permitir que la Reina se mueva horizontalmente, verticalmente y diagonalmente.
+        Se añadió una verificación para permitir el movimiento solo si la casilla de destino está vacía o si contiene una pieza del color contrario.
+        Se añadió la restricción para devolver False si el movimiento no es válido.
+
+-**Creación del tablero de ajedrez vacío**:
+      Se implementó la creación de un tablero de 8x8 con casillas vacías representadas por None.
+
+-**Instanciación y prueba de la Reina**:
+      Se creó una instancia de la Reina en la posición inicial (0, 0) con el color blanco.
+      Se añadieron pruebas para mover la Reina a diferentes posiciones y verificar la validez de los movimiento
+
+## [1.11.0] - 2024-08-25
+
+-**Pruebas unitarias para la clase Knight**: test_move_L_shape: Verifica movimiento en "L" válido. test_move_not_L_shape: Asegura que no se permite un movimiento inválido. test_move_to_same_color_piece: Impide moverse a una casilla ocupada por una pieza del mismo color. test_move_to_opponent_piece: Permite moverse a una casilla ocupada por una pieza del color opuesto.
+
 ## [1.10.0] - 2024-08-24
 
 -**Clase Knight**: Implementada la clase para representar al caballo en el juego de ajedrez.
