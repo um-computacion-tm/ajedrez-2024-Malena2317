@@ -12,6 +12,17 @@ class Queen:
         # Movimientos horizontales o verticales
         if self.__row__ == to_row or self.__col__ == to_col:
             # Si la casilla está vacía o hay una pieza del otro color
+
+            if board[to_row][to_col] == None or board[to_row][to_col].__color__ != self.__color__:
+                self.__row__ = to_row
+                self.__col__ = to_col
+                return True
+
+        # Movimientos diagonales
+        elif abs(self.__row__ - to_row) == abs(self.__col__ - to_col):
+            if board[to_row][to_col] == None or board[to_row][to_col].__color__ != self.__color__:
+                self.__row__ = to_row
+                self.__col__ = to_col
             if board[to_row][to_col] == None or board[to_row][to_col].color != self.color:
                 self.row = to_row
                 self.col = to_col
@@ -22,6 +33,7 @@ class Queen:
             if board[to_row][to_col] == None or board[to_row][to_col].color != self.color:
                 self.row = to_row
                 self.col = to_col
+                
                 return True
 
         # Si nada de lo anterior funciona, entonces no se puede mover

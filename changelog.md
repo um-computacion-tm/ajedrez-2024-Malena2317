@@ -3,7 +3,7 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
 
- 2024-08-26-adding-piece
+
 
 ## [1.12.0] - 2024-08-26
 
