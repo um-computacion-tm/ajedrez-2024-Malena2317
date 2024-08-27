@@ -4,6 +4,18 @@ Todos los cambios importantes en este proyecto serán documentados en este archi
 
 
 
+## [1.12.0] - 2024-08-27
+
+-Se agregó un método setUp que inicializa un tablero de ajedrez vacío y coloca una Reina blanca en la posición inicial (0, 0).
+-**Se implementaron seis pruebas unitarias para verificar el comportamiento de la Reina**:
+      -  **Movimiento horizontal**: Verifica que la Reina se pueda mover horizontalmente en la misma fila.
+      -  **Movimiento vertical**: Verifica que la Reina se pueda mover verticalmente en la misma columna.
+      -  **Movimiento diagonal**: Verifica que la Reina se pueda mover en diagonal.
+      -  **Movimiento inválido**: Verifica que la Reina no se mueva a una posición inválida.
+      -  **Movimiento a casilla ocupada por la misma pieza**: Verifica que la Reina no se pueda mover a una casilla ocupada por otra pieza del mismo color.
+      -  **Movimiento a casilla ocupada por una pieza oponente**: Verifica que la Reina pueda capturar una pieza del oponente moviéndose a su posición.
+
+
 ## [1.12.0] - 2024-08-26
 
 -**Inicialización de la clase Queen**:
