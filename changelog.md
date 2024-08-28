@@ -5,6 +5,17 @@ Todos los cambios importantes en este proyecto serán documentados en este archi
 
 
 
+
+
+## [1.12.0] - 2024-08-28
+
+-Creación de la clase King con atributos __row__, __col__ y __color__ para representar la posición y el color del rey en el tablero.
+-**Movimiento del Rey**:
+    Implementación del método move para permitir al Rey moverse una casilla en cualquier dirección.
+-**Condiciones de movimiento**:
+    El Rey puede moverse horizontal, vertical o diagonalmente a una casilla adyacente.
+    Se permite el movimiento solo si la casilla de destino está vacía o si contiene una pieza de color contrario
+
 ## [1.12.0] - 2024-08-27
 
 -Se agregó un método setUp que inicializa un tablero de ajedrez vacío y coloca una Reina blanca en la posición inicial (0, 0).
