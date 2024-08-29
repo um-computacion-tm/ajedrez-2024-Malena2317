@@ -3,9 +3,18 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
 
+## [1.13.0] - 2024-08-29
 
+-**Creación del TestKing**:
+    Se añadió la clase TestKing para probar los movimientos de la pieza del Rey.
+    Implementación de setUp para inicializar un tablero vacío y colocar un Rey blanco en la posición (0, 4).
 
+-**Pruebas de movimientos**:
 
+  -  **Movimiento hacia abajo**: Se agregó la prueba test_mover_una_casilla_hacia_abajo para verificar que el Rey se pueda mover una casilla hacia abajo.
+  -  **Movimiento en diagonal**: Se añadió la prueba test_mover_en_diagonal para comprobar el movimiento diagonal del Rey.
+  -  **Movimiento a casilla ocupada por misma pieza**: Implementación de la prueba test_colocar_otra_pieza_y_moverla para asegurar que el Rey no se mueva a una casilla ocupada por una pieza del mismo color.
+  -  **Movimiento a casilla ocupada por pieza contraria**: Se creó la prueba test_mover_pieza_negra para verificar que el Rey puede capturar una pieza de color contrario.
 
 ## [1.12.0] - 2024-08-28
 
