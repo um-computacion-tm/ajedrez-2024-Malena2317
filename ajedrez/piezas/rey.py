@@ -17,7 +17,7 @@ class King:
                     self.__row__ = to_row
                     self.__col__ = to_col
                     return True
-                elif board[to_row][to_col] != None and board[to_row][to_col].color != self.__color__:
+                elif board[to_row][to_col] != None and board[to_row][to_col].__color__ != self.__color__:
                     self.__row__= to_row
                     self.__col__ = to_col
                     return True
