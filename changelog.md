@@ -3,6 +3,20 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
 
+
+## [1.14.0] - 2024-08-31
+
+-**InvalidMoveNoPiece**:
+   Añadida una excepción personalizada para indicar que un movimiento no es válido.
+-**Constructor (__init__)**: 
+   Inicializa el mensaje de error predeterminado "Movimiento no válido".
+-**Modificación de la Clase de Movimiento**:
+    InvalidMoveRookMove: Actualizada la implementación del método move para verificar la validez del movimiento.
+-**Verificación de Movimiento**: Se comprueba si el movimiento es válido usando self.is_valid_move().
+-**Manejo de Errores**: Se imprime un mensaje de error si el movimiento no es válido. El código no maneja excepciones pero indica el error mediante un mensaje en la consola.
+
+
+
 ## [1.13.0] - 2024-08-29
 
 -**Creación del TestKing**:
