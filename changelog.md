@@ -4,6 +4,23 @@ Todos los cambios importantes en este proyecto serán documentados en este archi
 
 
 
+
+## [1.15.0] - 2024-09-1
+
+-**Función verificar_si_posicion_ocupada añadida**:
+      
+      Se implementó una nueva función para verificar si una posición en el tablero está ocupada por una pieza del mismo color.
+
+-**Detalles**:
+    La función toma como parámetros el tablero (board), la fila y columna de destino (to_row, to_col), y la pieza que intenta moverse (pieza).
+    Utiliza board.get_piece(to_row, to_col) para obtener la pieza en la posición de destino.
+    Comprueba si la posición de destino está ocupada por una pieza.
+    Si la pieza en la posición de destino es del mismo color que la pieza que intenta moverse, se imprime un mensaje de error y la función devuelve True.
+    Si la posición de destino está vacía o está ocupada por una pieza de otro color, la función devuelve False.
+
+-**Manejo básico de errores**:
+    Se agregó un mensaje de error que se imprime cuando la posición de destino está ocupada por una pieza del mismo color
+
 ## [1.14.0] - 2024-08-31
 
 -**InvalidMoveNoPiece**:
