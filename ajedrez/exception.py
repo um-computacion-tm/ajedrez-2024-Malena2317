@@ -13,6 +13,19 @@ class InvalidMoveRookMove():
         # Error si el movimiento no es válido
             print("Error: Movimiento inválido para la torre.")
         return
-
+    
 class InvalidMove(Exception):
-    pass
+    
+    def verificar_si_posicion_ocupada(board, to_row, to_col, pieza):
+    # Buscar la pieza en la posición
+        pieza_en_destino = board.get_piece(to_row, to_col)
+    
+    # Si hay algo en esa posición
+        if pieza_en_destino != None:
+        # Si es del mismo color
+            if pieza_en_destino.__color__ == pieza.__color__:
+                print("Error: La posición está ocupada por una pieza del mismo color.")
+            return True  # Está ocupada, así que devolver True
+    
+    # Si no hay pieza o es de otro color
+        return False  # No está ocupada por una pieza del mismo color
