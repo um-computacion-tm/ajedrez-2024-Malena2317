@@ -3,7 +3,17 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
 
+## [1.16.0] - 2024-09-2
 
+-**Funcionalidad**: Implementación del método move para verificar si una pieza se mueve fuera de los límites del tablero.
+
+-**Descripción del Cambio**:
+
+  -**Comprobación de límites**: Se añade una verificación para asegurarse de que las coordenadas de destino (to_row, to_col) estén dentro del rango válido del tablero (0 a 7).
+  -**Manejo de errores**: Si las coordenadas están fuera de los límites del tablero, se imprime un mensaje de error en lugar de lanzar una excepción.
+      Detalles del Código:
+  -**Verificación de coordenadas**: Se usa una condición para verificar si to_row o to_col están fuera del rango de 0 a 7.
+  -**mensaje de error**: En caso de que las coordenadas estén fuera del tablero, se imprime el mensaje "¡Ouch! Te saliste del tablero!" en lugar de lanzar una excepción.
 
 ## [1.15.0] - 2024-09-1
 
