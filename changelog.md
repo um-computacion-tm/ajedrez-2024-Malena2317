@@ -3,6 +3,15 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
 
+
+## [1.16.0] - 2024-09-03
+
+-**Agregado**:
+      -Creación inicial de la clase PieceNotFoundException para manejar errores cuando no se encuentra una pieza en una posición específica.
+      -Implementación del método __str__ en PieceNotFoundException para mostrar un mensaje de error básico.
+      -Añadida la función get_piece_at para verificar la presencia de una pieza en una posición y lanzar una excepción si no se encuentra ninguna.
+
+
 ## [1.16.0] - 2024-09-2
 
 -**Funcionalidad**: Implementación del método move para verificar si una pieza se mueve fuera de los límites del tablero.
