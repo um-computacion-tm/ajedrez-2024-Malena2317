@@ -2,7 +2,17 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
+## [1.16.0] - 2024-09-04
 
+-**Nueva clase InvalidMoveBishop**: 
+    -Se añadió una excepción personalizada que maneja movimientos inválidos del alfil. Incluye:
+    -Atributo position para indicar la posición no válida.
+    -Mensaje personalizado indicando el error de movimiento.
+-**Nueva función mover_alfil**: 
+    -Implementada para gestionar el movimiento del alfil en el tablero. Incluye:
+    -Verificación de movimientos diagonales válidos.
+    -Lógica para mover el alfil solo si la casilla destino está vacía.
+    -Manejo de la excepción en caso de movimiento inválido.
 
 ## [1.16.0] - 2024-09-03
 
