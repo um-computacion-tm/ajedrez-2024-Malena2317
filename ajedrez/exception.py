@@ -40,6 +40,41 @@ def mover_alfil(alfil, to_row, to_col, tablero):
     
     # Retornar False si la casilla no está vacía
     return False
+
+class InvalidMoveKnight(Exception):
+    def __init__(self, position, message="El caballo no se puede mover así"):
+        # Guardar la posición donde ocurrió el error
+        self.position = position
+        # Crear el mensaje de error con la posición
+        self.message = message + " en " + str(position)
+        # Llamar a la superclase Exception
+        super(InvalidMoveKnight, self).__init__(self.message)
+
+    def __str__(self):
+        # Mostrar el mensaje de error
+        return "Error: " + self.message
+
+    def mover_caballo(caballo, to_row, to_col, tablero):
+    # Calcular las diferencias en filas y columnas usando métodos getter
+        diferencia_filas = abs(caballo.get_row() - to_row)
+        diferencia_columnas = abs(caballo.get_col() - to_col)
+    
+    # Comprobar si el movimiento es válido para el caballo
+        if not (diferencia_filas == 2 and diferencia_columnas == 1) and not (diferencia_filas == 1 and diferencia_columnas == 2):
+        # Lanzar error si el movimiento no es válido
+            raise InvalidMoveKnight((to_row, to_col))
+    
+    # Comprobar si la casilla destino está vacía
+        if tablero[to_row][to_col] is None:
+        # Mover el caballo a la nueva posición
+            caballo.set_row(to_row)
+            caballo.set_col(to_col)
+            return True
+    
+        # Retornar False si la casilla está ocupada
+        return False
+
+
 #---------------------------------------------------------------------------------------------------------------------------------
 
 #EXCEPCIONES GENERALES --------------------------------------------------------------------------------------------------------------
