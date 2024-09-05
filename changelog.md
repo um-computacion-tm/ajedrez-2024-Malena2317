@@ -5,7 +5,6 @@ Todos los cambios importantes en este proyecto serán documentados en este archi
 
 
 
-
 ## [1.17.0] - 2024-09-05
 
 -**Corrección de Acceso a Atributos Privados**:
