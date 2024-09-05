@@ -2,6 +2,23 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
+
+
+
+
+## [1.17.0] - 2024-09-05
+
+-**Corrección de Acceso a Atributos Privados**:
+      Se reemplazó el acceso directo a los atributos privados __row__ y __col__ de la clase Caballo con métodos getter y setter (get_row(), get_col(), set_row(row), set_col(col)) para seguir las buenas prácticas de encapsulamiento en Python.
+
+-**Actualización de la Función mover_caballo**:
+      Modificada la función para utilizar métodos getter y setter en lugar de acceder directamente a los atributos privados.
+      Añadido manejo de la excepción InvalidMoveKnight cuando el movimiento no es válido para el caballo.
+      La función verifica si la casilla destino está vacía antes de mover el caballo y retorna True si el movimiento es exitoso y False si la casilla está ocupada.
+
+-**Definición de Excepción**:
+      Se ha incluido la definición de la excepción InvalidMoveKnight, que ahora es utilizada en la función mover_caballo para indicar movimientos inválidos del caballo con un mensaje de error claro.
+
 ## [1.16.0] - 2024-09-04
 
 -**Nueva clase InvalidMoveBishop**: 
