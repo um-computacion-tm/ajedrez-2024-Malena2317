@@ -11,29 +11,40 @@ class Rook(Piece):
         self.__symbol__ = "♜" if color == "WHITE"  else "♖"
 
 
-    def move( self, board, start_row, start_col, to_row, to_col):
-            if self.is_valid_move(board, start_row, start_col, to_row, to_col) == False:
-                 raise ValueError("Movimiento inválido")
-    
-            board.get_piece(to_row, to_col, self)
-            board.get_piece(start_row, start_col, None)
+    def move(self, board, start_row, start_col, to_row, to_col):
+        # Verificar si la torre intenta moverse al mismo lugar
+        if start_row == to_row and start_col == to_col:
+            return False  # El movimiento al mismo lugar no es válido
+        
+        # Verificación de si el movimiento es válido (horizontal o vertical)
+        if self.is_valid_move(board, start_row, start_col, to_row, to_col):
+            # Realiza el movimiento
+            board.set_piece(to_row, to_col, self)
+            board.set_piece(start_row, start_col, None)  # Elimina la pieza de la posición inicial
+            return True  # Devuelve True si el movimiento fue exitoso
+        
+        return False 
     
     def is_valid_move(self, board, start_row, start_col, to_row, to_col):
-    # La torre solo puede moverse en línea recta
-        if start_row != to_row and start_col != to_col:
-    # Movimiento horizontal
-            if start_row == to_row: 
-                for col in range(min(start_col, to_col) + 1, max(start_col, to_col)):
-                    if board.get_piece(start_row, col) != None:
-                        return False
-    # Movimiento vertical
-            if start_col == to_col:
-                for row in range(min(start_row, to_row) + 1, max(start_row, to_row)):
-                    if board.get_piece(row, start_col) != None:
-                        return False
-            return True
+    # Verificar si el movimiento es vertical u horizontal 
+        if start_row == to_row:  # Movimiento Horizontal
+            return self._is_valid_horizontal_move(board, start_row, start_col, to_col)
+        elif start_col == to_col:  # Movimiento Vertical 
+            return self._is_valid_vertical_move(board, start_row, to_row, start_col)
+        else:
+            return False
 
-        return False
+    def _is_valid_horizontal_move(self, board, row, start_col, to_col):
+        for col in range(min(start_col, to_col) + 1, max(start_col, to_col)):
+            if board.get_piece(row, col) is not None:
+                return False
+        return True
+
+    def _is_valid_vertical_move(self, board, start_row, to_row, col):
+        for row in range(min(start_row, to_row) + 1, max(start_row, to_row)):
+            if board.get_piece(row, col) is not None:
+                return False
+        return True
 
     
 
