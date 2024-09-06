@@ -2,7 +2,6 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
-
 ## [1.18.0] - 2024-09-06
 
 -**Descripción del Cambio**: 
