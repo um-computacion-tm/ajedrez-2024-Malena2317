@@ -3,7 +3,14 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
 
+## [1.18.0] - 2024-09-06
 
+-**Descripción del Cambio**: 
+      Se realizó una refactorización en la función is_valid_move para reducir su complejidad cognitiva. La versión anterior tenía una complejidad cognitiva de 20, lo que supera el límite recomendado de 15. La refactorización incluye la simplificación de las verificaciones de movimiento horizontal y vertical, así como la mejora en la legibilidad del código.
+
+-**Cambios Realizados Refactorización de is_valid_move:**
+      -Motivo: Reducir la complejidad cognitiva de la función que originalmente supera el límite recomendado.
+      -Acción: Simplificación de la lógica de validación de movimientos horizontales y verticales.
 
 ## [1.17.0] - 2024-09-05
 
