@@ -1,6 +1,16 @@
 # Changelog
 
-Todos los cambios importantes en este proyecto serán documentados en este archivo.
+Todos los cambios importantes en este proyecto serán documentados en este archivos.
+
+## [1.19.0] - 2024-09-07
+
+-**Refactorización de la Función move en la Clase Piece**
+
+-**Descripción**: La función move en la clase Piece ha sido refactorizada para ajustar el número de argumentos, cumpliendo así con el límite permitido de cinco argumentos.
+
+-**Problema Original**: La función move original tenía seis argumentos (self, start_row, start_col, to_row, to_col, board), lo que excedía el límite de cinco argumentos permitidos por las reglas de diseño.
+
+-**Solución**: Se ha simplificado la función para utilizar dos objetos Position que encapsulan la información de las posiciones de inicio y destino. Esto permite que la función move acepte sólo cinco argumentos en total, reduciendo la complejidad y cumpliendo con las restricciones.
 
 ## [1.18.0] - 2024-09-06
 

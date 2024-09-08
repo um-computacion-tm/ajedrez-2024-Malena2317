@@ -1,4 +1,9 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 from plistlib import InvalidFileException
+
 
 
 # EXCEPCION FICHAS ------------------------------------------------------------------------------------------------------
@@ -24,22 +29,14 @@ class InvalidMoveBishop(Exception):
         # Se retorna el mensaje formateado
         return "Error: " + self.message
 
-# Función para mover el alfil en el tablero
-def mover_alfil(alfil, to_row, to_col, tablero):
-    # Verificar si el movimiento es diagonal
-    if abs(alfil.get_row() - to_row) != abs(alfil.get_col() - to_col):
-        # Lanza la excepción si el movimiento no es diagonal
-        raise InvalidFileException((to_row, to_col))
-    
-    # Verificar si la casilla destino está vacía
-    if tablero[to_row][to_col] is None:
-        # Mover el alfil a la nueva posición
-        alfil.__row__ = to_row
-        alfil.__col__ = to_col
-        return True
-    
-    # Retornar False si la casilla no está vacía
-    return False
+    def is_valid_diagonal_move(start_row, start_col, to_row, to_col, board):
+        if abs(start_row - to_row) != abs(start_col - to_col):
+            raise InvalidMoveDiagonal((to_row, to_col))
+        if board[to_row][to_col] is not None:
+            raise InvalidMoveDiagonal((to_row, to_col), message= "La casilla de destino está ocupada")
+            return True
+
+
 
 class InvalidMoveKnight(Exception):
     def __init__(self, position, message="El caballo no se puede mover así"):
