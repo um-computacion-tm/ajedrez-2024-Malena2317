@@ -2,6 +2,19 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
+
+## [1.20.0] - 2024-09-08
+
+-**Agregando funcion es is_valid_diagonal_move**:
+
+-**Descripción**
+-Constructor de la clase InvalidMoveBishop ahora guarda la posición del error y un mensaje personalizado que incluye la posición en la que ocurre el error.
+-Se sobreescribió el método __str__ en InvalidMoveBishop para proporcionar un mensaje de error más claro cuando se muestra la excepción.
+-Se incluyó la función is_valid_diagonal_move dentro de la clase InvalidMoveBishop para verificar si un movimiento diagonal es válido en un tablero de ajedrez:
+      -Verifica que el movimiento sea diagonal al comparar las diferencias absolutas entre las filas y columnas.
+      -Lanza una excepción InvalidMoveDiagonal si el movimiento no es diagonal.
+      -Verifica si la casilla de destino está ocupada, lanzando una excepción si es así.
+
 ## [1.19.0] - 2024-09-07
 
 -**Refactorización de la Función move en la Clase Piece**

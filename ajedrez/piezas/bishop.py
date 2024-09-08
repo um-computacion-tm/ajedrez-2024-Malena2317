@@ -7,7 +7,6 @@ from ajedrez.exception import is_valid_diagonal_move
 
 
 
-
 class Alfil:
     def __init__(self, row, col, color, board = None):
         self.__row__ = row
