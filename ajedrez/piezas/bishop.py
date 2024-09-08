@@ -1,20 +1,27 @@
 import sys
-sys.path.insert(0, '/home/meli/Escritorio/computacion/ajedrez-2024-Malena2317/ajedrez')
-from piezas.pieza import Piece
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from ajedrez.exception import is_valid_diagonal_move
+
+
+
+
+
 
 class Alfil:
-    def __init__(self, row, col, color):
+    def __init__(self, row, col, color, board = None):
         self.__row__ = row
         self.__col__ = col
         self.__color__ = color
+        self.board = board
+        self.symbol = "♗" if color == "WHITE" else "♝"
 
-    def mover(self, to_row, to_col, tablero):
-        if abs(self.__row__ - to_row) == abs(self.__col__ - to_col):
-            if tablero[to_row][to_col] is None:
-                self.__row__ = to_row
-                self.__col__ = to_col
-                return True
-        return False  
+        # Verifica si el movimiento es diagonal y si la casilla de destino está vacía.
+         
+    def mover(self, to_row, to_col, board):
+        # Utiliza la función is_valid_diagonal_move desde exceptions
+        if not is_valid_diagonal_move(self.__row__, self.__col__, to_row, to_col, self.board):
+            raise InvalidMoveBishop((to_row, to_col))
     
     def get_row(self):
         return self.__row__
