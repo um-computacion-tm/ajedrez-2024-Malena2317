@@ -9,7 +9,7 @@ from plistlib import InvalidFileException
 # EXCEPCION FICHAS ------------------------------------------------------------------------------------------------------
 
 class InvalidMoveRookMove():
-
+    
     def move(self, board, start_row, start_col, to_row, to_col):
     # Verifica si el movimiento es válido
         valid_move = self.is_valid_move(board, start_row, start_col, to_row, to_col)
