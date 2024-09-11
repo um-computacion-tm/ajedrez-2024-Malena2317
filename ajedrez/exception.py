@@ -1,7 +1,7 @@
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-
+from typing import List
 from plistlib import InvalidFileException
 
 
@@ -19,6 +19,7 @@ class InvalidMoveRookMove():
         return
     
 class InvalidMoveBishop(Exception):
+
     def __init__(self, position, message="Movimiento no válido para el alfil"):
         # Se guarda la posición y se crea el mensaje básico
         self.position = position
@@ -30,11 +31,16 @@ class InvalidMoveBishop(Exception):
         return "Error: " + self.message
 
     def is_valid_diagonal_move(start_row, start_col, to_row, to_col, board):
+        # Verifica si el movimiento es diagonal
         if abs(start_row - to_row) != abs(start_col - to_col):
             raise InvalidMoveDiagonal((to_row, to_col))
+
+    # Verifica si la casilla de destino está ocupada
         if board[to_row][to_col] is not None:
-            raise InvalidMoveDiagonal((to_row, to_col), message= "La casilla de destino está ocupada")
-            return True
+            raise InvalidMoveDiagonal((to_row, to_col), message="La casilla de destino está ocupada")
+    
+    # Si pasa todas las verificaciones, el movimiento es válido
+        return True
 
 
 
