@@ -3,6 +3,20 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
 
+
+
+## [1.21.0] - 2024-09-10
+
+-**Introducción de movimiento_valido**: 
+      -Se creó la variable movimiento_valido al inicio de la función, inicializándola en True. Esta variable se usa para determinar si el movimiento es válido o no.
+      -Anteriormente, el código contenía múltiples return para salir de la función en cada caso en que el movimiento no era válido. Ahora,  movimiento_valido se actualiza en cada verificaciónn.
+
+-**Eliminación de múltiples return**: 
+      Ahora solo hay un único return al final, que devuelve el valor de movimiento_valido.
+      
+-**Flujo más claro**: 
+      Todas las verificaciones se realizan antes de decidir si el movimiento es válido, haciendo el código más legible sin cambiar la lógica.
+
 ## [1.20.0] - 2024-09-08
 
 -**Agregando funcion es is_valid_diagonal_move**:
