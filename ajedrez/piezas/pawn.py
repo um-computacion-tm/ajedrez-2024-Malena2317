@@ -16,28 +16,37 @@ class Position:
         self.__row__ = row
         self.__col__ = col
         
-    def mover(self, start_pos, to_pos, board):
-        # Verifica si el peón se está moviendo en la misma fila
+    def move(self, start_pos, to_pos, board):  #Verifica si el peón se puede mover de la posición start_pos a to_pos en el tablero.
+
+    
+        movimiento_valido = True  # Variable para rastrear si el movimiento es válido o no
+    
+        # Verificar si se mueve en la misma fila
         if start_pos.row == to_pos.row:
             print("No puedes mover el peón a la misma fila")
-            return False
-        
-        # Verifica que el peón solo se mueva en la columna correcta
+            movimiento_valido = False
+    
+        # Verificar si se mueve en la columna
         if start_pos.col != to_pos.col:
             print("El peón solo se puede mover en columnas")
-            return False
+            movimiento_valido = False
 
-        # Verifica que el peón blanco solo se mueva hacia adelante
-        if self.__color__ == "WHITE" and to_pos.row > start_pos.row:
-            print("El peón blanco solo se puede mover hacia adelante")
-            return False
+        # Verificar si el peón blanco va para adelante
+        if self.__color__ == "WHITE":
+            if to_pos.row > start_pos.row:
+                print("El peón blanco solo se puede mover hacia adelante")
+                movimiento_valido= False
 
-        # Verifica que el peón negro solo se mueva hacia adelante
-        if self.__color__ == "BLACK" and to_pos.row < start_pos.row:
-            print("El peón negro solo se puede mover hacia adelante")
-            return False
+        # Verificar si el peón negro va para adelante
+        if self.__color__ == "BLACK":
+            if to_pos.row < start_pos.row:
+                print("El peón negro solo se puede mover hacia adelante")
+                movimiento_valido= False
 
-        # Si todas las verificaciones pasan, mueve el peón
+        # Devuelve el resultado final
+        return movimiento_valido
+    
+     # Si todas las verificaciones pasan, mueve el peón
         board[to_pos.row][to_pos.col] = self
         board[start_pos.row][start_pos.col] = None
         return True
