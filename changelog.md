@@ -5,6 +5,8 @@ Todos los cambios importantes en este proyecto serán documentados en este archi
 
 
 
+
+
 ## [1.21.0] - 2024-09-10
 
 -**Introducción de movimiento_valido**: 
@@ -13,7 +15,7 @@ Todos los cambios importantes en este proyecto serán documentados en este archi
 
 -**Eliminación de múltiples return**: 
       Ahora solo hay un único return al final, que devuelve el valor de movimiento_valido.
-      
+
 -**Flujo más claro**: 
       Todas las verificaciones se realizan antes de decidir si el movimiento es válido, haciendo el código más legible sin cambiar la lógica.
 
