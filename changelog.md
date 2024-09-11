@@ -5,6 +5,17 @@ Todos los cambios importantes en este proyecto serán documentados en este archi
 
 
 
+## [1.21.0] - 2024-09-11
+
+-**Cambios Realizados**:
+
+-**Refactorización**: Se ha creado el método Test_Move para consolidar la lógica de prueba repetida en un solo lugar.
+-**Código Anterior**: Los métodos de prueba (test_mover_torre_vertical, test_mover_torre_horizontal, etc.) contenían bloques de código repetitivos para colocar la pieza, realizar el movimiento y verificar el resultado.
+-**Código Nuevo**: Los métodos de prueba utilizan Test_Move para realizar estas tareas de manera más concisa y evitar la duplicación de código.
+Verificación del Movimiento:
+-**Código Anterior**: Cada método verificaba el movimiento, la posición inicial, y la posición final directamente en el mismo método.
+-**Código Nuevo**: La verificación se realiza en el método Test_Move, simplificando los métodos de prueba individuales.
+
 
 
 ## [1.21.0] - 2024-09-10
