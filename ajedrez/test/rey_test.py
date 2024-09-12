@@ -23,38 +23,34 @@ class TestKing(unittest.TestCase):
         self.king = King(0, 4, "white")
         self.board[0][4] = self.king
 
+    def assert_king_position(self, row, col, result):
+        if result:
+            self.assertEqual(self.king.__row__, row)
+            self.assertEqual(self.king.__col__, col)
+
     def test_mover_una_casilla_hacia_abajo(self):
         result = self.king.move(1, 4, self.board)
         self.assertTrue(result)
-        if result == True:  # Verificar si el movimiento fue exitoso
-            self.assertEqual(self.king.__row__, 1)
-            self.assertEqual(self.king.__col__, 4)
+        self.assert_king_position(1, 4, result)
 
     def test_mover_en_diagonal(self):
         result = self.king.move(1, 5, self.board)
         self.assertTrue(result)
-        if result == True:
-            self.assertEqual(self.king.__row__, 1)
-            self.assertEqual(self.king.__col__, 5)
+        self.assert_king_position(1, 5, result)
 
     def test_colocar_otra_pieza_y_moverla(self):
         another_king = King(1, 4, "white")
         self.board[1][4] = another_king
         result = self.king.move(1, 4, self.board)
         self.assertFalse(result)
-        if result == False:
-            self.assertEqual(self.king.__row__, 0)
-            self.assertEqual(self.king.__col__, 4)
+        self.assert_king_position(0, 4, result)
 
     def test_mover_pieza_negra(self):
-        # Colocar una pieza negra y tratar de moverse allí
         another_king = King(1, 4, "black")
         self.board[1][4] = another_king
         result = self.king.move(1, 4, self.board)
         self.assertTrue(result)
-        if result == True:
-            self.assertEqual(self.king.__row__, 1)
-            self.assertEqual(self.king.__col__, 4)
+        self.assert_king_position(1, 4, result)
 
 if __name__ == '__main__':
     unittest.main()
