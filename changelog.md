@@ -4,6 +4,12 @@ Todos los cambios importantes en este proyecto serán documentados en este archi
 
 
 
+## [1.21.0] - 2024-09-12
+
+Se creó el método auxiliar assert_king_position(row, col, result) para eliminar la duplicación de código en la validación de la posición del rey después de cada movimiento.
+-**Mejoras**: Se reemplazaron las verificaciones individuales de la posición del rey en los tests (test_mover_una_casilla_hacia_abajo, test_mover_en_diagonal, etc.) con llamadas al nuevo método assert_king_position, haciendo el código más limpio y reutilizable.
+-**Metodos**: Se eliminó la repetición de las sentencias assertEqual para validar las posiciones del rey en múltiples pruebas, centralizando la lógica de validación.
+-**Mantenibilidad**: Ahora, cualquier cambio en la forma de verificar la posición del rey solo necesita realizarse en un único lugar (assert_king_position), simplificando futuras modificaciones.
 
 ## [1.21.0] - 2024-09-11
 
