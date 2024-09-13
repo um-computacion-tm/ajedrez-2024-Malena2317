@@ -4,6 +4,20 @@ Todos los cambios importantes en este proyecto serán documentados en este archi
 
 
 
+
+## [1.21.0] - 2024-09-13
+
+-**Refactorización de Test_Move**:
+
+-**Cambio**: Se actualizó el método Test_Move para simplificar la prueba de movimientos de la pieza.
+-**Acción**: Ahora se pasa la posición inicial de la pieza (fila y columna) directamente al método en lugar de obtenerla dentro de Test_Move.
+-**Resultado**: Esta modificación facilita la verificación del movimiento de la pieza, asegurando que se coloque correctamente en la nueva posición o permanezca en la original según el resultado esperado.
+Nuevo Método get_piece_position:
+
+Cambio: Se introdujo un nuevo método para obtener la posición de una pieza en el tablero.
+Acción: Este método recorre el tablero para encontrar y retornar las coordenadas de la pieza especificada.
+Resultado: Permite obtener fácilmente la posición actual de cualquier pieza en el tablero, facilitando la gestión de movimientos en las pruebas.
+
 ## [1.21.0] - 2024-09-12
 
 Se creó el método auxiliar assert_king_position(row, col, result) para eliminar la duplicación de código en la validación de la posición del rey después de cada movimiento.
