@@ -23,7 +23,15 @@ class Board:
 
     def set_piece(self, row, col, piece):
         self.__positions__[row][col] = piece
+    
 
+    def get_piece_position(self, piece):
+        """Busca la posición de una pieza en el tablero y retorna (row, col)"""
+        for row in range(8):
+            for col in range(8):
+                if self.get_piece(row, col) == piece:
+                    return row, col
+        return None, None
 
         
     def __str__(self):
