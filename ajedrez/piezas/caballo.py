@@ -8,6 +8,21 @@ class Knight:
         self.__col__ = start_col
         self.__color__ = color
 
+    def get_row(self):
+        return self.__row__
+
+    def get_col(self):
+        return self.__col__
+
+    def set_row(self, row):
+        self.__row__ = row
+
+    def set_col(self, col):
+        self.__col__ = col
+
+    def get_color(self):
+        return self.__color__
+    
     def move(self, start_row, start_col, to_row, to_col, board):
         # Calcular la diferencia en filas y columnas
         row_diff = abs(to_row - start_row)

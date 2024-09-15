@@ -12,37 +12,33 @@ class TestKnight(unittest.TestCase):
         self.knight = Knight(1, 1, "white")
         self.board[1][1] = self.knight
 
+    def Mover_y_Verificar(self, start_pos, end_pos, expected_result, expected_pos):
+        "Auxiliar para mover el caballo y verificar el resultado."
+        result = self.knight.move(start_pos[0], start_pos[1], end_pos[0], end_pos[1], self.board)
+        self.assertEqual(result, expected_result)
+        self.assertEqual((self.knight.row, self.knight.col), expected_pos)
+
+    def place_piece(self, row, col, color):
+        "Colocar una pieza en el tablero."
+        self.board[row][col] = Knight(row, col, color)
+
     def test_move_L_shape(self):
-        # Probar movimiento en "L" a (3, 2)
-        result = self.knight.move(1, 1, 3, 2, self.board)
-        self.assertTrue(result)
-        self.assertEqual(self.knight.row, 3)
-        self.assertEqual(self.knight.col, 2)
+        "Probar movimiento en 'L' a (3, 2)."
+        self.move_and_check((1, 1), (3, 2), True, (3, 2))
 
     def test_move_not_L_shape(self):
-        # Probar movimiento que no es en "L" a (4, 4)
-        result = self.knight.move(1, 1, 4, 4, self.board)
-        self.assertFalse(result)
-        self.assertEqual(self.knight.row, 1)
-        self.assertEqual(self.knight.col, 1)
+        "Probar movimiento que no es en 'L' a (4, 4)."
+        self.move_and_check((1, 1), (4, 4), False, (1, 1))
 
     def test_move_to_same_color_piece(self):
-        # Probar mover el caballo a donde ya hay otra pieza blanca en (3, 2)
-        another_knight = Knight(3, 2, "white")
-        self.board[3][2] = another_knight
-        result = self.knight.move(1, 1, 3, 2, self.board)
-        self.assertFalse(result)
-        self.assertEqual(self.knight.row, 1)
-        self.assertEqual(self.knight.col, 1)
+        "Probar mover el caballo a donde ya hay otra pieza blanca en (3, 2)."
+        self.place_piece(3, 2, "white")
+        self.move_and_check((1, 1), (3, 2), False, (1, 1))
 
     def test_move_to_opponent_piece(self):
-        # Probar mover el caballo a donde hay una pieza negra en (3, 2)
-        another_knight = Knight(3, 2, "black")
-        self.board[3][2] = another_knight
-        result = self.knight.move(1, 1, 3, 2, self.board)
-        self.assertTrue(result)
-        self.assertEqual(self.knight.row, 3)
-        self.assertEqual(self.knight.col, 2)
+        "Probar mover el caballo a donde hay una pieza negra en (3, 2)."
+        self.place_piece(3, 2, "black")
+        self.move_and_check((1, 1), (3, 2), True, (3, 2))
 
 if __name__ == '__main__':
     unittest.main()
