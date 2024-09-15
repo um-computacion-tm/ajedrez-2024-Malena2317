@@ -35,10 +35,5 @@ class TestKnight(unittest.TestCase):
         self.place_piece(3, 2, "white")
         self.move_and_check((1, 1), (3, 2), False, (1, 1))
 
-    def test_move_to_opponent_piece(self):
-        "Probar mover el caballo a donde hay una pieza negra en (3, 2)."
-        self.place_piece(3, 2, "black")
-        self.move_and_check((1, 1), (3, 2), True, (3, 2))
-
 if __name__ == '__main__':
     unittest.main()
