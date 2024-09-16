@@ -1,43 +1,34 @@
 import sys
 sys.path.insert(0, '/home/meli/Escritorio/computacion/ajedrez-2024-Malena2317/ajedrez')
-from piezas.pieza import Piece
+from pieza import Piece 
 
-class Queen:
+class Queen(Piece):
+
     def __init__(self, row, col, color):
-        self.__row__ = row
-        self.__col__ = col
-        self.__color__ = color
+        super().__init__(row, col, color)
+
+    def is_valid_move(self, to_row, to_col, board):
+        return board[to_row][to_col] is None or board[to_row][to_col].color != self.color
+
+
+    def make_move(self, to_row, to_col, board):
+        if self.is_valid_move(to_row, to_col, board):
+            self.row = to_row
+            self.col = to_col
+            return True
+        return False
+
 
     def move(self, to_row, to_col, board):
-        # Movimientos horizontales o verticales
-        if self.__row__ == to_row or self.__col__ == to_col:
-            # Si la casilla está vacía o hay una pieza del otro color
-
-            if board[to_row][to_col] == None or board[to_row][to_col].__color__ != self.__color__:
-                self.__row__ = to_row
-                self.__col__ = to_col
-                return True
-
-        # Movimientos diagonales
-        elif abs(self.__row__ - to_row) == abs(self.__col__ - to_col):
-            if board[to_row][to_col] == None or board[to_row][to_col].__color__ != self.__color__:
-                self.__row__ = to_row
-                self.__col__ = to_col
-            if board[to_row][to_col] == None or board[to_row][to_col].color != self.color:
-                self.row = to_row
-                self.col = to_col
-                return True
-
-        # Movimientos diagonales
-        elif abs(self.row - to_row) == abs(self.col - to_col):
-            if board[to_row][to_col] == None or board[to_row][to_col].color != self.color:
-                self.row = to_row
-                self.col = to_col
-                
-                return True
-
-        # Si nada de lo anterior funciona, entonces no se puede mover
+        if self.is_horizontal_or_vertical(to_row, to_col) or self.is_diagonal(to_row, to_col):
+            return self.make_move(to_row, to_col, board)
         return False
+
+    def is_horizontal_or_vertical(self, to_row, to_col):
+        return self.__row__ == to_row or self.col == to_col
+
+    def is_diagonal(self, to_row, to_col):
+        return abs(self.__row__ - to_row) == abs(self.col - to_col)
 
 
 # Crear un tablero vacío
