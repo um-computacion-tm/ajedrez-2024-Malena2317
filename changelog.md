@@ -2,7 +2,30 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
- 2024-09-15-Caballo-Test-Moidificado
+
+[1.23.0] - 2024-09-16
+-**clase queen**:
+
+-**Constructor (__init__)**:Se reemplazó la inicialización manual de atributos por super().__init__ para aprovechar la clase base Piece.
+-**Método move**:Se simplificó al delegar la lógica de movimiento en métodos auxiliares (is_horizontal_or_vertical, is_diagonal, y make_move).
+-**Nuevo Método is_valid_move**:Se agregó para verificar si un movimiento es válido.
+-**Nuevo Método make_move**:Se introdujo para realizar movimientos tras validar la jugada.
+-**Nuevos Métodos Auxiliares**:is_horizontal_or_vertical y is_diagonal se añadieron para manejar la lógica de los movimientos específicos.
+
+
+-**clase position y piece**:
+
+-**Cambios en la Clase Piece**:
+
+Constructor (__init__): Ahora inicializa también las posiciones row y col junto con el color.
+Método move: Ahora delega la lógica de movimiento en la clase Position, utilizando to_position para realizar el movimiento.
+Cambio en la Interacción con la Clase Position: Se delega la lógica de validación de movimiento a Position, mejorando la separación de responsabilidades y la modularidad del código.
+
+-**Cambios en la Clase Position**:
+Constructor (__init__):Cambia a usar atributos privados __row__ y __col__, mejorando el encapsulamiento.
+-**Método can_move_to**:Agregado para verificar si la pieza puede moverse a una nueva posición, considerando la presencia de otras piezas y el color.
+-**Método move**:Ahora realiza la verificación completa del movimiento, incluyendo si la nueva posición está dentro del tablero y si el movimiento es válido según el color de la pieza.
+
 [1.22.0] - 2024-09-15
 
 Eliminación de Código Repetitivo:
