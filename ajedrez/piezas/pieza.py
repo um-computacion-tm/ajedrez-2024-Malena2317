@@ -4,7 +4,7 @@ class Piece:
         self.__row__ = row
         self.__col__ = col
         self.__color__ = color
-
+        
 
         
     def __str__(self):
@@ -26,6 +26,11 @@ class Position:
     def is_within_board(self):
         # Verifica si la posición está dentro del tablero
         return 0 <= self.row < 8 and 0 <= self.col < 8
+    
+    def can_move_to(self, to_pos, board, color):
+        # Verifica si se puede mover a la nueva posición
+        return (board[to_pos.row][to_pos.col] is None or
+                board[to_pos.row][to_pos.col].color != color)
 
     def move(self, start_pos, to_pos, board):
         # Intenta mover la pieza de start_pos a to_pos en el tablero
@@ -38,13 +43,4 @@ class Position:
             return True
         return False
 
-    def is_valid_move(self, to_row, to_col, board):
-        return board[to_row][to_col] is None or board[to_row][to_col].color != self.color
-
-    def make_move(self, to_row, to_col, board):
-        if self.is_valid_move(to_row, to_col, board):
-            self.row = to_row
-            self.col = to_col
-            return True
-        return False
     
