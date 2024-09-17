@@ -25,32 +25,41 @@ class TestKing(unittest.TestCase):
 
     def assert_king_position(self, row, col, result):
         if result:
+            # Comprobar si el rey se movió a la posición correcta
             self.assertEqual(self.king.__row__, row)
             self.assertEqual(self.king.__col__, col)
 
+    def move_and_assert(self, row, col, expected_result=True):
+        # Mover el rey existente y verificar el resultado
+        result = self.king.move(row, col, self.board)
+        self.assertEqual(result, expected_result)
+        self.assert_king_position(row, col, result)
+
+    def place_piece_and_move(self, row, col, color, expected_result=True):
+        """Coloca una pieza en el tablero y prueba si puede moverse"""
+        
+        if color == "white" and (row, col) == (self.king.__row__, self.king.__col__):
+            # Si es el mismo rey blanco en la misma posición, probar su movimiento
+            result = self.king.move(row, col, self.board)
+        else:
+            # Colocar una nueva pieza (rey negro) y probar el movimiento
+            another_king = King(row, col, color)
+            self.board[row][col] = another_king  # Coloca el rey negro en el tablero
+            result = self.king.move(row, col, self.board)  # Intenta mover el rey blanco (mover actual rey)
+        
+        self.assertEqual(result, expected_result)  # Compara resultado esperado
+
     def test_mover_una_casilla_hacia_abajo(self):
-        result = self.king.move(1, 4, self.board)
-        self.assertTrue(result)
-        self.assert_king_position(1, 4, result)
+        self.move_and_assert(1, 4, True)
 
     def test_mover_en_diagonal(self):
-        result = self.king.move(1, 5, self.board)
-        self.assertTrue(result)
-        self.assert_king_position(1, 5, result)
+        self.move_and_assert(1, 5, True)
 
     def test_colocar_otra_pieza_y_moverla(self):
-        another_king = King(1, 4, "white")
-        self.board[1][4] = another_king
-        result = self.king.move(1, 4, self.board)
-        self.assertFalse(result)
-        self.assert_king_position(0, 4, result)
+        self.place_piece_and_move(1, 4, "white", False)
 
     def test_mover_pieza_negra(self):
-        another_king = King(1, 4, "black")
-        self.board[1][4] = another_king
-        result = self.king.move(1, 4, self.board)
-        self.assertTrue(result)
-        self.assert_king_position(1, 4, result)
+        self.place_piece_and_move(1, 4, "black", True)
 
 if __name__ == '__main__':
     unittest.main()

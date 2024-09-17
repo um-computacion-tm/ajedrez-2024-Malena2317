@@ -9,19 +9,17 @@ class King:
         self.__color__ = color
 
     def move(self, to_row, to_col, board):
-        # Verifica si el rey se mueve una casilla en cualquier dirección
-        if to_row == self.__row__ + 1 or to_row == self.__row__ - 1 or to_row == self.__row__:
-            if to_col == self.__col__ + 1 or to_col == self.__col__ - 1 or to_col == self.__col__:
-                # Verifica si la casilla está vacía o tiene una pieza del color contrario
-                if board[to_row][to_col] == None:
-                    self.__row__ = to_row
-                    self.__col__ = to_col
-                    return True
-                elif board[to_row][to_col] != None and board[to_row][to_col].__color__ != self.__color__:
-                    self.__row__= to_row
-                    self.__col__ = to_col
-                    return True
+        # El rey solo puede moverse una casilla en cualquier dirección
+        if abs(to_row - self.__row__) <= 1 and abs(to_col - self.__col__) <= 1:
+            # Verifica si la casilla está vacía o tiene una pieza del color contrario
+            if board[to_row][to_col] is None or board[to_row][to_col].__color__ != self.__color__:
+            # Mueve el rey a la nueva posición
+                self.__row__ = to_row
+                self.__col__ = to_col
+                return True
         return False
+
+
     
 # Creo un tablero vacío
 board = []
