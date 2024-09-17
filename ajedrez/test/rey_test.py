@@ -46,7 +46,7 @@ class TestKing(unittest.TestCase):
             another_king = King(row, col, color)
             self.board[row][col] = another_king  # Coloca el rey negro en el tablero
             result = self.king.move(row, col, self.board)  # Intenta mover el rey blanco (mover actual rey)
-        
+            
         self.assertEqual(result, expected_result)  # Compara resultado esperado
 
     def test_mover_una_casilla_hacia_abajo(self):
