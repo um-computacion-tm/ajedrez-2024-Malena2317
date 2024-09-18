@@ -2,6 +2,28 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
+[1.24.0] - 2024-09-17
+
+-**REY**:
+Cambios Introducidos:
+
+Validación de Movimiento del Rey: Se simplificó el cálculo utilizando la diferencia absoluta entre las filas y columnas. Esto asegura que el rey puede moverse solo una casilla en cualquier dirección de manera más directa y precisa.
+
+Verificación de la Casilla Destino:La verificación se mantiene igual, pero se ha simplificado la lógica. Ahora se usa is None para comprobar si la casilla está vacía y se mantiene la verificación del color contrario en una sola condición.
+
+Movimiento del Rey:El movimiento se realiza si las condiciones se cumplen, con la lógica simplificada y la operación realizada en un bloque condicional más compacto.
+
+-**TEST REY**:
+
+Refactorización de Métodos de Prueba:Se crearon métodos de utilidad move_and_assert y place_piece_and_move para reducir la duplicación y mejorar la legibilidad del código.
+
+Nuevo Método move_and_assert: Se introdujo el método move_and_assert para mover el rey y verificar su posición de manera consistente.
+
+Nuevo Método place_piece_and_move: Se introdujo el método place_piece_and_move para manejar la colocación de una nueva pieza y verificar el movimiento en un solo lugar, reduciendo la repetición y facilitando la actualización de la lógica de prueba.
+
+Mejora en assert_king_position:El método assert_king_position se ajustó para incluir un comentario aclaratorio y se mantiene el comportamiento sin cambios significativos.
+
+
 
 [1.23.0] - 2024-09-16
 -**clase queen**:
