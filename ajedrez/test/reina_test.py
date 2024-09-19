@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from piezas.reina import Queen
 
 class TestQueen(unittest.TestCase):
-
+    
     def setUp(self):
         self.queen = Queen(0, 0, "white")  # Initialize the queen attribute
         # Armo un tablero de ajedrez con None
