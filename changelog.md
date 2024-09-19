@@ -2,6 +2,22 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
+
+
+[1.25.0] - 2024-09-19
+
+Cambios realizados en la nueva versión:
+
+-**Refactorización del código repetido en funciones auxiliares**:Se creó la función auxiliar auxiliar_move que maneja la lógica común de verificación de movimientos (válidos e inválidos) y la actualización de las coordenadas de la reina.
+
+Se agregó la función auxiliar_move_to_occupied para manejar los casos en los que la reina intenta moverse a una posición ocupada por otra pieza (tanto del mismo color como del oponente).
+
+-**Limpieza y reducción de la duplicación de código**:Las funciones de prueba test_move_horizontal, test_move_vertical, test_move_diagonal, y test_invalid_move ahora utilizan la función auxiliar auxiliar_move para eliminar la duplicación de la lógica de prueba.
+
+Las pruebas de movimientos hacia posiciones ocupadas ahora usan la nueva función auxiliar_move_to_occupied, lo que simplifica la creación de piezas ocupantes y reduce la repetición de código.
+
+-**Uso más claro de parámetros**:En lugar de escribir directamente la lógica dentro de cada prueba, se pasó a usar parámetros (row, col, color, expected_result) en las funciones auxiliares para hacer las pruebas más flexibles y fáciles de leer.
+
 [1.24.0] - 2024-09-17
 
 -**REY**:
