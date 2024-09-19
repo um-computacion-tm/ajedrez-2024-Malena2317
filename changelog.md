@@ -3,7 +3,6 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
 
-
 [1.25.0] - 2024-09-19
 
 Cambios realizados en la nueva versión:
