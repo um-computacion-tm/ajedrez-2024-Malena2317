@@ -1,10 +1,13 @@
 import sys
 sys.path.insert(0, '/home/meli/Escritorio/computacion/ajedrez-2024-Malena2317/ajedrez')
-from pieza import Piece 
+from piezas.pieza import Piece
 
 class Queen(Piece):
 
     def __init__(self, row, col, color):
+        self.__row__ = row
+        self.__col__ = col
+        self.color = color  # Add this line
         super().__init__(row, col, color)
 
     def is_valid_move(self, to_row, to_col, board):
@@ -12,12 +15,12 @@ class Queen(Piece):
 
 
     def make_move(self, to_row, to_col, board):
-        if self.is_valid_move(to_row, to_col, board):
-            self.row = to_row
-            self.col = to_col
+        if self.is_valid_move(to_row, to_col, board) and (board[to_row][to_col] is None or board[to_row][to_col].color != self.color):
+            self.__row__ = to_row
+            self.__col__ = to_col
+            board[to_row][to_col] = self  # Update the board to reflect the queen's new position
             return True
         return False
-
 
     def move(self, to_row, to_col, board):
         if self.is_horizontal_or_vertical(to_row, to_col) or self.is_diagonal(to_row, to_col):
@@ -25,10 +28,10 @@ class Queen(Piece):
         return False
 
     def is_horizontal_or_vertical(self, to_row, to_col):
-        return self.__row__ == to_row or self.col == to_col
+        return self.__row__ == to_row or self.__col__ == to_col
 
     def is_diagonal(self, to_row, to_col):
-        return abs(self.__row__ - to_row) == abs(self.col - to_col)
+        return abs(self.__row__ - to_row) == abs(self.__col__ - to_col)
 
 
 # Crear un tablero vacío
