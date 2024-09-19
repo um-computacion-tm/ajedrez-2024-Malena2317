@@ -9,9 +9,10 @@ class Queen(Piece):
         self.__col__ = col
         self.color = color  # Add this line
         super().__init__(row, col, color)
+        
 
     def is_valid_move(self, to_row, to_col, board):
-        return board[to_row][to_col] is None or board[to_row][to_col].color != self.color
+        return (0 <= to_row < 8) and (0 <= to_col < 8) and (board[to_row][to_col] is None or board[to_row][to_col].color != self.color)
 
 
     def make_move(self, to_row, to_col, board):
@@ -23,7 +24,7 @@ class Queen(Piece):
         return False
 
     def move(self, to_row, to_col, board):
-        if self.is_horizontal_or_vertical(to_row, to_col) or self.is_diagonal(to_row, to_col):
+        if (0 <= to_row < 8) and (0 <= to_col < 8) and (self.is_horizontal_or_vertical(to_row, to_col) or self.is_diagonal(to_row, to_col)):
             return self.make_move(to_row, to_col, board)
         return False
 
