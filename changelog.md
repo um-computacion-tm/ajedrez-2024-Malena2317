@@ -3,6 +3,20 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
 
+
+[1.26.0] - 2024-09-20
+
+-**Refactorización de métodos duplicados**:
+
+Se eliminó la duplicación de código en los métodos _is_valid_horizontal_move y _is_valid_vertical_move.
+Se creó un nuevo método privado llamado _is_path_clear que unifica la lógica para verificar si el camino está libre tanto en movimientos horizontales como verticales.
+
+-**Parámetros**:
+**start**: posición inicial (puede ser fila o columna, según el tipo de movimiento).
+**end**: posición final (puede ser fila o columna, según el tipo de movimiento).
+**fixed**: valor fijo que se mantiene constante durante la iteración (por ejemplo, la fila en un movimiento horizontal o la columna en un movimiento vertical).
+**is_horizontal**: booleano que indica si se trata de un movimiento horizontal o vertical, para acceder a las piezas correspondientes del tablero.
+
 [1.25.0] - 2024-09-19
 
 Cambios realizados en la nueva versión:

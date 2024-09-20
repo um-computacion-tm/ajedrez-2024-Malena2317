@@ -1,6 +1,5 @@
 import sys
 sys.path.insert(0, '/home/meli/Escritorio/computacion/ajedrez-2024-Malena2317/ajedrez')
-
 from piezas.pieza import Piece
 
 
@@ -34,16 +33,13 @@ class Rook(Piece):
         else:
             return False
 
-    def _is_valid_horizontal_move(self, board, row, start_col, to_col):
-        step = 1 if to_col > start_col else -1
-        for col in range(start_col + step, to_col, step):
-            if board.get_piece(row, col) is not None:
-                return False
-        return True
-
-    def _is_valid_vertical_move(self, board, start_row, to_row, col):
-        step = 1 if to_row > start_row else -1
-        for row in range(start_row + step, to_row, step):
-            if board.get_piece(row, col) is not None:
-                return False
+    def _is_path_clear(self, board, fixed, start, end, is_horizontal):
+        step = 1 if end > start else -1
+        for pos in range(start + step, end, step):
+            if is_horizontal:
+                if board.get_piece(fixed, pos) is not None:
+                    return False
+            else:
+                if board.get_piece(pos, fixed) is not None:
+                    return False
         return True
