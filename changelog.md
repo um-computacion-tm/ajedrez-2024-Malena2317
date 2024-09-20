@@ -3,7 +3,6 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
 
-
 [1.26.0] - 2024-09-20
 
 -**Refactorización de métodos duplicados**:
