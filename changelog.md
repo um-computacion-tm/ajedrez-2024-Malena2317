@@ -3,6 +3,18 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
 
+[1.27.0] - 2024-09-22
+
+-**Arreglando errores de roo_test**
+
+-En la nueva versión, durante el método setUp, se agregaron las torres blanca y negra directamente en sus posiciones iniciales en el tablero (self.board.set_piece(0, 0, self.rook_blanca) y self.board.set_piece(7, 7, self.rook_negra)). Esto asegura que las piezas estén correctamente ubicadas antes de realizar las pruebas.
+
+Se añadió una verificación para asegurarse de que la posición inicial de la torre (start_row y start_col) no sea None. En caso de que alguna de estas coordenadas sea inválida, se lanza un error utilizando self.fail("Start row or column is None"). Esto garantiza que siempre se trabajará con piezas correctamente posicionadas antes de intentar moverlas.
+
+En la versión antigua, la torre negra se movía horizontalmente en la primera fila (fila 0). En la nueva versión, esta prueba fue modificada para que la torre negra se mueva en la última fila (su posición inicial en la fila 7), manteniendo consistencia con su ubicación inicial definida en setUp.
+
+En la nueva versión, se añade un obstáculo explícito en el tablero para esta prueba (self.board.set_piece(2, 0, Piece(2, 0, "WHITE"))), lo que simula una pieza en el camino de la torre blanca. En la versión anterior, se asumía que había un obstáculo sin definirlo explícitamente
+
 [1.26.0] - 2024-09-20
 
 -**Refactorización de métodos duplicados**:
