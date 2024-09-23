@@ -2,6 +2,41 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
+[1.28.0] - 2024-09-23
+
+**Uso de métodos auxiliares para simplificar las pruebas:**
+
+Se introdujeron dos nuevos métodos privados: _setup_patches y _run_test. Esto elimina la repetición de código en las pruebas individuales al encapsular el comportamiento repetitivo de los parches (patch) y la ejecución de las pruebas.
+**_setup_patches:** Encapsula los parches para los métodos input, print y Chess.move, permitiendo reutilizar esta lógica en las pruebas sin duplicación de código.
+**_run_test:** Este método simplifica la lógica principal de las pruebas. Recibe los efectos secundarios de la entrada (input_side_effect), el número de llamadas esperadas para input, print, y move, y los verifica tras la ejecución de la prueba.
+
+**Reducción de duplicación de código:**
+
+La versión anterior contenía bloques de código duplicados en las tres pruebas (test_happy_path, test_not_happy_path, test_more_not_happy_path), con pequeñas variaciones en las entradas y verificaciones. La nueva versión usa el método _run_test para unificar esta lógica
+
+**Claridad en las entradas y verificaciones:**
+
+En la nueva versión, se pasa una lista de los efectos de input directamente como argumento a _run_test, junto con los valores esperados para el conteo de llamadas de input, print, y move. 
+
+[1.27.0] - 2024-09-22
+
+-**solucionando problemas en los test de rook**
+
+**Inicialización de las piezas en el tablero:**
+
+En la nueva versión, durante el método setUp, se agregaron las torres blanca y negra directamente en sus posiciones iniciales en el tablero (self.board.set_piece(0, 0, self.rook_blanca) y self.board.set_piece(7, 7, self.rook_negra)). Esto asegura que las piezas estén correctamente ubicadas antes de realizar las pruebas.
+
+**Validación de posiciones iniciales:**
+
+Se añadió una verificación para asegurarse de que la posición inicial de la torre (start_row y start_col) no sea None. En caso de que alguna de estas coordenadas sea inválida, se lanza un error utilizando self.fail("Start row or column is None"). Esto garantiza que siempre se trabajará con piezas correctamente posicionadas antes de intentar moverlas.
+
+**Ajustes en la prueba test_mover_torre_horizontal:**
+
+En la versión antigua, la torre negra se movía horizontalmente en la primera fila (fila 0). En la nueva versión, esta prueba fue modificada para que la torre negra se mueva en la última fila (su posición inicial en la fila 7), manteniendo consistencia con su ubicación inicial definida en setUp.
+
+**Agregado explícito de obstáculos en la prueba test_mover_torre_con_obstaculo:**
+
+En la nueva versión, se añade un obstáculo explícito en el tablero para esta prueba (self.board.set_piece(2, 0, Piece(2, 0, "WHITE"))), lo que simula una pieza en el camino de la torre blanca. En la versión anterior, se asumía que había un obstáculo sin definirlo explícitamente. 
 
 [1.26.0] - 2024-09-20
 
