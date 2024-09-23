@@ -4,6 +4,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from piezas.rook import Rook
 from tablero.board import Board
+from piezas.pieza import Piece
 
 class TestRook(unittest.TestCase):
 
@@ -12,10 +13,17 @@ class TestRook(unittest.TestCase):
         self.rook_blanca = Rook("WHITE")
         self.rook_negra = Rook("BLACK")
 
-    def Test_Move(self, rook, to_row, to_col, expected_result):
+        # Coloca las piezas en el tablero
+        self.board.set_piece(0, 0, self.rook_blanca)
+        self.board.set_piece(7, 7, self.rook_negra)
+
+    def Rook_Move(self, rook, to_row, to_col, expected_result):
         # Obtener la posición inicial de la torre
         start_row, start_col = self.board.get_piece_position(rook)
         
+        if start_row is None or start_col is None:
+            self.fail("Start row or column is None")
+
         # Realiza el movimiento
         result = rook.move(self.board, to_row, to_col)
         
@@ -32,18 +40,18 @@ class TestRook(unittest.TestCase):
             self.assertEqual(self.board.get_piece(to_row, to_col), None)
 
     def test_mover_torre_vertical(self):
-        self.Test_Move(self.rook_blanca, 4, 0, True)
+        self.Rook_Move(self.rook_blanca, 4, 0, True)
 
     def test_mover_torre_horizontal(self):
-        self.Test_Move(self.rook_negra, 0, 5, True)
+        self.Rook_Move(self.rook_negra, 7, 5, True)  # Mover torre negra horizontalmente
+
 
     def test_mover_torre_diagonal(self):
-        self.Test_Move(self.rook_blanca, 3, 3, False)
+        self.Rook_Move(self.rook_blanca, 3, 3, False)
 
     def test_mover_torre_con_obstaculo(self):
-        # Coloca un obstáculo en la trayectoria de la torre blanca
-        self.Test_Move(self.rook_blanca, 4, 0, False)
-
+        self.board.set_piece(2, 0, Piece(2, 0, "WHITE"))  # Agrega una pieza obstáculo
+        self.Rook_Move(self.rook_blanca, 4, 0, False)
 
 
 if __name__ == '__main__':
