@@ -2,6 +2,35 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
+
+[1.29.0] - 2024-09-24
+
+
+-**PAWN**
+
+Corrección en el Método move:
+
+Se han reorganizado y corregido las validaciones de movimiento del peón:
+La validación de movimiento en la misma fila se mantiene.
+Se han corregido las condiciones de movimiento hacia adelante para los peones:
+Peón Blanco: Se ha cambiado de to_pos.row < start_pos.row a to_pos.row < start_pos.row para validar el movimiento hacia adelante.
+Peón Negro: Se ha cambiado de to_pos.row > start_pos.row a to_pos.row > start_pos.row para validar el movimiento hacia adelante.
+
+Eliminación de Código Duplicado:
+Se ha eliminado el código duplicado al final del método move, asegurando que solo se mueva el peón si las verificaciones son exitosas.
+
+Lógica de Retorno:
+El método move ahora devuelve False si el movimiento no es válido, en lugar de un resultado implícito, para mejorar la claridad del flujo de control.
+
+-**PAWN TEST**
+
+Método mover_peon_y_verificar:
+Se introdujo el método mover_peon_y_verificar, que encapsula la lógica para mover el peón y verificar el resultado.
+Esto reduce la duplicación de código y mejora la legibilidad.
+
+Pruebas de Movimiento:
+Las pruebas utilizan mover_peon_y_verificar, lo que hace que cada prueba sea más concisa, mejorando la claridad y la estructura del código de pruebas al eliminar la redundancia y agrupar la lógica común.
+
 [1.28.0] - 2024-09-23
 
 **Uso de métodos auxiliares para simplificar las pruebas:**
