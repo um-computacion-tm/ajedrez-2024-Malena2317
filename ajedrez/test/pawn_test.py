@@ -44,7 +44,7 @@ class TestPawn(unittest.TestCase):
 
     def test_mover_peon_diferente_columna(self):
         self.mover_peon_y_verificar(self.peon_negro, (4, 4), (5, 5), False)
-        
+
     
 if __name__ == '__main__':
     unittest.main()
