@@ -3,8 +3,17 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
 
-[1.29.0] - 2024-09-24
 
+[1.30.0] - 2024-09-25
+
+-**Factrorizando funcion move**
+
+-Se introdujo una nueva función move_valid, separando la validación del movimiento de la actualización de la posición. Esto mejora la legibilidad y reutilización del código.
+
+-La lógica de validación del movimiento (distancia de una casilla y verificación de la ocupación del destino) se extrajo a move_valid, eliminando la duplicación en el método move.
+
+
+[1.29.0] - 2024-09-24
 
 -**PAWN**
 
