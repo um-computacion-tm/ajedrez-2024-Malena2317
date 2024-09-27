@@ -2,29 +2,40 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from exception import is_valid_diagonal_move
-
-
-
-
-
 
 
 
 class Alfil:
-    def __init__(self, row, col, color, board = None):
+    def __init__(self, row, col, color, board=None):
         self.__row__ = row
         self.__col__ = col
         self.__color__ = color
-        self.board = board
+        self.board = board if board is not None else [[None for _ in range(8)] for _ in range(8)]
         self.symbol = "♗" if color == "WHITE" else "♝"
-
-        # Verifica si el movimiento es diagonal y si la casilla de destino está vacía.
          
+    def is_valid_diagonal_move(self, from_row, from_col, to_row, to_col, board):
+        # verifica que el movimeinto sea en diagonal 
+        row_diff = abs(to_row - from_row)
+        col_diff = abs(to_col - from_col)
+        if row_diff != col_diff:
+            return False
+
+        # verifica si la casilla de destino est vacia 
+        if board[to_row][to_col] is not None:
+            return False
+
+        return True
+
     def mover(self, to_row, to_col, board):
-        # Utiliza la función is_valid_diagonal_move desde exceptions
-        if not is_valid_diagonal_move(self.__row__, self.__col__, to_row, to_col, self.board):
-            raise InvalidMoveBishop((to_row, to_col))
+        if not self.is_valid_diagonal_move(self.__row__, self.__col__, to_row, to_col, board):
+            return False
+        else:
+            # actualiza la posicion de la pieza
+            self.__row__ = to_row
+            self.__col__ = to_col
+            board[to_row][to_col] = self
+            board[self.__row__][self.__col__] = None
+            return True
     
     def get_row(self):
         return self.__row__
