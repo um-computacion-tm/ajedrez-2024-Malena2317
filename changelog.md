@@ -3,6 +3,29 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
 
+[1.31.0] - 2024-09-26
+-**TEST ALFIL**
+Cambios realizados:
+
+Refactorización del código repetido:
+Se creó un método auxiliar privado _mover_alfil para encapsular la lógica común de prueba que se repetía en varios métodos de prueba. Esto elimina la duplicación y hace que el código sea más limpio y fácil de mantener.
+
+Simplificación de las pruebas:
+Los métodos de prueba ahora utilizan el nuevo método _mover_alfil, lo que reduce la cantidad de líneas de código en cada prueba y mejora la claridad del propósito de cada una.
+
+-**PIEZA ALFIL**
+
+Cambios realizados:
+
+Inicialización del tablero:
+-En el constructor __init__, se actualizó la inicialización de self.board para crear un nuevo tablero vacío por defecto si no se proporciona uno. Esto asegura que el alfil tenga un tablero para interactuar sin depender de un argumento externo.
+
+Método is_valid_diagonal_move:
+-Se agregó un nuevo método is_valid_diagonal_move, que encapsula la lógica para validar si el movimiento del alfil es diagonal y si la casilla de destino está vacía. Esto mejora la legibilidad y reutilización del código.
+
+Refactorización del método mover:
+-El método mover ahora utiliza is_valid_diagonal_move para validar los movimientos. Si el movimiento no es válido, devuelve False en lugar de lanzar una excepción, lo que simplifica el manejo de errores y hace que el código sea más fácil de seguir.
+-Si el movimiento es válido, se actualiza la posición de la pieza en el tablero y se libera la casilla de origen.
 
 [1.30.0] - 2024-09-25
 
