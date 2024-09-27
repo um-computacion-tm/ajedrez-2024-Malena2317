@@ -18,29 +18,7 @@ class InvalidMoveRookMove():
             print("Error: Movimiento inválido para la torre.")
         return
     
-class InvalidMoveBishop(Exception):
 
-    def __init__(self, position, message="Movimiento no válido para el alfil"):
-        # Se guarda la posición y se crea el mensaje básico
-        self.position = position
-        self.message = message + " en la posición " + str(position)
-        super().__init__(self.message)  # Llamada al constructor de Exception
-
-    def __str__(self):
-        # Se retorna el mensaje formateado
-        return "Error: " + self.message
-
-    def is_valid_diagonal_move(start_row, start_col, to_row, to_col, board):
-        # Verifica si el movimiento es diagonal
-        if abs(start_row - to_row) != abs(start_col - to_col):
-            raise InvalidMoveDiagonal((to_row, to_col))
-
-    # Verifica si la casilla de destino está ocupada
-        if board[to_row][to_col] is not None:
-            raise InvalidMoveDiagonal((to_row, to_col), message="La casilla de destino está ocupada")
-    
-    # Si pasa todas las verificaciones, el movimiento es válido
-        return True
 
 
 
