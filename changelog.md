@@ -3,6 +3,23 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
 
+
+[1.32.0] - 2024-09-27
+
+Reestructuración de la inicialización:
+
+El método initialize_board fue creado para separar la lógica de inicialización de piezas del método __init__.Ahora se inicializa el tablero y se colocan las piezas en sus posiciones iniciales dentro de este método.
+
+Nuevo método de impresión:
+Se agregó el método print_board para imprimir el tablero de forma visual en la consola, con un formato más claro para el usuario, representando casillas vacías con guiones ("-").
+
+Nuevo método de movimiento:
+Se añadió el método move_piece para mover una pieza de una casilla a otra, permitiendo especificar las coordenadas de origen y destino.
+
+Cambio en el uso de la representación:
+El método __str__ ahora convierte el tablero a una cadena de texto utilizando self.__positions__, pero la lógica de impresión ha sido mejorada con el nuevo método print_board.
+
+
 [1.31.0] - 2024-09-26
 -**TEST ALFIL**
 Cambios realizados:
