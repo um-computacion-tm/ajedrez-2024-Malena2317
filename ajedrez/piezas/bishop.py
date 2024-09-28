@@ -37,6 +37,11 @@ class Alfil:
             board[self.__row__][self.__col__] = None
             return True
     
+    def _mover_alfil(self, to_row, to_col, expected_result, expected_position):
+        resultado = self.alfil.mover(to_row, to_col, self.tablero)
+        self.assertEqual(resultado, expected_result)
+        self.assertEqual((self.alfil.get_row(), self.alfil.get_col()), expected_position)
+        
     def get_row(self):
         return self.__row__
     
