@@ -20,5 +20,3 @@ class King(Piece):
             return super().move(to_row, to_col, board)
         return False
 
-
-    
