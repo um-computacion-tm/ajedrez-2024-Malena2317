@@ -13,43 +13,41 @@ class Pawn(Piece):
 
     def __init__(self, color):
         self.__color__ = color
-        self.simbolo = "P" if color == "WHITE" else "p"
+        self.simbolo = '♙' if color == "WHITE" else '♟'
     
-    def move(self, start_pos, to_pos, board):  # Este método debe ser parte de la clase Pawn
-        movimiento_valido = True
-
-        # Verificar si se mueve en la misma fila
-        if start_pos.row == to_pos.row:
-            print("No puedes mover el peón a la misma fila")
-            movimiento_valido = False
-
-        # Verificar si se mueve en la columna
-        if start_pos.col != to_pos.col:
-            print("El peón solo se puede mover en columnas")
-            movimiento_valido = False
-
-        # Verificar si el peón blanco va para adelante
-        if self.__color__ == "WHITE":
-            if to_pos.row <  start_pos.row:
-                print("El peón blanco solo se puede mover hacia adelante")
-                movimiento_valido = False
-
-        # Verificar si el peón negro va para adelante
-        if self.__color__ == "BLACK":
-            if to_pos.row > start_pos.row:
-                print("El peón negro solo se puede mover hacia adelante")
-                movimiento_valido = False
-
-        # Si todas las verificaciones pasan, mueve el peón
-        if movimiento_valido:
-            board[to_pos.row][to_pos.col] = self
-            board[start_pos.row][start_pos.col] = None
-            return True
+    def move(self, to_row, to_col, board):
+        if self.is_valid_move(to_row, to_col, board):
+            return super().move(to_row, to_col, board)
+        return False
         
+    def is_valid_move(self, to_row, to_col, board):
+        start_row, start_col = self.get_coordinates()
+        if start_col != to_col:
+            print("El peón solo se puede mover en la misma columna.")
+            return False
+
+        if self.get_color() == "WHITE":
+            if to_row <= start_row:
+                print("El peón blanco solo puede avanzar hacia adelante.")
+                return False
+            elif to_row - start_row > 1:
+                print("El peón blanco solo puede avanzar una casilla.")
+                return False
+
+        if self.get_color() == "BLACK":
+            if to_row >= start_row:
+                print("El peón negro solo puede avanzar hacia adelante.")
+                return False
+            elif start_row - to_row > 1:
+                print("El peón negro solo puede avanzar una casilla.")
+                return False
+
+        return self.can_move_to(to_row, to_col, board)
         return False  # Si no es válido, devuelve False
     
         board[to_pos.row][to_pos.col] = self
         board[start_pos.row][start_pos.col] = None
         return True
+
 
 
