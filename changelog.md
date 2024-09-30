@@ -2,6 +2,32 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
+[1.33.0] - 2024-09-29
+
+Eliminación de la clase Position:
+Se eliminó la clase Position y su lógica de manejo de posiciones (coordenadas y verificación de límites del tablero) ahora está directamente dentro de la clase Piece.
+
+Cambio en el método de movimiento:
+El método move ahora se implementa completamente dentro de la clase Piece en lugar de delegar la lógica a la clase Position. Esto hace que la clase Piece sea responsable tanto de la validación del movimiento como de la actualización de las coordenadas de la pieza.
+
+Nuevo método get_coordinates:
+Se agregó el método get_coordinates que devuelve la posición actual de la pieza como una tupla (row, col).
+
+Nuevo método update_coordinates:
+Se introdujo el método update_coordinates, que actualiza las coordenadas de la pieza con una nueva fila y columna. Anteriormente, la lógica de actualización de posición estaba en la clase Position.
+
+Iconos en lugar de strings:
+En la nueva versión, se agregó el método display_icon para devolver el icono correspondiente al color de la pieza (white_icon o black_icon), en lugar de utilizar los atributos white_str y black_str como en la versión anterior.
+
+
+Verificación del tablero (is_within_board):
+Ahora, la validación de si una posición está dentro del tablero se realiza directamente en la clase Piece mediante el método is_within_board. Anteriormente, esta lógica estaba en la clase Position.
+
+Método can_move_to:
+Se integró el método can_move_to en la clase Piece, que verifica si una pieza puede moverse a una nueva posición, comprobando tanto los límites del tablero como la ocupación de la casilla. Antes, esto se realizaba mediante la clase Position.
+
+Excepción NotImplementedError:
+Se mantuvo el método is_valid_move que lanza una excepción NotImplementedError, indicando que las subclases deben implementar su propia lógica de validación de movimiento, similar a la versión anterior.
 
 
 [1.32.0] - 2024-09-27
