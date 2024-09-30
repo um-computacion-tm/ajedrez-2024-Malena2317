@@ -5,46 +5,19 @@ from piezas.pieza import Piece
 class Queen(Piece):
 
     def __init__(self, row, col, color):
-        self.__row__ = row
-        self.__col__ = col
-        self.color = color  # Add this line
         super().__init__(row, col, color)
+        self.symbol = "♕" if color == "WHITE" else "♛"
         
 
     def is_valid_move(self, to_row, to_col, board):
-        return (0 <= to_row < 8) and (0 <= to_col < 8) and (board[to_row][to_col] is None or board[to_row][to_col].color != self.color)
-
-
-    def make_move(self, to_row, to_col, board):
-        if self.is_valid_move(to_row, to_col, board) and (board[to_row][to_col] is None or board[to_row][to_col].color != self.color):
-            self.__row__ = to_row
-            self.__col__ = to_col
-            board[to_row][to_col] = self  # Update the board to reflect the queen's new position
+        current_row, current_col = self.get_coordinates()
+        row_diff = abs(to_row - current_row)
+        col_diff = abs(to_col - current_col)
+        if row_diff == col_diff or current_row == to_row or current_col == to_col:
             return True
         return False
 
-    def move(self, to_row, to_col, board):
-        if (0 <= to_row < 8) and (0 <= to_col < 8) and (self.is_horizontal_or_vertical(to_row, to_col) or self.is_diagonal(to_row, to_col)):
-            return self.make_move(to_row, to_col, board)
+    def move(self, to_row, to_col, board):  
+        if self.is_valid_move(to_row, to_col, board):
+            return super().move(to_row, to_col, board)
         return False
-
-    def is_horizontal_or_vertical(self, to_row, to_col):
-        return self.__row__ == to_row or self.__col__ == to_col
-
-    def is_diagonal(self, to_row, to_col):
-        return abs(self.__row__ - to_row) == abs(self.__col__ - to_col)
-
-
-# Crear un tablero vacío
-board = []
-for i in range(8):
-    board.append([None] * 8)
-
-# Crear una Reina blanca en (0, 0)
-queen = Queen(0, 0, "white")
-
-# Intentar mover la Reina a varias posiciones
-print(queen.move(0, 5, board))  # True
-print(queen.move(5, 5, board))  # True
-print(queen.move(2, 2, board))  # True
-print(queen.move(4, 1, board))  # False
