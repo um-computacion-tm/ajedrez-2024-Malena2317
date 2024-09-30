@@ -2,6 +2,32 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
+
+
+[1.34.0] - 2024-09-30
+
+ Clase Pawn :
+      Se agregó un nuevo método move que verifica si el peón realiza movimientos válidos:
+      Impide mover el peón hacia atrás.
+      Verifica que no se mueva lateralmente.
+      Permite avanzar solo una fila por turno.
+      Se implementaron condiciones específicas para peones blancos y negros.
+
+Clase Alfil:
+
+      Se agregó el método is_valid_diagonal_move para validar movimientos en diagonal de manera detallada:
+      Verifica que el movimiento sea diagonal.
+      Comprueba si la casilla destino está vacía.
+      El método mover ahora actualiza la posición del Alfil en el tablero y devuelve True si el movimiento es válido.
+      Se incluyó un método get_row y get_col para obtener la posición actual del Alfil.
+
+Clase Knight:
+
+      Se eliminó el uso de la clase base Piece, y se reemplazó por un método move específico que realiza las verificaciones de movimiento:
+      Verifica que el movimiento sea en forma de "L".
+      Comprueba si la casilla destino está vacía o si está ocupada por una pieza enemiga.
+      Se añadieron los métodos get_row, get_col, set_row, y set_col para obtener y actualizar la posición del caballo
+
 [1.33.0] - 2024-09-29
 
 Eliminación de la clase Position:
