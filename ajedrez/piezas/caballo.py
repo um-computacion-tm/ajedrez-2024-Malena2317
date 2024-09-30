@@ -53,14 +53,3 @@ class Knight:
                 return True
         return False
 
-# Crear un tablero vacío
-board = [[None for _ in range(8)] for _ in range(8)]
-
-# Crear un caballo blanco en la posición (1, 1)
-knight = Knight("white", 1, 1)
-
-# Intentar mover el caballo a (3, 2)
-print(knight.move(1, 1, 3, 2, board))  # Debería imprimir True si el movimiento es válido
-
-# Imprimir la nueva posición del caballo
-print(knight.row, knight.col)  # Debería imprimir 3, 2 si el movimiento fue exitoso

@@ -35,16 +35,3 @@ class Queen(Piece):
         return abs(self.__row__ - to_row) == abs(self.__col__ - to_col)
 
 
-# Crear un tablero vacío
-board = []
-for i in range(8):
-    board.append([None] * 8)
-
-# Crear una Reina blanca en (0, 0)
-queen = Queen(0, 0, "white")
-
-# Intentar mover la Reina a varias posiciones
-print(queen.move(0, 5, board))  # True
-print(queen.move(5, 5, board))  # True
-print(queen.move(2, 2, board))  # True
-print(queen.move(4, 1, board))  # False

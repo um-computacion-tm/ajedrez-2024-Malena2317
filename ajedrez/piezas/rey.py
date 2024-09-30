@@ -25,22 +25,3 @@ class King:
             self.__col__ = to_col
             return True
         return False
-
-
-    
-# Creo un tablero vacío
-board = []
-for i in range(8):
-    fila = []
-    for j in range(8):
-        fila.append(None)
-    board.append(fila)
-
-# Coloco un Rey blanco en la posición (0, 4)
-king = King(0, 4, "white")
-board[0][4] = king
-
-# Intento mover el Rey a diferentes posiciones
-print(king.move_valid(1, 4, board))  # Debería ser True, mover abajo
-print(king.move_valid(2, 4, board))  # Debería ser False, movimiento inválido
-print(king.move_valid(1, 5, board))  # Debería ser True, mover en diagonal
