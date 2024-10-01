@@ -5,6 +5,15 @@ Todos los cambios importantes en este proyecto serán documentados en este archi
 
 [1.35.0] - 2024-09-1
 
+-**KING**
+Eliminación de código duplicado en move:
+
+Se ha eliminado el código redundante que verificaba si el movimiento era válido dos veces.
+La nueva versión encapsula la lógica de movimiento en una sola llamada, lo que mejora la claridad y evita repeticiones:
+Llama a is_valid_move y, si el movimiento es válido, realiza el movimiento con super().move, todo en una sola líne
+
+-**PAWN**
+
 Modificación del constructor:
 
 Se utiliza super().__init__(0, 0, color) para inicializar la posición en (0, 0) y llamar al constructor de la clase base Piece. Se elimina la referencia a self.__color__.
