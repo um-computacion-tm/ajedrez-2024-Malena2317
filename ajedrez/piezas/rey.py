@@ -3,7 +3,6 @@ sys.path.insert(0, '/home/meli/Escritorio/computacion/ajedrez-2024-Malena2317/aj
 from piezas.pieza import Piece
 
 class King(Piece):
-
     SYMBOLS = {"WHITE": "♔", "BLACK": "♚"}
 
     def __init__(self, row, col, color):
