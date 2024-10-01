@@ -4,9 +4,11 @@ from piezas.pieza import Piece
 
 class King(Piece):
 
+    SYMBOLS = {"WHITE": "♔", "BLACK": "♚"}
+
     def __init__(self, row, col, color):
         super().__init__(row, col, color)
-        self.symbol = "♔" if color == "WHITE" else "♚"
+        self.symbol = self.SYMBOLS[color]
 
     def is_valid_move(self, to_row, to_col, board):
         start_row, start_col = self.get_coordinates()
@@ -16,9 +18,6 @@ class King(Piece):
         return False
 
     def move(self, to_row, to_col, board):
-        if self.is_valid_move(to_row, to_col, board):
-            return super().move(to_row, to_col, board)
-        return False
-
+        return super().move(to_row, to_col, board) if self.is_valid_move(to_row, to_col, board) else False
 
     
