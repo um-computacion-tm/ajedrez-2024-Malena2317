@@ -3,6 +3,12 @@ sys.path.insert(0, '/home/meli/Escritorio/computacion/ajedrez-2024-Malena2317/aj
 from piezas.pieza import Piece 
 
 
+class Position:
+    def __init__(self, row, col):
+        self.row = row
+        self.col = col
+
+
 class Pawn(Piece):
 
     def __init__(self, color):
@@ -44,3 +50,11 @@ class Pawn(Piece):
                 return False
 
         return self.can_move_to(to_row, to_col, board)
+        return False  # Si no es válido, devuelve False
+    
+        board[to_pos.row][to_pos.col] = self
+        board[start_pos.row][start_pos.col] = None
+        return True
+
+
+
