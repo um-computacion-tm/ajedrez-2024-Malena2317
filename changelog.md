@@ -3,6 +3,22 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
 
+[1.35.0] - 2024-09-1
+
+Modificación del constructor:
+
+Se utiliza super().__init__(0, 0, color) para inicializar la posición en (0, 0) y llamar al constructor de la clase base Piece. Se elimina la referencia a self.__color__.
+
+Reestructuración de is_valid_move:
+
+Refactorización:
+      El código fue reorganizado para hacer el flujo de la lógica más claro y evitar duplicación innecesaria.
+      Se agrega una variable is_valid para realizar todas las verificaciones y luego devolver el resultado de una sola vez, en lugar de devolver False en cada error.
+
+Validaciones de movimiento:
+      Se sigue verificando que el peón solo puede moverse en la misma columna.
+      El cálculo de la diferencia de filas (row_diff) es ahora más conciso y se usa para validar que el peón avanza en la dirección correcta (blanco hacia adelante y negro hacia adelante) y que no avanza más de una casilla.
+      Se eliminan las verificaciones redundantes sobre el movimiento de los peones negros que estaban duplicadas en la versión anterior.
 
 [1.34.0] - 2024-09-30
 

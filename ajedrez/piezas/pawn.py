@@ -12,7 +12,7 @@ class Position:
 class Pawn(Piece):
 
     def __init__(self, color):
-        self.__color__ = color
+        super().__init__(0, 0, color)  # Inicializa la posición en (0, 0)
         self.simbolo = '♙' if color == "WHITE" else '♟'
     
     def move(self, to_row, to_col, board):
@@ -22,17 +22,24 @@ class Pawn(Piece):
         
     def is_valid_move(self, to_row, to_col, board):
         start_row, start_col = self.get_coordinates()
-        if start_col != to_col:
-            print("El peón solo se puede mover en la misma columna.")
-            return False
+        is_valid = True
 
-        if self.get_color() == "WHITE":
-            if to_row <= start_row:
-                print("El peón blanco solo puede avanzar hacia adelante.")
-                return False
-            elif to_row - start_row > 1:
-                print("El peón blanco solo puede avanzar una casilla.")
-                return False
+        if start_col != to_col:
+                print("El peón solo se puede mover en la misma columna.")
+                is_valid = False
+        row_diff = to_row - start_row
+
+        if (self.get_color() == "WHITE" and row_diff <= 0) or (self.get_color() == "BLACK" and row_diff >= 0):
+            print("El peón solo puede avanzar hacia adelante.")
+            is_valid = False
+        elif abs(row_diff) > 1:
+            print("El peón solo puede avanzar una casilla.")
+            is_valid = False
+            
+        if is_valid:
+            is_valid = self.can_move_to(to_row, to_col, board)
+
+        return is_valid
 
         if self.get_color() == "BLACK":
             if to_row >= start_row:
