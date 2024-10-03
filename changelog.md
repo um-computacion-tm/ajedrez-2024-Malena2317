@@ -2,8 +2,16 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
+[1.35.0] - 2024-09-02
 
-[1.35.0] - 2024-09-1
+-**class chess**
+Agregado:
+
+-Se añadió el atributo game_over en el constructor __init__ para llevar un control sobre si el juego ha terminado.
+-Se agregó un nuevo método play_turn (dentro de la propiedad), que permite controlar el flujo de cada turno del juego. Incluye lógica para imprimir el tablero y obtener las    posiciones de origen y destino de una pieza, además de la posibilidad de que un jugador se rinda ingresando 'q'.
+-En el nuevo método play_turn, se agregó la validación para terminar el juego cuando game_over es True, mostrando el tablero y solicitando las coordenadas del usuario en cada turno.
+
+[1.35.0] - 2024-09-01
 
 -**KING**
 Eliminación de código duplicado en move:
