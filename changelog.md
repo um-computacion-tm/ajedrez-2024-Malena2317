@@ -2,6 +2,25 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
+
+
+[1.35.0] - 2024-09-03
+
+Modificación del método move
+      Se ha añadido la validación de movimientos con el método is_valid_move, que se asegura de que la pieza pueda moverse a la posición deseada antes de cambiar el turno.
+
+Reescritura del método play_turn
+      Se corrigió el formato y la indentación del método play_turn para que funcione correctamente. Ahora es un método regular en lugar de ser una propiedad.
+      Se corrigió la lógica de manejo de la rendición.
+      Se agregó la conversión de las posiciones ingresadas por el usuario (origin y destination) en coordenadas utilizables con el método convert_position.
+      Se incluyó la validación de que las posiciones ingresadas por el usuario sean correctas antes de realizar el movimiento.
+
+Nueva función is_valid_move
+      Se introdujo una nueva función is_valid_move dentro del método move para validar si un movimiento es legal antes de realizarlo.
+
+Manejo de posiciones
+      Se implementó la conversión de posiciones de origen y destino usando convert_position, lo que asegura que las entradas de texto del jugador (como "D2") se conviertan correctamente en coordenadas de tablero.
+
 [1.35.0] - 2024-09-02
 
 -**class chess**
