@@ -4,6 +4,17 @@ Todos los cambios importantes en este proyecto serán documentados en este archi
 
 
 
+[1.39.0] - 2024-10-05
+
+Método _is_path_clear:
+
+      -Se agregó una nueva lógica para calcular la dirección del movimiento utilizando el método _get_step.
+      -Se modificó la lógica para recorrer el camino desde la posición actual hasta la de destino utilizando un bucle while.
+
+Método _get_step:
+      
+      -Se agregó un nuevo método para calcular la dirección del movimiento en lugar de utilizar condicionales.
+
 [1.38.0] - 2024-10-04
 
 método is_valid_move:
