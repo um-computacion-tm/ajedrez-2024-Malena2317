@@ -4,7 +4,22 @@ Todos los cambios importantes en este proyecto serán documentados en este archi
 
 
 
-[1.35.0] - 2024-09-03
+[1.38.0] - 2024-10-04
+
+método is_valid_move:
+      Se ha agregado el método is_valid_move para validar si un movimiento es legal. Este método recibe una pieza y las coordenadas de destino, verificando si el movimiento cumple con las reglas del juego en el contexto del tablero.
+
+Método move:
+      El método move utiliza el nuevo método is_valid_move para validar los movimientos antes de realizarlos.
+
+Método convert_position:
+       Se ha añadido el método convert_position, que convierte una posición en notación de ajedrez (como 'D2') a coordenadas de tablero (fila, columna). Este método permite validar la entrada del jugador y verificar que la posición sea válida.
+
+Método play_turn:
+      El método play_turn sigue el mismo flujo, pero con la validación mejorada gracias al nuevo método convert_position. La conversión de las entradas en coordenadas ahora es más robusta, manejando errores como posiciones fuera de los límites.
+
+
+[1.37.0] - 2024-10-03
 
 Modificación del método move
       Se ha añadido la validación de movimientos con el método is_valid_move, que se asegura de que la pieza pueda moverse a la posición deseada antes de cambiar el turno.
@@ -21,7 +36,7 @@ Nueva función is_valid_move
 Manejo de posiciones
       Se implementó la conversión de posiciones de origen y destino usando convert_position, lo que asegura que las entradas de texto del jugador (como "D2") se conviertan correctamente en coordenadas de tablero.
 
-[1.35.0] - 2024-09-02
+[1.36.0] - 2024-10-02
 
 -**class chess**
 Agregado:
@@ -30,7 +45,7 @@ Agregado:
 -Se agregó un nuevo método play_turn (dentro de la propiedad), que permite controlar el flujo de cada turno del juego. Incluye lógica para imprimir el tablero y obtener las    posiciones de origen y destino de una pieza, además de la posibilidad de que un jugador se rinda ingresando 'q'.
 -En el nuevo método play_turn, se agregó la validación para terminar el juego cuando game_over es True, mostrando el tablero y solicitando las coordenadas del usuario en cada turno.
 
-[1.35.0] - 2024-09-01
+[1.35.0] - 2024-10-01
 
 -**KING**
 Eliminación de código duplicado en move:
