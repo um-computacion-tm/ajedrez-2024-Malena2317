@@ -17,15 +17,6 @@ class Queen(Piece):
             return True
         return False
 
-    def move(self, to_row, to_col, board):  
-        if self.is_valid_move(to_row, to_col, board):
-            return super().move(to_row, to_col, board)
-        return False
 
-    def is_horizontal_or_vertical(self, to_row, to_col):
-        return self.__row__ == to_row or self.__col__ == to_col
-
-    def is_diagonal(self, to_row, to_col):
-        return abs(self.__row__ - to_row) == abs(self.__col__ - to_col)
 
 

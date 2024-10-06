@@ -16,8 +16,7 @@ class King(Piece):
         print("Movimiento inválido para el Rey.")
         return False
 
-    def move(self, to_row, to_col, board):
-        return super().move(to_row, to_col, board) if self.is_valid_move(to_row, to_col, board) else False
+
 
    
         if self.is_valid_move(to_row, to_col, board):

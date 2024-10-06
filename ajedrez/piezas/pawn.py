@@ -9,10 +9,6 @@ class Pawn(Piece):
         super().__init__(0, 0, color)  # Inicializa la posición en (0, 0)
         self.simbolo = '♙' if color == "WHITE" else '♟'
     
-    def move(self, to_row, to_col, board):
-        if self.is_valid_move(to_row, to_col, board):
-            return super().move(to_row, to_col, board)
-        return False
         
     def is_valid_move(self, to_row, to_col, board):
         start_row, start_col = self.get_coordinates()

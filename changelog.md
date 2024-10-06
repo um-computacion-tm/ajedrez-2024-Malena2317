@@ -3,6 +3,20 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
 
+[1.40.0] - 2024-10-06
+
+Refactorización del método move:
+
+Clase Base (Piece):
+
+      -Se mantuvo el método move, que implementa la lógica de movimiento común para todas las piezas
+      -Se eliminó la duplicación del método move en las subclases, simplificando así la implementación del movimiento de piezas.
+
+Subclases (Rook, King, Queen, Pawn, Knight, Alfil):
+
+      -Se eliminó el método move de todas las subclases, que antes redefinían la lógica de movimiento.
+      -Cada subclase ahora utiliza directamente el método move de la clase base Piece, lo que evita la duplicación de código.
+      -Cada subclase continúa implementando su propia lógica de validación de movimientos a través del método is_valid_move.
 
 [1.39.0] - 2024-10-05
 
