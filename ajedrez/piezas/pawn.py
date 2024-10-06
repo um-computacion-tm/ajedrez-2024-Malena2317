@@ -40,3 +40,5 @@ class Pawn(Piece):
                 return False
 
         return self.can_move_to(to_row, to_col, board)
+
+

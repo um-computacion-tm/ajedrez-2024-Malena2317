@@ -18,4 +18,8 @@ class King(Piece):
 
 
 
-    
+   
+        if self.is_valid_move(to_row, to_col, board):
+            return super().move(to_row, to_col, board)
+        return False
+
