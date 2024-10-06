@@ -10,10 +10,6 @@ class Rook(Piece):
         self.__color__ = color
         self.__symbol__ = "♜" if color == "WHITE"  else "♖"
 
-    def move(self, to_row, to_col, board):
-        if self.is_valid_move(to_row, to_col, board):
-            return super().move(to_row, to_col, board)
-        return False
         
     def is_valid_move(self, to_row, to_col, board):
         current_row, current_col = self.get_coordinates()
