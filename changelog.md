@@ -2,6 +2,28 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
+[1.42.0] - 2024-10-09
+
+Cambios Realizados
+
+Refactorización de Métodos de Prueba:
+      Se introdujo el método assert_valid_move(self, row, col, expected) para centralizar la verificación de movimientos válidos, lo que mejora la legibilidad y la reutilización del código.
+      
+Consolidación de Pruebas:
+      Se eliminó la duplicación de pruebas individuales y se agruparon pruebas de movimientos inválidos en el nuevo método test_invalid_moves(), donde se testean múltiples movimientos no válidos en un solo método, simplificando así el código.
+
+Nueva Prueba para Movimiento a Casilla Ocupada:
+      Se añadió test_move_to_occupied_square() para comprobar que el caballo no puede moverse a una casilla ocupada por una pieza del mismo color, mejorando la cobertura de pruebas.
+
+Validación de Captura de Pieza Enemiga:
+      Se modificó test_move_to_enemy_piece() para confirmar que el caballo puede moverse a una casilla ocupada por una pieza enemiga.
+
+Prueba para Movimiento a la Misma Posición:     
+      Se incluyó test_move_to_same_position() para asegurarse de que el caballo no puede moverse a la posición en la que ya se encuentra.
+
+Actualización en la Prueba de Movimientos Válidos en 'L':
+      Se añadió test_valid_L_shape_moves() para verificar todos los movimientos válidos en 'L' desde la posición actual del caballo, asegurando una mejor cobertura de las reglas de movimiento
+
 
 [1.41.0] - 2024-10-08
 
