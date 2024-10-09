@@ -13,8 +13,5 @@ class Knight(Piece):
         col_diff = abs(to_col - self.get_coordinates()[1])
         return ((row_diff == 2 and col_diff == 1) or (row_diff == 1 and col_diff == 2)) and self.can_move_to(to_row, to_col, board)
 
-    def move(self, to_row, to_col, board):
-        if self.is_valid_move(to_row, to_col, board):
-            return super().move(to_row, to_col, board)
-        return False
+
 
