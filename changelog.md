@@ -3,7 +3,6 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
 
-
 [1.41.0] - 2024-10-08
 
 Refactorización de tests:
@@ -33,6 +32,7 @@ Refactorización:
       Se implementó el método auxiliar place_piece para colocar piezas en el tablero y evitar redundancia.
       Uso del método is_valid_move antes de mover piezas para verificar la validez del movimiento.
       Mejora en la verificación de movimientos hacia casillas ocupadas por piezas enemigas y del mismo color con assertTrue y assertFalse antes de realizar el movimiento.
+      
       
 [1.40.0] - 2024-10-06
 
