@@ -3,6 +3,37 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
 
+[1.41.0] - 2024-10-08
+
+Refactorización de tests:
+      Se introdujeron métodos auxiliares para reducir redundancia en el código de test.
+      Se utilizaron métodos como place_piece para colocar piezas en el tablero y centralizar la lógica.
+      Se mejoró la verificación de movimientos inválidos y de intentos de mover a una casilla ocupada por una pieza del mismo color.
+
+Cambios en TestBishop:
+
+Nuevos tests:
+      Se añadió un test test_move_out_of_board para verificar que el alfil no se pueda mover fuera del tablero.
+      Se añadió un test test_move_diagonal_up_left para verificar movimientos diagonales hacia arriba e izquierda.
+      Se añadieron tests test_move_to_enemy_piece y test_move_to_same_color_piece para probar movimientos a casillas ocupadas por piezas enemigas y del mismo color, respectivamente.
+
+Refactorización:
+      El método place_piece se utiliza para evitar repetir código al colocar piezas en el tablero.
+      Se reemplazaron assertEqual con llamadas a assertTrue y assertFalse para verificar los movimientos válidos o inválidos antes de realizar movimientos efectivos.
+      Uso de get_coordinates en vez de acceder directamente a las variables de fila y columna.
+
+Cambios en TestKnight:
+
+Nuevos tests:
+      Se añadieron varios tests para movimientos en todas las direcciones posibles de "L" (hacia arriba, abajo, izquierda y derecha), como test_move_L_shape_up_left y test_move_L_shape_down_right.
+      Se añadió un test test_move_out_of_board para verificar que el caballo no se pueda mover fuera del tablero.
+
+Refactorización:
+      Se implementó el método auxiliar place_piece para colocar piezas en el tablero y evitar redundancia.
+      Uso del método is_valid_move antes de mover piezas para verificar la validez del movimiento.
+      Mejora en la verificación de movimientos hacia casillas ocupadas por piezas enemigas y del mismo color con assertTrue y assertFalse antes de realizar el movimiento.
+      
+      
 [1.40.0] - 2024-10-06
 
 Refactorización del método move:
