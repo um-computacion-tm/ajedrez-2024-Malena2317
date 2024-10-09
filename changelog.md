@@ -3,7 +3,114 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
 
-[1.35.0] - 2024-09-1
+
+[1.41.0] - 2024-10-08
+
+Refactorización de tests:
+      Se introdujeron métodos auxiliares para reducir redundancia en el código de test.
+      Se utilizaron métodos como place_piece para colocar piezas en el tablero y centralizar la lógica.
+      Se mejoró la verificación de movimientos inválidos y de intentos de mover a una casilla ocupada por una pieza del mismo color.
+
+Cambios en TestBishop:
+
+Nuevos tests:
+      Se añadió un test test_move_out_of_board para verificar que el alfil no se pueda mover fuera del tablero.
+      Se añadió un test test_move_diagonal_up_left para verificar movimientos diagonales hacia arriba e izquierda.
+      Se añadieron tests test_move_to_enemy_piece y test_move_to_same_color_piece para probar movimientos a casillas ocupadas por piezas enemigas y del mismo color, respectivamente.
+
+Refactorización:
+      El método place_piece se utiliza para evitar repetir código al colocar piezas en el tablero.
+      Se reemplazaron assertEqual con llamadas a assertTrue y assertFalse para verificar los movimientos válidos o inválidos antes de realizar movimientos efectivos.
+      Uso de get_coordinates en vez de acceder directamente a las variables de fila y columna.
+
+Cambios en TestKnight:
+
+Nuevos tests:
+      Se añadieron varios tests para movimientos en todas las direcciones posibles de "L" (hacia arriba, abajo, izquierda y derecha), como test_move_L_shape_up_left y test_move_L_shape_down_right.
+      Se añadió un test test_move_out_of_board para verificar que el caballo no se pueda mover fuera del tablero.
+
+Refactorización:
+      Se implementó el método auxiliar place_piece para colocar piezas en el tablero y evitar redundancia.
+      Uso del método is_valid_move antes de mover piezas para verificar la validez del movimiento.
+      Mejora en la verificación de movimientos hacia casillas ocupadas por piezas enemigas y del mismo color con assertTrue y assertFalse antes de realizar el movimiento.
+      
+[1.40.0] - 2024-10-06
+
+Refactorización del método move:
+
+Clase Base (Piece):
+
+      -Se mantuvo el método move, que implementa la lógica de movimiento común para todas las piezas
+      -Se eliminó la duplicación del método move en las subclases, simplificando así la implementación del movimiento de piezas.
+
+Subclases (Rook, King, Queen, Pawn, Knight, Alfil):
+
+      -Se eliminó el método move de todas las subclases, que antes redefinían la lógica de movimiento.
+      -Cada subclase ahora utiliza directamente el método move de la clase base Piece, lo que evita la duplicación de código.
+      -Cada subclase continúa implementando su propia lógica de validación de movimientos a través del método is_valid_move.
+
+[1.39.0] - 2024-10-05
+
+Método _is_path_clear:
+
+      -Se agregó una nueva lógica para calcular la dirección del movimiento utilizando el método _get_step.
+      -Se modificó la lógica para recorrer el camino desde la posición actual hasta la de destino utilizando un bucle while.
+
+Método _get_step:
+      
+      -Se agregó un nuevo método para calcular la dirección del movimiento en lugar de utilizar condicionales.
+
+[1.38.0] - 2024-10-04
+
+método is_valid_move:
+      Se ha agregado el método is_valid_move para validar si un movimiento es legal. Este método recibe una pieza y las coordenadas de destino, verificando si el movimiento cumple con las reglas del juego en el contexto del tablero.
+
+Método move:
+      El método move utiliza el nuevo método is_valid_move para validar los movimientos antes de realizarlos.
+
+Método convert_position:
+       Se ha añadido el método convert_position, que convierte una posición en notación de ajedrez (como 'D2') a coordenadas de tablero (fila, columna). Este método permite validar la entrada del jugador y verificar que la posición sea válida.
+
+Método play_turn:
+      El método play_turn sigue el mismo flujo, pero con la validación mejorada gracias al nuevo método convert_position. La conversión de las entradas en coordenadas ahora es más robusta, manejando errores como posiciones fuera de los límites.
+
+
+[1.37.0] - 2024-10-03
+
+Modificación del método move
+      Se ha añadido la validación de movimientos con el método is_valid_move, que se asegura de que la pieza pueda moverse a la posición deseada antes de cambiar el turno.
+
+Reescritura del método play_turn
+      Se corrigió el formato y la indentación del método play_turn para que funcione correctamente. Ahora es un método regular en lugar de ser una propiedad.
+      Se corrigió la lógica de manejo de la rendición.
+      Se agregó la conversión de las posiciones ingresadas por el usuario (origin y destination) en coordenadas utilizables con el método convert_position.
+      Se incluyó la validación de que las posiciones ingresadas por el usuario sean correctas antes de realizar el movimiento.
+
+Nueva función is_valid_move
+      Se introdujo una nueva función is_valid_move dentro del método move para validar si un movimiento es legal antes de realizarlo.
+
+Manejo de posiciones
+      Se implementó la conversión de posiciones de origen y destino usando convert_position, lo que asegura que las entradas de texto del jugador (como "D2") se conviertan correctamente en coordenadas de tablero.
+
+[1.36.0] - 2024-10-02
+
+-**class chess**
+Agregado:
+
+-Se añadió el atributo game_over en el constructor __init__ para llevar un control sobre si el juego ha terminado.
+-Se agregó un nuevo método play_turn (dentro de la propiedad), que permite controlar el flujo de cada turno del juego. Incluye lógica para imprimir el tablero y obtener las    posiciones de origen y destino de una pieza, además de la posibilidad de que un jugador se rinda ingresando 'q'.
+-En el nuevo método play_turn, se agregó la validación para terminar el juego cuando game_over es True, mostrando el tablero y solicitando las coordenadas del usuario en cada turno.
+
+[1.35.0] - 2024-10-01
+
+-**KING**
+Eliminación de código duplicado en move:
+
+Se ha eliminado el código redundante que verificaba si el movimiento era válido dos veces.
+La nueva versión encapsula la lógica de movimiento en una sola llamada, lo que mejora la claridad y evita repeticiones:
+Llama a is_valid_move y, si el movimiento es válido, realiza el movimiento con super().move, todo en una sola líne
+
+-**PAWN**
 
 Modificación del constructor:
 
