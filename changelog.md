@@ -2,6 +2,58 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
+
+
+[1.43.0] - 2024-10-10
+
+**Cambios en la Clase Pawn**
+Adición de atributo has_moved:
+      Se añadió el atributo has_moved en el constructor para rastrear si el peón ha sido movido.
+
+Nuevo método move:
+      Se introdujo un método move que maneja la lógica de movimiento y verifica si el movimiento es válido llamando a is_valid_move.
+
+Modificaciones en is_valid_move:    
+      -Se mejoró la lógica para comprobar movimientos permitidos según el color del peón (blanco o negro).
+      -Se incluyó la lógica para permitir que los peones avancen dos casillas solo en su primer movimiento.
+      -Se eliminaron mensajes de depuración en caso de un movimiento inválido.
+
+**Cambios en las Pruebas (TestPawn)**
+
+Actualización del método mover_peon_y_verificar:
+      -Se renombró a move_pawn_and_verify.
+      -Se añadió impresión del estado del tablero antes y después de los movimientos para facilitar la depuración.
+
+Pruebas adicionales y ajustes:
+      -Se añadieron pruebas para verificar el movimiento de dos espacios hacia adelante para peones blancos y negros.
+      -Se incluyó una prueba para verificar si un peón intenta moverse a una casilla ocupada por otra pieza.
+      -Se mejoró la verificación de movimientos fuera de los límites del tablero
+
+**TestBishop**
+
+Refactorización de place_piece: 
+      Se mejoró la reutilización de la función place_piece, eliminando la duplicación de código para posicionar piezas en el tablero.
+
+Nuevo método _assert_move: 
+      Se introdujo el método _assert_move para simplificar y estandarizar la verificación de movimientos válidos e inválidos, reduciendo la repetición de lógica en los tests.
+
+Eliminación de código redundante: 
+      Se eliminaron las llamadas repetitivas a assertTrue y assertFalse en cada prueba, sustituyéndolas por el nuevo método _assert_move para una mayor claridad y eficiencia.
+
+Manejo de errores en _assert_move: 
+      Se añadió un control de excepciones (try-except) en el método _assert_move para manejar situaciones en las que se intenta mover a una posición inválida, garantizando un resultado más robusto.
+
+Cambio de nombre de variables: 
+      Se ajustaron los nombres de las variables para mejorar la claridad del código, usando row y col en lugar de nombres menos descriptivos.
+
+Se eliminó el código duplicado:
+       Varias pruebas como test_move_diagonal_free y test_move_to_enemy_piece reutilizan la misma lógica a través de _assert_move, eliminando la redundancia previa.
+
+Nueva prueba test_invalid_move_horizontal: 
+      Se añadió una prueba para verificar que el alfil no puede moverse horizontalmente, asegurando una cobertura más completa de los posibles movimientos inválidos.
+
+
+
 [1.42.0] - 2024-10-09
 
 Cambios Realizados
