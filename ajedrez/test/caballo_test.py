@@ -3,6 +3,7 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from piezas.caballo import Knight
+from tablero.board import Board 
 
 class TestKnight(unittest.TestCase):
 
