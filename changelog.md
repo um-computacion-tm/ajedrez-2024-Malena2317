@@ -4,6 +4,28 @@ Todos los cambios importantes en este proyecto serán documentados en este archi
 
 
 
+[1.44.0] - 2024-10-11
+
+**Clase Queen**
+Cambios en el constructor __init__:Se ha agregado la asignación explícita del atributo color en el constructor para mejorar la claridad y la accesibilidad del color de la reina.
+
+Cambios en el método is_valid_move:
+      -Validación de tablero: Se agregó una verificación para asegurarse de que la posición de destino esté dentro de los límites del tablero y que no sea la misma que la posición actual de la reina.
+      -Verificación de ocupación: Se añadió una comprobación para verificar si la posición de destino está ocupada por una pieza del mismo color, evitando que la reina se mueva a una casilla que contenga una pieza aliada.
+      -Lógica de movimiento: La lógica se ha mantenido, pero se mejoró con la verificación de los movimientos diagonales, horizontales y verticales. Se implementaron bucles para asegurarse de que no haya piezas en el camino de la reina durante el movimiento diagonal o recto.
+      -Nuevo método move:Se implementó un nuevo método move que incorpora verificaciones adicionales para asegurarse de que el movimiento de la reina sea válido y que la posición de destino esté dentro del tablero.
+
+**Clase de Test TestQueen**
+
+Cambios en la estructura de los tests:
+
+      -Se eliminaron las verificaciones de posición en auxiliar_move, en su lugar se optó por usar self.assertEqual únicamente para el resultado del movimiento. Esto simplifica la lógica de los tests.
+
+Se agregaron nuevos tests para validar situaciones adicionales:
+      -Movimientos fuera del tablero: Se introdujo un nuevo test test_move_out_of_board para asegurar que la reina no se pueda mover fuera de los límites del tablero.
+      -Movimiento a la misma posición: Se agregó un test test_move_to_same_position para verificar que no se permita mover a la misma posición.
+      -Pruebas para movimientos diagonales: Se introdujeron tests específicos para validar movimientos diagonales ocupados por piezas del mismo color o del oponente.
+
 [1.43.0] - 2024-10-10
 
 **Cambios en la Clase Pawn**
