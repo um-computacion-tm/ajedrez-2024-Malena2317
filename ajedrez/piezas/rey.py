@@ -3,7 +3,6 @@ sys.path.insert(0, '/home/meli/Escritorio/computacion/ajedrez-2024-Malena2317/aj
 from piezas.pieza import Piece
 
 class King(Piece):
-
     SYMBOLS = {"WHITE": "♔", "BLACK": "♚"}
 
     def __init__(self, row, col, color):
@@ -17,7 +16,10 @@ class King(Piece):
         print("Movimiento inválido para el Rey.")
         return False
 
-    def move(self, to_row, to_col, board):
-        return super().move(to_row, to_col, board) if self.is_valid_move(to_row, to_col, board) else False
 
-    
+
+   
+        if self.is_valid_move(to_row, to_col, board):
+            return super().move(to_row, to_col, board)
+        return False
+

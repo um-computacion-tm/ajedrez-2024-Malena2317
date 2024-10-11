@@ -44,3 +44,7 @@ class Queen(Piece):
                 board[to_row][to_col] = self
                 return True
         return False
+
+
+
+
