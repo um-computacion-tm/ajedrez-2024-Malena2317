@@ -54,15 +54,9 @@ class Queen(Piece):
         row_diff = to_row - start_row
         col_diff = to_col - start_col
 
-        if row_diff == 0:  # Movimiento horizontal
-            step_row = 0
-            step_col = 1 if col_diff > 0 else -1
-        elif col_diff == 0:  # Movimiento vertical
-            step_row = 1 if row_diff > 0 else -1
-            step_col = 0
-        else:  # Movimiento diagonal
-            step_row = 1 if row_diff > 0 else -1
-            step_col = 1 if col_diff > 0 else -1
+        # Determinar los pasos en filas y columnas
+        step_row = (row_diff > 0) - (row_diff < 0)  # 1 si es positivo, -1 si es negativo, 0 si es 0
+        step_col = (col_diff > 0) - (col_diff < 0)  # 1 si es positivo, -1 si es negativo, 0 si es 0
 
         current_row, current_col = start_row + step_row, start_col + step_col
         while (current_row, current_col ) != (to_row, to_col):
