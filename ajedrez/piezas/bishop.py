@@ -13,6 +13,3 @@ class Alfil(Piece):
         row_diff = abs(to_row - self.get_coordinates()[0])
         col_diff = abs(to_col - self.get_coordinates()[1])
         return row_diff == col_diff and self.can_move_to(to_row, to_col, board)
-
-
-

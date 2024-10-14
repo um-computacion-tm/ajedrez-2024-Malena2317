@@ -10,7 +10,7 @@ class Rook(Piece):
     def __init__(self,row, col, color):
         super().__init__(row, col, color)
         self.__symbol__ = "♜" if color == "WHITE"  else "♖"
-
+        
     def move(self, to_row, to_col, board):
         if self.is_valid_move(to_row, to_col, board):
             current_row, current_col = self.get_coordinates()
@@ -19,8 +19,7 @@ class Rook(Piece):
             board[to_row][to_col] = self
             return True
         return False
-        
-        
+
     def is_valid_move(self, to_row, to_col, board):
         # Verificar si la posición está dentro del tablero
         if not self.is_within_board(to_row, to_col):
@@ -55,3 +54,4 @@ class Rook(Piece):
                 if board[row][from_col] is not None:
                     return False
         return True
+

@@ -5,6 +5,7 @@ class Piece:
         self.__col__ = col
         self.__color__ = color
 
+        
     def get_coordinates(self):
         return (self.__row__, self.__col__)
 
@@ -40,3 +41,4 @@ class Piece:
 
     def is_valid_move(self, to_row, to_col, board):
         raise NotImplementedError("Este método debe ser implementado por las subclases") 
+
