@@ -57,10 +57,10 @@ class TestQueen(unittest.TestCase):
         self.auxiliar_move(1, 1, True)
 
     def test_move_up_right(self):
-        self.auxiliar_move(1, 7, True)
+        self.auxiliar_move(0, 6, True)
 
     def test_move_down_left(self):
-        self.auxiliar_move(7, 1, True)
+        self.auxiliar_move(6, 0, True)
 
     def test_move_down_right(self):
         self.auxiliar_move(7, 7, True)

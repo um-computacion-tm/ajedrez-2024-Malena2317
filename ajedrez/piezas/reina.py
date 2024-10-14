@@ -51,15 +51,28 @@ class Queen(Piece):
 
     def check_obstacles(self, start_coords, to_row, to_col, board):
         start_row, start_col = start_coords
-        step_row, step_col = ((to - start) // max(1, abs(to - start)) if start != to else 0 for start, to in [(start_row, to_row), (start_col, to_col)])
+        row_diff = to_row - start_row
+        col_diff = to_col - start_col
+
+        if row_diff == 0:  # Movimiento horizontal
+            step_row = 0
+            step_col = 1 if col_diff > 0 else -1
+        elif col_diff == 0:  # Movimiento vertical
+            step_row = 1 if row_diff > 0 else -1
+            step_col = 0
+        else:  # Movimiento diagonal
+            step_row = 1 if row_diff > 0 else -1
+            step_col = 1 if col_diff > 0 else -1
 
         current_row, current_col = start_row + step_row, start_col + step_col
-        while (current_row != to_row) or (current_col != to_col):
+        while (current_row, current_col ) != (to_row, to_col):
+            if not self.is_within_board(current_row, current_col):
+                return True  # Fuera del tablero
             if board[current_row][current_col] is not None:
                 return True  # Hay un obstáculo
             current_row += step_row
             current_col += step_col
-
+                    
         return False  # No hay obstáculos
 
     def move(self, to_row, to_col, board):
