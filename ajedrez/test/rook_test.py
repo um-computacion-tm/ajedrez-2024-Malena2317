@@ -32,16 +32,6 @@ class TestRook(unittest.TestCase):
                 self.assertNotEqual(self.board[to_row][to_col], rook)
 
 
-    def test_mover_torre_a_casilla_ocupada(self):
-        # Agrega una pieza del mismo color en la casilla destino
-        self.board[3][1] = Rook(3, 1, "WHITE")
-        self.Rook_Move(self.rook, 3, 1, False)
-
-    def test_mover_torre_con_obstaculo(self):
-        # Agrega una pieza obstáculo
-        self.board[2][1] = Rook(2, 1, "WITHE")
-        self.Rook_Move(self.rook, 3, 1, False)
-
     def test_mover_torre_fuera_del_tablero(self):
         # Intenta mover la torre fuera del tablero
         self.Rook_Move(self.rook, 8, 1, False)
@@ -57,17 +47,28 @@ class TestRook(unittest.TestCase):
     def test_mover_torre_diagonal(self):
         # Intenta mover la torre diagonalmente
         self.Rook_Move(self.rook, 3, 3, False)
-    
-    def test_mover_torre_a_casilla_ocupada_mismo_color(self):
-        self.board[3][1] = Rook(3, 1, "WHITE")
-        self.Rook_Move(self.rook, 3, 1, False)
-
-    def test_mover_torre_a_casilla_ocupada_diferente_color(self):
-        self.board[3][1] = Rook(3, 1, "BLACK")
-        self.Rook_Move(self.rook, 3, 1, True)
 
     def test_mover_torre_fuera_del_tablero(self):
         self.Rook_Move(self.rook, -1, 1, False)
+
+    def test_mover_torre_a_casilla_ocupada(self):
+        self._test_mover_torre_a_casilla_ocupada_con_color("WHITE", False)
+
+    def test_mover_torre_a_casilla_ocupada_diferente_color(self):
+        self._test_mover_torre_a_casilla_ocupada_con_color("BLACK", True)
+
+    def test_mover_torre_con_obstaculo(self):
+        self._test_mover_torre_con_obstaculo("WHITE", False)
+
+    def _test_mover_torre(self, row, col, color, expected_result):
+        self.board[row][col] = Rook(row, col, color)
+        self.Rook_Move(self.rook, row, col, expected_result)
+
+    def _test_mover_torre_a_casilla_ocupada_con_color(self, color, expected_result):
+        self._test_mover_torre(3, 1, color, expected_result)
+
+    def _test_mover_torre_con_obstaculo(self, color, expected_result):
+        self._test_mover_torre(2, 1, color, expected_result)
 
 if __name__ == '__main__':
     unittest.main()
