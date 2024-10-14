@@ -23,6 +23,7 @@ class Queen(Piece):
 
     def is_valid_move(self, to_row, to_col, board):
 
+
         """Check if the Queen can move to a specified position.
         
         Args:
@@ -67,3 +68,4 @@ class Queen(Piece):
                 board[to_row][to_col] = self
                 return True
         return False
+

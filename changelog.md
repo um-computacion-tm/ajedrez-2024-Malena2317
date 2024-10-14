@@ -133,6 +133,7 @@ Prueba para Movimiento a la Misma Posición:
 Actualización en la Prueba de Movimientos Válidos en 'L':
       Se añadió test_valid_L_shape_moves() para verificar todos los movimientos válidos en 'L' desde la posición actual del caballo, asegurando una mejor cobertura de las reglas de movimiento
 
+
 [1.41.0] - 2024-10-08
 
 Refactorización de tests:
@@ -162,6 +163,7 @@ Refactorización:
       Se implementó el método auxiliar place_piece para colocar piezas en el tablero y evitar redundancia.
       Uso del método is_valid_move antes de mover piezas para verificar la validez del movimiento.
       Mejora en la verificación de movimientos hacia casillas ocupadas por piezas enemigas y del mismo color con assertTrue y assertFalse antes de realizar el movimiento.
+      
       
 [1.40.0] - 2024-10-06
 
