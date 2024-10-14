@@ -3,6 +3,41 @@
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
 
+[1.45.0] - 2024-10-13
+
+**Cambios en la Clase King**
+
+Método is_valid_move:
+      Se mejoró la validación del movimiento del rey para asegurar que solo pueda moverse a una casilla adyacente.
+      El cálculo de la distancia entre la posición actual y la posición de destino se realiza usando diferencias absolutas entre filas y columnas.
+      Se verifica que la casilla de destino esté vacía o que contenga una pieza de un color diferente. Si hay una pieza del mismo color en la casilla de destino, el movimiento es inválido.
+      Se agregó un mensaje de diagnóstico "Movimiento inválido para el Rey." para ayudar a identificar por qué un movimiento es rechazado durante la ejecución.
+
+Método move:
+      El método move ahora solo actualiza las coordenadas del rey si el movimiento es válido, utilizando el método is_valid_move para verificar la validez del mismo.
+      Si el movimiento es válido, se actualiza la posición de la pieza en el tablero, reemplazando la casilla anterior con None y colocando el rey en la nueva casilla.
+      Si el movimiento no es válido, el método devuelve False sin realizar cambios en el tablero.
+
+**Cambios en los Tests Unitarios para la Clase King**
+
+Método move_and_assert:
+      Este método intenta mover el rey a una posición especificada y verifica que el resultado coincida con el esperado.
+      Se agrega una verificación de la posición actual del rey tras el movimiento utilizando self.assert_king_position.
+      Esto asegura que, si el movimiento es válido, el rey se encuentra efectivamente en la nueva posición, y si es inválido, permanece en su posición original.
+
+Método place_piece_and_move:
+      Se creó este método para facilitar la colocación de otras piezas en el tablero y probar cómo el rey interactúa con ellas.
+      Se coloca otra pieza (otro rey, ya sea blanco o negro) en la posición de destino y se prueba si el movimiento del rey original es válido o no.
+      Esto es útil para verificar que el rey no pueda ocupar una casilla ya ocupada por otra pieza del mismo color y que pueda capturar una pieza de un color contrario.
+
+Casos de Prueba Específicos:
+test_mover_una_casilla_hacia_abajo: Verifica que el rey puede moverse una casilla hacia abajo.
+test_mover_en_diagonal: Verifica que el rey puede moverse en diagonal una casilla.
+test_mover_fuera_del_tablero: Verifica que el rey no puede moverse fuera de los límites del tablero.
+test_mover_a_una_posicion_invalida: Verifica que el rey no puede realizar un movimiento que no esté permitido por las reglas (como mover más de una casilla).
+test_mover_a_una_posicion_ocupada_por_una_pieza_del_mismo_color: Verifica que el rey no puede moverse a una posición donde ya hay una pieza de su mismo color.
+test_mover_a_una_posicion_ocupada_por_una_pieza_de_diferente_color: Verifica que el rey puede capturar una pieza de un color contrario moviéndose a su posición.
+
 
 [1.44.0] - 2024-10-11
 
