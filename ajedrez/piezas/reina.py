@@ -44,18 +44,29 @@ class Queen(Piece):
         row_diff = abs(to_row - self.get_coordinates()[0])
         col_diff = abs(to_col - self.get_coordinates()[1])
 
-        # Diagonal movement
-        if row_diff == col_diff:  
-            for i in range(1, row_diff):
-                if board[self.get_coordinates()[0] + (to_row - self.get_coordinates()[0]) // row_diff * i][self.get_coordinates()[1] + (to_col - self.get_coordinates()[1]) // col_diff * i] is not None:
-                    return False
-        # Horizontal/Vertical movemen
-        elif row_diff == 0 or col_diff == 0:  
-            for i in range(1, max(row_diff, col_diff)):
-                if (row_diff == 0 and board[to_row][self.get_coordinates()[1] + (to_col - self.get_coordinates()[1]) // col_diff * i] is not None) or \
-                    (col_diff == 0 and board[self.get_coordinates()[0] + (to_row - self.get_coordinates()[0]) // row_diff * i][to_col] is not None):
-                    return False
-        return True
+        # Comprobar movimiento diagonal
+        if row_diff == col_diff:
+            return not self.check_obstacles(self.get_coordinates(), to_row, to_col, board)
+
+        # Comprobar movimiento horizontal o vertical
+        if row_diff == 0 or col_diff == 0:
+            return not self.check_obstacles(self.get_coordinates(), to_row, to_col, board)
+
+        return False  # Si no es un movimiento válido
+
+    def check_obstacles(self, start_coords, to_row, to_col, board):
+        start_row, start_col = start_coords
+        step_row = (to_row - start_row) // max(1, abs(to_row - start_row)) if start_row != to_row else 0
+        step_col = (to_col - start_col) // max(1, abs(to_col - start_col)) if start_col != to_col else 0
+
+        current_row, current_col = start_row + step_row, start_col + step_col
+        while (current_row != to_row) or (current_col != to_col):
+            if board[current_row][current_col] is not None:
+                return True  # Hay un obstáculo
+            current_row += step_row
+            current_col += step_col
+
+        return False  # No hay obstáculos
 
     def move(self, to_row, to_col, board):
         # Comprobar si la posición está dentro del tablero

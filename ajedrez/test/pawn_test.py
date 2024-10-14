@@ -23,7 +23,7 @@ class TestPawn(unittest.TestCase):
         self.move_pawn_and_verify(self.white_pawn, (0, 0), (1, 0), True)
 
     def test_move_black_pawn_forward(self):
-        self.move_pawn_and_verify(self.black_pawn, (6,0), (5,0), True)
+        self.move_pawn_and_verify(self.black_pawn, (6,0), (4,0), True)
 
     def test_move_white_pawn_backward(self):
         self.move_pawn_and_verify(self.white_pawn, (0, 0), (-1, 0), False)
