@@ -5,7 +5,6 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from piezas.rey import King
 
 class TestKing(unittest.TestCase):
-
     def setUp(self):
         # Crear un tablero vacío
         self.board = []
