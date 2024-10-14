@@ -19,45 +19,25 @@ class Pawn(Piece):
         start_row, start_col = self.get_coordinates()
         print(f"Coordenadas actuales: ({start_row}, {start_col})")
         print(f"Intentando mover a: ({to_row}, {to_col})")
-        is_valid = True
-        
-
+    
+    
         # El peón solo se mueve en la misma columna
         if start_col != to_col:
                 print("El peón solo se puede mover en la misma columna.")
-                is_valid = False
+                return False
+         
+        # Diferencia de filas
+        row_diff = to_row - start_row if self.get_color() == "WHITE" else start_row - to_row
+       
+        # Verificar si el movimiento es válido
         if self.get_color() == "WHITE":
-            row_diff = to_row - start_row  # Diferencia de filas para peones blancos
+            if row_diff < 0 or row_diff > 2 or (row_diff == 2 and (self.has_moved or start_row != 1)):
+                print("El peón blanco solo puede avanzar hacia adelante.")
+                return False
         else:
-            row_diff = start_row - to_row  # Diferencia de filas para peones negros
+            if row_diff > 0 or (row_diff < -2 and self.has_moved) or (row_diff == -2 and (self.has_moved or start_row != 6)) or (row_diff != -1 and self.has_moved):
+                print("El peón negro solo puede avanzar hacia adelante.")
+                return False
 
-
-        # Peón blanco avanza hacia adelante (filas crecientes y Peón negro avanza hacia atrás (filas decrecientes)
-        if self.get_color() == "WHITE":
-            if row_diff < 0 or row_diff > 2:
-                print("El peón solo puede avanzar hacia adelante.")
-                is_valid = False
-
-            elif row_diff == 2 and (self.has_moved or start_row != 1):
-                print("El peón blanco solo puede avanzar dos casillas en su primer movimiento.")
-                is_valid = False
-
-        elif self.get_color() == "BLACK":
-            if row_diff > 0 or (row_diff < -2 and self.has_moved) or (row_diff == -2 and (self.has_moved or start_row != 6)):
-                print("El peón solo puede avanzar hacia adelante.")
-                is_valid = False
-
-            elif row_diff == -2 and (self.has_moved or start_row != 6):
-                print("El peón negro solo puede avanzar dos casillas en su primer movimiento.")
-                is_valid = False
-
-            elif row_diff != -1 and self.has_moved:
-                print("El peón negro solo puede avanzar una casilla en movimientos subsiguientes.")
-                is_valid = False
-
-        #Verificar si puede moverse a la posición
-        if is_valid:
-            is_valid = self.can_move_to(to_row, to_col, board)
-
-        return is_valid
-
+        # Verificar si puede moverse a la posición
+        return self.can_move_to(to_row, to_col, board)
