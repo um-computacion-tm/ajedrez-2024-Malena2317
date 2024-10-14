@@ -21,6 +21,8 @@ Condiciones para Peones Negros:
 
 Comprobación de Movimiento a la Posición de Destino:Se realizó la verificación de si se puede mover a la posición de destino utilizando el método can_move_to de manera más directa, eliminando la necesidad de utilizar una variable temporal para almacenar el estado.
 
+Separación de Lógica: Las funciones is_valid_white_move e is_valid_black_move se mantienen para manejar la lógica de validación de forma clara y concisa, lo que reduce la complejidad cognitiva de la función principal is_valid_move
+
 **Clase Rook**
 
 Método move:Se implementó un método move que actualiza la posición de la torre en el tablero si el movimiento es válido.

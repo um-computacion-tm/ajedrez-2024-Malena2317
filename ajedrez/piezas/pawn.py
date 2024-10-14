@@ -36,6 +36,7 @@ class Pawn(Piece):
         return True
 
     def is_valid_black_move(self, row_diff, start_row):
-       if row_diff > 0 or (self.has_moved and row_diff not in [-1, 0]) or (row_diff == -2 and start_row != 6):
+        if row_diff > 1 or (self.has_moved and row_diff not in [-1]) or (row_diff == 2 and start_row != 6):
             print("El peón negro solo puede avanzar hacia adelante.")
             return False
+        return True
