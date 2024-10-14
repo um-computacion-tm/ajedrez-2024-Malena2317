@@ -44,20 +44,13 @@ class Queen(Piece):
         row_diff = abs(to_row - self.get_coordinates()[0])
         col_diff = abs(to_col - self.get_coordinates()[1])
 
-        # Comprobar movimiento diagonal
-        if row_diff == col_diff:
-            return not self.check_obstacles(self.get_coordinates(), to_row, to_col, board)
-
-        # Comprobar movimiento horizontal o vertical
-        if row_diff == 0 or col_diff == 0:
-            return not self.check_obstacles(self.get_coordinates(), to_row, to_col, board)
-
-        return False  # Si no es un movimiento válido
+        is_valid = (row_diff == col_diff or row_diff == 0 or col_diff == 0)
+        is_valid &= not self.check_obstacles(self.get_coordinates(), to_row, to_col, board)
+        return is_valid
 
     def check_obstacles(self, start_coords, to_row, to_col, board):
         start_row, start_col = start_coords
-        step_row = (to_row - start_row) // max(1, abs(to_row - start_row)) if start_row != to_row else 0
-        step_col = (to_col - start_col) // max(1, abs(to_col - start_col)) if start_col != to_col else 0
+        step_row, step_col = ((to - start) // max(1, abs(to - start)) if start != to else 0 for start, to in [(start_row, to_row), (start_col, to_col)])
 
         current_row, current_col = start_row + step_row, start_col + step_col
         while (current_row != to_row) or (current_col != to_col):
