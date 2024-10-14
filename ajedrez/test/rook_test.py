@@ -4,55 +4,70 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from piezas.rook import Rook
 from tablero.board import Board
-from piezas.pieza import Piece
+
+
 
 class TestRook(unittest.TestCase):
 
     def setUp(self):
-        self.board = Board()
-        self.rook_blanca = Rook("WHITE")
-        self.rook_negra = Rook("BLACK")
-
-        # Coloca las piezas en el tablero
-        self.board.set_piece(0, 0, self.rook_blanca)
-        self.board.set_piece(7, 7, self.rook_negra)
+        
+        # Crear un tablero vacío y un caballo
+        self.board = [[None for _ in range(8)] for _ in range(8)]
+        self.rook = Rook(1, 1, "WHITE")
+        self.board[1][1] = self.rook
 
     def Rook_Move(self, rook, to_row, to_col, expected_result):
-        # Obtener la posición inicial de la torre
-        start_row, start_col = self.board.get_piece_position(rook)
-        
-        if start_row is None or start_col is None:
-            self.fail("Start row or column is None")
 
-        # Realiza el movimiento
-        result = rook.move(self.board, to_row, to_col)
-        
-        # Verifica el resultado del movimiento
+        result = rook.move(to_row, to_col, self.board)
         self.assertEqual(result, expected_result)
         
         if expected_result:
-            # Verifica que la pieza se haya movido a la nueva posición
-            self.assertEqual(self.board.get_piece(start_row, start_col), None)
-            self.assertEqual(self.board.get_piece(to_row, to_col), rook)
+            # Verifica que la torre se haya movido a la nueva posición
+            self.assertIsNone(self.board[1][1])
+            self.assertEqual(self.board[to_row][to_col], rook)
         else:
-            # Verifica que la pieza permanezca en su lugar original
-            self.assertEqual(self.board.get_piece(start_row, start_col), rook)
-            self.assertEqual(self.board.get_piece(to_row, to_col), None)
-
-    def test_mover_torre_vertical(self):
-        self.Rook_Move(self.rook_blanca, 4, 0, True)
-
-    def test_mover_torre_horizontal(self):
-        self.Rook_Move(self.rook_negra, 7, 5, True)  # Mover torre negra horizontalmente
+            # Verifica que la torre permanezca en su lugar original
+            self.assertEqual(self.board[1][1], rook)
+            if 0 <= to_row < 8 and 0 <= to_col < 8:
+                self.assertNotEqual(self.board[to_row][to_col], rook)
 
 
-    def test_mover_torre_diagonal(self):
-        self.Rook_Move(self.rook_blanca, 3, 3, False)
+    def test_mover_torre_a_casilla_ocupada(self):
+        # Agrega una pieza del mismo color en la casilla destino
+        self.board[3][1] = Rook(3, 1, "WHITE")
+        self.Rook_Move(self.rook, 3, 1, False)
 
     def test_mover_torre_con_obstaculo(self):
-        self.board.set_piece(2, 0, Piece(2, 0, "WHITE"))  # Agrega una pieza obstáculo
-        self.Rook_Move(self.rook_blanca, 4, 0, False)
+        # Agrega una pieza obstáculo
+        self.board[2][1] = Rook(2, 1, "WITHE")
+        self.Rook_Move(self.rook, 3, 1, False)
 
+    def test_mover_torre_fuera_del_tablero(self):
+        # Intenta mover la torre fuera del tablero
+        self.Rook_Move(self.rook, 8, 1, False)
+
+    def test_mover_torre_horizontal(self):
+        # Mover torre horizontalmente
+        self.Rook_Move(self.rook, 1, 3, True)
+
+    def test_mover_torre_vertical(self):
+        # Mover torre verticalmente
+        self.Rook_Move(self.rook, 3, 1, True)
+
+    def test_mover_torre_diagonal(self):
+        # Intenta mover la torre diagonalmente
+        self.Rook_Move(self.rook, 3, 3, False)
+    
+    def test_mover_torre_a_casilla_ocupada_mismo_color(self):
+        self.board[3][1] = Rook(3, 1, "WHITE")
+        self.Rook_Move(self.rook, 3, 1, False)
+
+    def test_mover_torre_a_casilla_ocupada_diferente_color(self):
+        self.board[3][1] = Rook(3, 1, "BLACK")
+        self.Rook_Move(self.rook, 3, 1, True)
+
+    def test_mover_torre_fuera_del_tablero(self):
+        self.Rook_Move(self.rook, -1, 1, False)
 
 if __name__ == '__main__':
     unittest.main()

@@ -24,10 +24,10 @@ class Board:
             squares.append(row)
 
         # Coloca las piezas en su posición inicial
-        squares[0][0] = Rook("BLACK")
-        squares[0][7] = Rook("BLACK")
-        squares[7][7] = Rook("WHITE")
-        squares[7][0] = Rook("WHITE")
+        squares[0][0] = Rook(0, 0, "BLACK")
+        squares[0][7] = Rook(0, 7, "BLACK")
+        squares[7][0] = Rook(7, 0, "WHITE")
+        squares[7][7] = Rook(7, 7, "WHITE")
 
         # Coloca los peones en su posición inicial
         for i in range(8):
@@ -35,26 +35,26 @@ class Board:
             squares[6][i] = Pawn("BLACK")
 
         # Coloca las piezas restantes en su posición inicial
-        squares[0][1] = Knight("BLACK")
-        squares[0][6] = Knight("BLACK")
-        squares[7][1] = Knight("WHITE")
-        squares[7][6] = Knight("WHITE")
+        squares[0][1] = Knight(0, 1, "BLACK")
+        squares[0][6] = Knight(0, 6, "BLACK")
+        squares[7][1] = Knight(7, 1, "WHITE")
+        squares[7][6] = Knight(7, 6, "WHITE")
 
-        squares[0][2] = Bishop("BLACK")
-        squares[0][5] = Bishop("BLACK")
-        squares[7][2] = Bishop("WHITE")
-        squares[7][5] = Bishop("WHITE")
+        squares[0][2] = Alfil(0, 2, "BLACK")
+        squares[0][5] = Alfil(0, 5, "BLACK")
+        squares[7][2] = Alfil(7, 2, "WHITE")
+        squares[7][5] = Alfil(7, 5, "WHITE")
 
-        squares[0][3] = Queen("BLACK")
-        squares[7][3] = Queen("WHITE")
+        squares[0][3] = Queen(0, 3, "BLACK")
+        squares[7][3] = Queen(7, 3, "WHITE")
 
-        squares[0][4] = King("BLACK")
-        squares[7][4] = King("WHITE")
+        squares[0][4] = King(0, 4, "BLACK")
+        squares[7][4] = King(7, 4, "WHITE")
 
         return squares
 
-    def get_piece(self, row, col):
         # Retorna la pieza en la posición (row, col)
+    def get_piece(self, row, col):
         return self.squares[row][col]
 
     def set_piece(self, row, col, piece):
