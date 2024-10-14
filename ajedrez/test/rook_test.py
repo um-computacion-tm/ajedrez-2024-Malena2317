@@ -6,7 +6,6 @@ from piezas.rook import Rook
 from tablero.board import Board
 
 
-
 class TestRook(unittest.TestCase):
 
     def setUp(self):
