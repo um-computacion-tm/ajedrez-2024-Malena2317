@@ -24,8 +24,12 @@ class Piece:
         if not self.is_within_board(to_row, to_col):
             print("Te saliste del tablero!!")
             return False
-        if board[to_row][to_col] is None or board[to_row][to_col].get_color() != self.get_color():
+        destination_piece = board[to_row][to_col]
+        # Permite el movimiento si la casilla destino está vacía o contiene una pieza de diferente color
+        if destination_piece is None or destination_piece.get_color() != self.get_color():
             return True
+                
+        print("La posición está ocupada por una pieza del mismo color.")
         return False
 
     def move(self, to_row, to_col, board):
