@@ -25,15 +25,21 @@ class Pawn(Piece):
         # Diferencia de filas
         row_diff = to_row - start_row if self.get_color() == "WHITE" else start_row - to_row
        
-        # Verificar si el movimiento es válido
-        if self.get_color() == "WHITE":
-            if row_diff < 0 or row_diff > 2 or (row_diff == 2 and (self.has_moved or start_row != 1)):
-                print("El peón blanco solo puede avanzar hacia adelante.")
-                return False
-        else:
-            if row_diff > 0 or (row_diff < -2 and self.has_moved) or (row_diff == -2 and (self.has_moved or start_row != 6)) or (row_diff != -1 and self.has_moved):
-                print("El peón negro solo puede avanzar hacia adelante.")
-                return False
+        # Validar movimiento según el color del peón
+        return (self.is_valid_white_move(row_diff, start_row) if self.get_color() == "WHITE" 
+            else self.is_valid_black_move(row_diff, start_row))
+        
+    def is_valid_white_move(self, row_diff, start_row):
+        if row_diff < 0 or row_diff > 2 or (row_diff == 2 and (self.has_moved or start_row != 1)):
+            print("El peón blanco solo puede avanzar hacia adelante.")
+            return False
+        return True
 
-        # Verificar si puede moverse a la posición
-        return self.can_move_to(to_row, to_col, board)
+    def is_valid_black_move(self, row_diff, start_row):
+        if (row_diff > 0 or 
+            (row_diff < -2 and self.has_moved) or 
+            (row_diff == -2 and (self.has_moved or start_row != 6)) or 
+            (row_diff != -1 and self.has_moved)):
+            print("El peón negro solo puede avanzar hacia adelante.")
+            return False
+        return True
