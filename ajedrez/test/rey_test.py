@@ -26,8 +26,8 @@ class TestKing(unittest.TestCase):
     def assert_king_position(self, row, col, result):
         if result:
             # Comprobar si el rey se movió a la posición correcta
-            self.assertEqual(self.king.__row__, row)
-            self.assertEqual(self.king.__col__, col)
+            self.assertEqual(self.king.get_coordinates()[0], row)
+            self.assertEqual(self.king.get_coordinates()[1], col)
 
     def move_and_assert(self, row, col, expected_result=True):
         # Mover el rey existente y verificar el resultado
@@ -38,7 +38,7 @@ class TestKing(unittest.TestCase):
     def place_piece_and_move(self, row, col, color, expected_result=True):
         """Coloca una pieza en el tablero y prueba si puede moverse"""
         
-        if color == "white" and (row, col) == (self.king.__row__, self.king.__col__):
+        if color == "white" and (row, col) == (self.king.get_coordinates()[0], self.king.get_coordinates()[1]):
             # Si es el mismo rey blanco en la misma posición, probar su movimiento
             result = self.king.move(row, col, self.board)
         else:
@@ -60,6 +60,33 @@ class TestKing(unittest.TestCase):
 
     def test_mover_pieza_negra(self):
         self.place_piece_and_move(1, 4, "black", True)
+
+    def test_mover_fuera_del_tablero(self):
+        self.move_and_assert(8, 4, False)
+
+    def test_mover_a_una_posicion_invalida(self):
+        self.move_and_assert(3, 4, False)
+
+    def test_mover_en_horizontal(self):
+        self.move_and_assert(0, 5, True)
+
+    def test_mover_en_vertical(self):
+        self.move_and_assert(1, 4, True)
+
+    def test_mover_en_diagonal_hacia_la_izquierda(self):
+        self.move_and_assert(1, 3, True)
+
+    def test_mover_a_una_posicion_ocupada_por_una_pieza_del_mismo_color(self):
+        self.place_piece_and_move(0, 4, "white", False)
+
+    def test_mover_a_una_posicion_ocupada_por_una_pieza_de_diferente_color(self):
+        self.place_piece_and_move(0, 4, "black", True)
+
+    def test_mover_fuera_del_tablero_en_la_fila_superior(self):
+        self.move_and_assert(-1, 4, False)
+
+    def test_mover_fuera_del_tablero_en_la_columna_izquierda(self):
+        self.move_and_assert(0, -1, False)
 
 if __name__ == '__main__':
     unittest.main()
