@@ -2,6 +2,40 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivos.
 
+[1.46.0] - 2024-10-14
+
+**clase Pawn**
+Cambios en la Función is_valid_move
+
+Refactorización de Complejidad Cognitiva:Se simplificó el flujo de control eliminando la variable is_valid y utilizando return de manera directa en los puntos de salida.
+
+implificación de Condicionales:Se reorganizaron las condiciones relacionadas con el movimiento del peón, utilizando return en lugar de asignar valores a una variable intermedia
+
+evisiones de Lógica:
+
+Condiciones para Peones Blancos:
+      Se verificó si el peón blanco solo puede avanzar hacia adelante y se establecieron las condiciones correspondientes para un movimiento de dos casillas en su primer movimiento.
+
+Condiciones para Peones Negros:
+      Se consolidó la lógica que verifica los movimientos permitidos y se aseguraron condiciones claras y concisas para determinar si un movimiento es válido.
+
+Comprobación de Movimiento a la Posición de Destino:Se realizó la verificación de si se puede mover a la posición de destino utilizando el método can_move_to de manera más directa, eliminando la necesidad de utilizar una variable temporal para almacenar el estado.
+
+**Clase Rook**
+
+Método move:Se implementó un método move que actualiza la posición de la torre en el tablero si el movimiento es válido.
+
+Método is_valid_move:Se añadió la verificación de si el movimiento está dentro del tablero usando is_within_board y si el camino está libre mediante _is_path_clear
+
+**Tests de Rook**
+
+Método Rook_Move: Se ajustó para trabajar directamente con la lista board y realizar las verificaciones de movimientos y actualizaciones del tablero.
+
+Pruebas Añadidas: 
+      Movimiento a una casilla ocupada por una pieza del mismo color.
+      Movimiento a una casilla ocupada por una pieza de diferente color.
+      Movimiento fuera del tablero con coordenadas negativas.
+
 
 [1.45.0] - 2024-10-13
 
