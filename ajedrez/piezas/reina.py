@@ -58,7 +58,7 @@ class Queen(Piece):
         step_row = (row_diff > 0) - (row_diff < 0)  # 1 si es positivo, -1 si es negativo, 0 si es 0
         step_col = (col_diff > 0) - (col_diff < 0)  # 1 si es positivo, -1 si es negativo, 0 si es 0
 
-        current_row,git status current_col = start_row + step_row, start_col + step_col
+        current_row, current_col == start_row + step_row, start_col + step_col
         while (current_row, current_col ) != (to_row, to_col):
             if not self.is_within_board(current_row, current_col):
                 return True  # Fuera del tablero
