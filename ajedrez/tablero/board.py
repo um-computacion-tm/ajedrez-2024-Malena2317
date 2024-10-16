@@ -31,8 +31,8 @@ class Board:
 
         # Coloca los peones en su posición inicial
         for i in range(8):
-            squares[1][i] = Pawn("WHITE")
-            squares[6][i] = Pawn("BLACK")
+            squares[1][i] = Pawn(1, i, "WHITE")  # Añadido: fila y columna
+            squares[6][i] = Pawn(6, i, "BLACK")  # Añadido: fila y columna
 
         # Coloca las piezas restantes en su posición inicial
         squares[0][1] = Knight(0, 1, "BLACK")
@@ -53,52 +53,53 @@ class Board:
 
         return squares
 
+    def print_board(self):
+            print("    A    B    C    D    E    F    G    H")
+            print("  +---------------------------------------+")
+            for i in range(8):
+                print(f"{8 - i} |", end=" ")
+                for j in range(8):
+                    piece = self.squares[i][j]
+                    if piece:
+                        print(f"{piece.symbol:<4}", end=" ")
+                    else:
+                        print(".   ", end=" ")
+                print("|")
+            print("  +---------------------------------------+")
+            print("    A    B    C    D    E    F    G    H")
+
         # Retorna la pieza en la posición (row, col)
     def get_piece(self, row, col):
-        return self.squares[row][col]
+        if self.is_within_board(row, col):
+            return self.squares[row][col]
+        return None
 
     def set_piece(self, row, col, piece):
         self.squares[row][col] = piece
 
     def get_piece_position(self, piece):
-        """Busca la posición de una pieza en el tablero y retorna (row, col)"""
-        for row in range(8):
-            for col in range(8):
-                if self.get_piece(row, col) == piece:
-                    return row, col
-        return None, None
+        if self.is_within_board(row, col):
+            return self.board[row][col]
+        return None
 
-    def print_board(self):
-        # Prints the board to the console
-        print("  a b c d e f g h")
-        for i in range(8):
-            print(i + 1, end=" ")
-            for j in range(8):
-                if self.squares[i][j] is None:
-                    print("-", end=" ")
-                else:
-                    print(self.squares[i][j], end=" ")
-            print()
-
+    def is_within_board(self, row, col):
+            # Verifica si las coordenadas están dentro del rango del tablero.
+            return 0 <= row < 8 and 0 <= col < 8
+        
     def move_piece(self, origin, destination):
-        # Mueve las piezas en el tablero
-        x1, y1 = origin
-        x2, y2 = destination
-        piece = self.squares[x1][y1]
-        if piece is not None:
-            self.squares[x1][y1] = None
-            self.squares[x2][y2] = piece
-        else:
+         piece = self.get_piece(origin_row, origin_col)
+        # Verificar si hay una pieza en la posición inicial
+        if piece is None:
             print("No piece at origin square")
-
-    def __str__(self):
-        # Representa el tablero como una cadena de texto
-        board_str = ""
-        for row in self.squares:
-            for cell in row:
-                if cell is not None:
-                    board_str += str(cell)
-                else:
-                    board_str += " . "  # Representa una celda vacía
-            board_str += "\n"
-        return board_str
+            return False
+        # Verificar si el movimiento es válido
+        if not piece.is_valid_move(dest_row, dest_col, self.squares):
+            print("Invalid move for this piece")
+            return False
+        # Realizar el movimiento
+        self.squares[origin_row][origin_col] = None
+        self.squares[dest_row][dest_col] = piece
+        piece.update_coordinates(dest_row, dest_col)
+        return True
+        
+       
