@@ -34,8 +34,6 @@ class Chess:
                 print("El jugador " + self.current_turn + " se ha rendido.")
                 self.game_over = True
                 return False
-
-            
                 # Entrada de destino del movimiento
                 destination = input("Ingrese la posición de destino (Ej: D3): ")
                 origin_coords = self.convert_position(origin)
@@ -48,22 +46,55 @@ class Chess:
             else:
                 print("Posiciones inválidas. Intenta de nuevo.")
 
+ def switch_turn(self):
+        # Change the current turn to the other player.
+        self.current_turn = "BLACK" if self.current_turn == "WHITE" else "WHITE"
+    
+    def get_user_input(self, prompt):
+        # Validate the user input.
+        while True:
+            user_input = input(prompt).strip().upper()
+            if len(user_input) == 2 and user_input[0] in "ABCDEFGH" and user_input[1].isdigit():
+                return user_input
+            print("Invalid input. Remember, it should be something like 'D2'. Try again.")
 
-    def change_turn(self):
+    def get_positions_from_notation(self, notation):
+        columns = "ABCDEFGH"
+        row = 8 - int(notation[1])  # Convert chess row (2-8) to array indices (7-0).
+        column = columns.index(notation[0])  # Convert chess column (A-H) to array indices (0-7
+        print(f"Notación {notation} convertida a coordenadas: ({row}, {column})")
+        return row, column
 
-        "Cambia el turno del jugador"
-        if self.__turn__ == "WHITE":
-            self.__turn__ = "BLACK" # Cambia a negro
-        else:
-            self.__turn__ = "WHITE"  # Cambia a blanco
+    def attempt_move(self, origin_row, origin_column, destination_row, destination_column):
+        # Validate that the positions are within the board.
+        if not self.board.is_within_board(origin_row, origin_column) or not self.board.is_within_board(destination_row, destination_column):
+            print("El movimiento está fuera de los límites del tablero.")
+            print(f"Intentando mover de ({origin_row}, {origin_column}) a ({destination_row}, {destination_column})")
+            return False
 
-    def convert_position(self, pos):
-        "Convierte una posición como 'D2' a coordenadas (fila, columna)"
-        columns = {'a': 0, 'b': 1, 'c': 2, 'd': 3, 'e': 4, 'f': 5, 'g': 6, 'h': 7}
-        try:
-            col = columns[pos[0].lower()]
-            row = int(pos[1]) - 1
-            return row, col
-        except (KeyError, ValueError):
-            print("Posición fuera de los límites. Intenta de nuevo.")
-            return None
+        # Get the part at the origin position.
+        piece = self.board.get_piece(origin_row, origin_column)
+        if not piece:
+            print("There is no piece in the home position.")
+            return False
+        if piece.get_color() != self.current_turn:
+            print(f"It's the turn of {self.current_turn.lower()}, not of {piece.get_color().lower()}.")
+            return False
+        # Try to move the piece on the board.
+        if self.board.move_piece(origin_row, origin_column, destination_row, destination_column):
+            print("Successful move.")
+            return True
+        print("Movimiento no válido según el método move_piece.")
+        return False
+
+    def check_pawn_promotion(self):
+            # Check if any pawn has reached the other end of the board and needs to be promoted.
+            for column in range(8):
+                # Check if there are white pawns that need to be promoted.
+                if isinstance(self.board.get_piece(0, column), Pawn) and self.board.get_piece(0, column).color == "WHITE":
+                    self.promote_pawn(0, column)
+                # Check if there are black pawns that need to be promoted.
+                elif isinstance(self.board.get_piece(7, column), Pawn) and self.board.get_piece(7, column).color == "BLACK":
+                    self.promote_pawn(7, column)
+
+ 
