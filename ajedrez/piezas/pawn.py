@@ -30,7 +30,10 @@ class Pawn(Piece):
 
     return False
 
-    def is_forward_move(self, current_row, to_row, current_col, to_col, direction, board):
+    def is_forward_move(self, from_pos, to_pos, direction, board):
+    current_row, current_col = from_pos
+    to_row, to_col = to_pos
+
         # Move forward one square
         if current_col == to_col:
             if to_row == current_row + direction and board.get_piece(to_row, to_col) is None:
@@ -42,17 +45,20 @@ class Pawn(Piece):
                     board.get_piece(to_row, to_col) is None and
                     board.get_piece(current_row + direction, to_col) is None):
                     return True
-
+    
         return False
 
-    def is_capture_move(self, current_row, current_col, to_row, to_col, direction, board):
+   def is_capture_move(self, from_pos, to_pos, direction, board):
+        current_row, current_col = from_pos
+        to_row, to_col = to_pos
+        
         # Diagonal capture movement
         if abs(current_col - to_col) == 1 and to_row == current_row + direction:
             piece_at_destination = board.get_piece(to_row, to_col)
             if piece_at_destination and piece_at_destination.get_color() != self.get_color():
                 return True
-
-    return False
+        
+        return False
 
         
   
