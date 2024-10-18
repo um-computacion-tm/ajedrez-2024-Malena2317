@@ -14,26 +14,45 @@ class Pawn(Piece):
         if self.is_valid_move(to_row, to_col, board):
             return super().move(to_row, to_col, board)
         return False
-        
-    def is_valid_move(self, to_row, to_col, board):
-        current_row, current_col = self.get_coordinates()
-        direction = 1 if self.get_color() == "WHITE" else -1  # Blancas hacia adelante, negras hacia atrás
 
-        # Movimiento hacia adelante de una casilla
+    def is_valid_move(self, to_row, to_col, board):
+    current_row, current_col = self.get_coordinates()
+    direction = 1 if self.get_color() == "WHITE" else -1  # Blancas hacia adelante, negras hacia atrás
+
+    # Check forward movement
+    if self.is_forward_move(current_row, to_row, current_col, to_col, direction, board):
+        return True
+
+    
+    # Check capture motion
+    if self.is_capture_move(current_row, current_col, to_row, to_col, direction, board):
+        return True
+
+    return False
+
+    def is_forward_move(self, current_row, to_row, current_col, to_col, direction, board):
+        # Move forward one square
         if current_col == to_col:
             if to_row == current_row + direction and board.get_piece(to_row, to_col) is None:
                 return True
-
-            # Movimiento de dos casillas desde la posición inicial
+            # Movement of two squares from the initial position
             if (current_row == 1 and self.get_color() == "WHITE" or
                 current_row == 6 and self.get_color() == "BLACK"):
-                if to_row == current_row + 2 * direction and board.get_piece(to_row, to_col) is None and board.get_piece(current_row + direction, to_col) is None:
+                if (to_row == current_row + 2 * direction and
+                    board.get_piece(to_row, to_col) is None and
+                    board.get_piece(current_row + direction, to_col) is None):
                     return True
 
-        # Movimiento de captura en diagonal
+        return False
+
+    def is_capture_move(self, current_row, current_col, to_row, to_col, direction, board):
+        # Diagonal capture movement
         if abs(current_col - to_col) == 1 and to_row == current_row + direction:
             piece_at_destination = board.get_piece(to_row, to_col)
             if piece_at_destination and piece_at_destination.get_color() != self.get_color():
                 return True
 
-        return False
+    return False
+
+        
+  
