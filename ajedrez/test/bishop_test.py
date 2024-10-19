@@ -2,32 +2,27 @@ import unittest
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from piezas.bishop import Alfil
+from piezas.bishop import Bishop
 from tablero.board import Board
 
 class TestBishop(unittest.TestCase):
 
-    def setUp(self):
-        # Inicializa el tablero y la pieza
-        self.board = [[None for _ in range(8)] for _ in range(8)]
-        self.place_piece(1, 1, "WHITE")
-        self.alfil = Alfil(1, 1, "WHITE")
-
-    def place_piece(self, row, col, color):
-        # Colocar una pieza en el tablero
-        self.board[row][col] = Alfil(row, col, color)
+        self.board = Board()
+        self.bishop = Bishop(4, 4, "WHITE")
+        self.board.set_piece(4, 4, self.bishop
+                             
+     def set_piece(self, row, col, color):
+        # Place a piece on the board
+        self.board.set_piece(row, col, Bishop(row, col, color))
 
     def _assert_move(self, row, col, expected_valid):
         if row < 0 or row >= 8 or col < 0 or col >= 8:
             self.assertFalse(expected_valid)
         else:
-            try:
-                self.alfil.move(row, col, self.board)
-                self.assertIsInstance(self.board[row][col], Alfil)
-                self.assertTrue(expected_valid)
-            except ValueError:
-                self.assertFalse(expected_valid)
+            valid_move = self.bishop.move(row, col, self.board)
+            self.assertEqual(valid_move, expected_valid)
 
+            
     def test_move_diagonal_free(self):
         self._assert_move(3, 3, True)
 
