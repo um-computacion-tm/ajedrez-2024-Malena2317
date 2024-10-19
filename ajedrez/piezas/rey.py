@@ -6,8 +6,10 @@ class King(Piece):
   
     def __init__(self, row, col, color):
         super().__init__(row, col, color)
-        self.symbol = "♔" if color == "WHITE" else "♚"
-        self.color = color
+
+    def get_symbol(self):
+          # Return the symbol for the king based on its color
+          return "♔" if self.get_color() == "WHITE" else "♚"
 
     def is_valid_move(self, to_row, to_col, board):
         start_row, start_col = self.get_coordinates()
