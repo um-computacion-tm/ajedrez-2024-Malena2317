@@ -4,10 +4,25 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from piezas.pieza import Piece 
 
       
-class Alfil(Piece):
+class Bishop (Piece):
     def __init__(self, row, col, color):
         super().__init__(row, col, color)
-        self.symbol = "♗" if color == "WHITE" else "♝"
+
+     def get_symbol(self):
+        # Returns the bishop's symbol based on its color.
+        return "♗" if self.get_color() == "WHITE" else "♝"
+    
+    def move(self, to_row, to_col, board):
+        if self.is_valid_move(to_row, to_col, board):
+            current_row, current_col = self.get_coordinates()
+            # Remueve la pieza de su posición actual en el tablero.
+            board.set_piece(current_row, current_col, None)
+            # Actualiza las coordenadas de la pieza.
+            self.update_coordinates(to_row, to_col)
+            # Coloca la pieza en la nueva posición.
+            board.set_piece(to_row, to_col, self)
+            return True
+        return False
 
     def is_valid_move(self, to_row, to_col, board):
         row_diff = abs(to_row - self.get_coordinates()[0])
