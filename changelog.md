@@ -4,6 +4,24 @@ Todos los cambios importantes en este proyecto serán documentados en este archi
 
 [1.46.0] - 2024-10-14
 
+**Pawn** 
+Método get_symbol: el método get_symbol() determina el símbolo según el color del peón, lo que simplifica la gestión de la representación visual del peón.
+
+La lógica de movimiento y validación de movimientos se ha unificado en is_valid_move(). 
+      Esto incluye:
+                  Movimiento hacia adelante de una casilla si la casilla de destino está vacía.
+                  Movimiento de dos casillas desde la posición inicial si ambas casillas están libres.
+                  Captura en diagonal si hay una pieza enemiga en la posición de destino.
+
+Modificaciones en los Tests (TestPawn): Utilizan la clase Board real para una mejor integración y pruebas más realistas. Se simplifica la colocación de las piezas en el tablero mediante el uso de set_piece.
+
+Método move_pawn_and_verify:Se actualizó el método move_pawn_and_verify para usar el método set_piece de la clase Board, facilitando la colocación de peones en posiciones iniciales específicas antes de cada prueba.
+
+Nuevos Casos de Prueba:
+      test_move_white_pawn_forward y test_move_black_pawn_forward: Verifican que los peones puedan moverse hacia adelante una casilla.
+      test_move_white_pawn_two_spaces_forward: Verifica que un peón blanco pueda avanzar dos casillas desde su posición inicial.
+      test_move_pawn_into_another_piece: Ahora coloca una pieza enemiga en una posición diagonal y verifica que el movimiento de captura sea válido.
+
 **clase Pawn**
 Cambios en la Función is_valid_move
 
@@ -11,7 +29,7 @@ Refactorización de Complejidad Cognitiva:Se simplificó el flujo de control eli
 
 implificación de Condicionales:Se reorganizaron las condiciones relacionadas con el movimiento del peón, utilizando return en lugar de asignar valores a una variable intermedia
 
-evisiones de Lógica:
+revisiones de Lógica:
 
 Condiciones para Peones Blancos:
       Se verificó si el peón blanco solo puede avanzar hacia adelante y se establecieron las condiciones correspondientes para un movimiento de dos casillas en su primer movimiento.

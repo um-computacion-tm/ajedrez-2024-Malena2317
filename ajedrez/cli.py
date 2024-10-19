@@ -1,30 +1,25 @@
 from chess import Chess
 
+
+class CommandLineInterface:
+    def __init__(self):
+        # Initialize the chess game instance.
+        self.chess_game = Chess()
+
+    def initiate(self):
+        # Run the game until the game is declared finished.        
+        while not self.chess_game.game_over:
+            # Call `play_turn` to have the current player make his move.
+            # `play_turn` should control when the game ends and change turns.
+            self.chess_game.play_turn()
+
+            # No need to check the return value of `play_turn` here,
+            # since the loop depends directly on `self.chess_game.game_over`
+            
 def main():
-    chess = Chess()
-    while True:
-        play(chess)
-
-def play(chess):
-    try:
-        # print(chess.show_board())
-        print("turn: ", chess.turn)
-        from_row = int(input("From row: "))
-        from_col = int(input("From col: "))
-        to_row = int(input("To Row: "))
-        to_col = int(input("To Col: "))
-        # :)
-        chess.move(
-            from_row,
-            from_col,
-            to_row,
-            to_col,
-        )
-    except Exception as e:
-        print("error", e)
-
-
+    # Start the command line interface for the chess game.
+    cli = CommandLineInterface()
+    cli.initiate()
 
 if __name__ == '__main__':
     main()
- # primir sprint se debe validar las coordenas es decir que no s epuede mover la ficah en algo que no existe y los prints solamente deben estar eb ek ckick 

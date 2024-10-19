@@ -2,13 +2,15 @@ import unittest
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from piezas.caballo import Knight
+from piezas.knight import Knight
+from tablero.board import Board
 
+ 
 class TestKnight(unittest.TestCase):
 
     def setUp(self):
         # Crear un tablero vacío y un caballo
-        self.board = [[None for _ in range(8)] for _ in range(8)]
+        self.board = Board ()
         self.knight = Knight(1, 1, "white")
         self.board[1][1] = self.knight
 

@@ -2,23 +2,13 @@ import unittest
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from piezas.rey import King
+from piezas.king import King
+from tablero.board import Board
 
+    
 class TestKing(unittest.TestCase):
     def setUp(self):
-        # Crear un tablero vacío
-        self.board = []
-        i = 0
-        while i < 8:
-            fila = []
-            j = 0
-            while j < 8:
-                fila.append(None)
-                j = j + 1
-            self.board.append(fila)
-            i = i + 1
-        
-        # Colocar el Rey blanco en (0, 4)
+        self.board = Board()
         self.king = King(0, 4, "white")
         self.board[0][4] = self.king
 
