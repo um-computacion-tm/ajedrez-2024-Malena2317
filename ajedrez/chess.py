@@ -147,39 +147,36 @@ class Chess:
         print(f"Notación {notation} convertida a coordenadas: ({row}, {column})")
         return row, column
 
-    def attempt_move(self, origin_row, origin_column, destination_row, destination_column):
-        # Validate that the positions are within the board.
-        if not (self.board.is_within_board(origin_row, origin_column) and 
-                self.board.is_within_board(destination_row, destination_column)):
-            print("El movimiento está fuera de los límites del tablero.")
-            print(f"Intentando mover de ({origin_row}, {origin_column}) a ({destination_row}, {destination_column})")
-            return False
+      def attempt_move(self, origin_row, origin_column, destination_row, destination_column):
+            # Inicialmente asumimos que el movimiento no es exitoso.
+            move_successful = False
     
-        # Get the piece at the origin position.
-        piece = self.board.get_piece(origin_row, origin_column)
-        if not piece:
-            print("There is no piece in the home position.")
-            return False
-    
-        # Check if it's the correct turn.
-        if piece.get_color() != self.current_turn:
-            print(f"It's the turn of {self.current_turn.lower()}, not of {piece.get_color().lower()}.")
-            return False
-    
-        # Attempt to move the piece.
-        successful_move = self.board.move_piece(origin_row, origin_column, destination_row, destination_column)
-        if successful_move:
-            print("Successful move.")
-            return True
-            # Check for pawn promotion if the piece is a pawn and it's in the promotion row
-            if isinstance(piece, Pawn) and (destination_row == 0 or destination_row == 7):
-                self.check_pawn_promotion()
-
-            return True
-
-            print("Movimiento no válido según el método move_piece.")
-            return False
-
+            # Validate that the positions are within the board.
+            if not (self.board.is_within_board(origin_row, origin_column) and 
+                    self.board.is_within_board(destination_row, destination_column)):
+                print("El movimiento está fuera de los límites del tablero.")
+            
+            else:
+                # Get the piece at the origin position.
+                piece = self.board.get_piece(origin_row, origin_column)
+                if not piece:
+                    print("No hay pieza en la posición de origen.")
+                
+                # Check if it's the correct turn.
+                elif piece.get_color() != self.current_turn:
+                    print(f"Es el turno de {self.current_turn.lower()}, no de {piece.get_color().lower()}.")
+                
+                # Attempt to move the piece.
+                else:
+                    move_successful = self.board.move_piece(origin_row, origin_column, destination_row, destination_column)
+                    if move_successful:
+                        print("Movimiento exitoso.")
+                        
+                        # Check for pawn promotion if the piece is a pawn and it's in the promotion row
+                        if isinstance(piece, Pawn) and (destination_row == 0 or destination_row == 7):
+                            self.check_pawn_promotion()
+            
+            return move_successful
     
     def check_pawn_promotion(self):
         # Check if any pawn has reached the other end of the board and needs to be promoted.
