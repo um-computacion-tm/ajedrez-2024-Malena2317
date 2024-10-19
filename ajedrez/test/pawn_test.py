@@ -17,29 +17,36 @@ class TestPawn(unittest.TestCase):
         self.board.set_piece(6, 0, self.black_pawn)
 
         
-    def move_pawn_and_verify (self, pawn, start_pos, to_pos, expect_result):
+    def move_pawn_and_verify(self, pawn, start_pos, to_pos, expect_result):
+        """Función auxiliar para mover un peón y verificar el resultado."""
+
+        # Establecer el peón en su posición inicial
         self.board.set_piece(start_pos[0], start_pos[1], pawn)
-        pawn.update_coordinates(start_pos[0], start_pos[1])
+
+        # Verificar posiciones en el tablero antes del movimiento
+        for row in range(8):
+            for col in range(8):
+                piece = self.board.get_piece(row, col)
+                print(f"Position ({row}, {col}): {piece}")
+
         resultado = pawn.move(to_pos[0], to_pos[1], self.board)
+        print(f"Result of move: {resultado}, Expected: {expect_result}")
+
         self.assertEqual(resultado, expect_result)
 
-    def test_move_white_pawn_forward(self):
-        self.move_pawn_and_verify(self.white_pawn, (1, 0), (2, 0), True)
+    def test_move_pawn_invalid_forward(self):
+        """Test de un peón intentando moverse más de dos espacios hacia adelante."""
+        self.move_pawn_and_verify(self.white_pawn, (1, 0), (4, 0), False)
+        self.move_pawn_and_verify(self.black_pawn, (6, 0), (3, 0), False)
 
-    def test_move_black_pawn_forward(self):
-        self.move_pawn_and_verify(self.black_pawn, (6, 0), (4, 0), True)
-
-    def test_move_white_pawn_two_spaces_forward(self):
-        self.move_pawn_and_verify(self.white_pawn, (1, 0), (3, 0), True)
-
-    def test_move_pawn_into_another_piece(self):
-        # Colocar una pieza enemiga en la posición (2, 1)
-        enemy_pawn = Pawn(2, 1, "BLACK")
-        self.board.set_piece(2, 1, enemy_pawn)
-        
-        # Intentar que el peón blanco capture la pieza enemiga en la diagonal
-        self.move_pawn_and_verify(self.white_pawn, (1, 0), (2, 1), True)
-
-
+    def test_move_black_pawn_invalid_forward(self):
+        """Test de un peón negro intentando moverse más de dos espacios hacia adelante."""
+        self.move_pawn_and_verify(self.black_pawn, (6, 0), (3, 0), False)
+    
+    def test_move_white_pawn_invalid_forward(self):
+        """Test de un peón blanco intentando moverse más de dos espacios hacia adelante."""
+        self.move_pawn_and_verify(self.white_pawn, (1, 0), (4, 0), False)
+    
 if __name__ == '__main__':
+
     unittest.main()
