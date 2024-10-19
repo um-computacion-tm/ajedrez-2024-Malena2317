@@ -7,63 +7,48 @@ from chess import Chess
 from cli import CommandLineInterface
 
 
+@patch('builtins.input', side_effect=['D2', 'D4'])  # Simulating moves
+@patch('builtins.print')  # To capture print statements
+@patch('cli.Chess')
 class TestCommandLineInterface(unittest.TestCase):
-    
-    @patch('cli.Chess')
-    def test_initiate(self, mock_chess):
-        # Mock the game over condition
-        mock_chess_instance = mock_chess.return_value
-        mock_chess_instance.game_over = False
-        
-        cli = CommandLineInterface()
-        cli.chess_game = mock_chess_instance  # Use the mocked chess instance
 
-        # Simulate a turn
-        mock_chess_instance.play_turn = MagicMock(side_effect=lambda: setattr(mock_chess_instance, 'game_over', True))
+    def setUp(self, mock_chess, mock_print, mock_input):
+        """Common setup for all test cases."""
+        self.mock_chess = mock_chess
+        self.mock_print = mock_print
+        self.mock_input = mock_input
 
-        # Run the CLI
-        cli.initiate()
+        # Common setup for the chess game instance
+        self.mock_chess_instance = self.mock_chess.return_value
+        self.mock_chess_instance.game_over = False
 
-        # Assert that play_turn was called once
-        mock_chess_instance.play_turn.assert_called_once()
+        self.cli = CommandLineInterface()
+        self.cli.chess_game = self.mock_chess_instance
 
-    @patch('builtins.input', side_effect=['D2', 'D4'])  # Simulating moves
-    @patch('builtins.print')  # To capture print statements
-    @patch('cli.Chess')
-    def test_play_turn_valid_move(self, mock_chess, mock_print, mock_input):
-        mock_chess_instance = mock_chess.return_value
-        mock_chess_instance.game_over = False
-        mock_chess_instance.attempt_move = MagicMock(return_value=True)
+    def setUp_play_turn(self, move_result, expected_print):
+        """Helper method to test play_turn with different outcomes."""
+        self.mock_chess_instance.attempt_move = MagicMock(return_value=move_result)
 
-        cli = CommandLineInterface()
-        cli.chess_game = mock_chess_instance
-        
-        cli.initiate()
+        # Run the CLI method that initiates the game.
+        self.cli.initiate()
 
-        # Assert that attempt_move was called
-        mock_chess_instance.attempt_move.assert_called_once()
+        # Assert that attempt_move was called once.
+        self.mock_chess_instance.attempt_move.assert_called_once()
 
-        # Check if the appropriate print statements were executed
-        mock_print.assert_any_call("Scores: White - 0, Black - 0")  # Change according to your score logic
+        # Assert the expected print statement was executed.
+        self.mock_print.assert_any_call(expected_print)
 
-    @patch('builtins.input', side_effect=['D2', 'D4'])  # Simulating moves
-    @patch('builtins.print')  # To capture print statements
-    @patch('cli.Chess')
-    def test_play_turn_invalid_move(self, mock_chess, mock_print, mock_input):
-        mock_chess_instance = mock_chess.return_value
-        mock_chess_instance.game_over = False
-        mock_chess_instance.attempt_move = MagicMock(return_value=False)
+    def test_play_turn_valid_move(self):
+        self.setUp_play_turn(
+            move_result=True,
+            expected_print="Scores: White - 0, Black - 0"  # Adjust according to your score logic
+        )
 
-        cli = CommandLineInterface()
-        cli.chess_game = mock_chess_instance
-        
-        cli.initiate()
-
-        # Assert that attempt_move was called
-        mock_chess_instance.attempt_move.assert_called_once()
-
-        # Check if the appropriate error message was printed
-        mock_print.assert_any_call("Invalid move. Try again.")
+    def test_play_turn_invalid_move(self):
+        self.setUp_play_turn(
+            move_result=False,
+            expected_print="Invalid move. Try again."
+        )
 
 if __name__ == '__main__':
     unittest.main()
