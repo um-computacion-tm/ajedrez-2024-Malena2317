@@ -12,9 +12,9 @@ class TestRook(unittest.TestCase):
     def setUp(self):
         
         # Crear un tablero vacío y un caballo
-        self.board = [[None for _ in range(8)] for _ in range(8)]
+        self.board = Board ()
         self.rook = Rook(1, 1, "WHITE")
-        self.board[1][1] = self.rook
+        self.board.set_piece(1, 1, self.rook)
 
     def Rook_Move(self, rook, to_row, to_col, expected_result):
 
@@ -32,12 +32,18 @@ class TestRook(unittest.TestCase):
                 self.assertNotEqual(self.board[to_row][to_col], rook)
 
 
+    def set_piece_and_test_move(self, row, col, color, expected_result):
+        # Helper to set a piece and test rook movement
+        self.board.set_piece(row, col, Rook(row, col, color))
+        self.Rook_Move(self.rook, row, col, expected_result)
+        
     def test_mover_torre_fuera_del_tablero(self):
         # Intenta mover la torre fuera del tablero
         self.Rook_Move(self.rook, 8, 1, False)
 
     def test_mover_torre_horizontal(self):
         # Mover torre horizontalmente
+        self.board.set_piece(1, 2, None) 
         self.Rook_Move(self.rook, 1, 3, True)
 
     def test_mover_torre_vertical(self):
@@ -52,24 +58,19 @@ class TestRook(unittest.TestCase):
         self.Rook_Move(self.rook, -1, 1, False)
 
     def test_mover_torre_a_casilla_ocupada(self):
-        self._test_mover_torre_a_casilla_ocupada_con_color("WHITE", False)
+        # Coloca una pieza del mismo color en la posición de destino
+        self.set_piece_and_test_move(3, 1, "WHITE", False)
 
     def test_mover_torre_a_casilla_ocupada_diferente_color(self):
-        self._test_mover_torre_a_casilla_ocupada_con_color("BLACK", True)
+        # Coloca una pieza de diferente color en la posición de destino
+        self.set_piece_and_test_move(3, 1, "BLACK", True)
 
     def test_mover_torre_con_obstaculo(self):
-        self._test_mover_torre_con_obstaculo("WHITE", False)
+        # Coloca un obstáculo entre la torre y la posición de destino
+        self.board.set_piece(2, 1, Rook(2, 1, "WHITE"))
+        self.Rook_Move(self.rook, 3, 1, False)
 
-    def _test_mover_torre(self, row, col, color, expected_result):
-        self.board[row][col] = Rook(row, col, color)
-        self.Rook_Move(self.rook, row, col, expected_result)
-
-    def _test_mover_torre_a_casilla_ocupada_con_color(self, color, expected_result):
-        self._test_mover_torre(3, 1, color, expected_result)
-
-    def _test_mover_torre_con_obstaculo(self, color, expected_result):
-        self._test_mover_torre(2, 1, color, expected_result)
-
+    
 if __name__ == '__main__':
     unittest.main()
 
