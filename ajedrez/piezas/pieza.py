@@ -4,8 +4,13 @@ class Piece:
         self.__row__ = row
         self.__col__ = col
         self.__color__ = color
+        self.symbol = self.get_symbol() # Each subclass defines its own symbol.
 
-        
+
+   def get_symbol(self):
+        # Must be implemented by subclasses to return the piece's symbol.
+        raise NotImplementedError("This method should be overridden in subclasses.")
+
     def get_coordinates(self):
         return (self.__row__, self.__col__)
 
@@ -35,7 +40,8 @@ class Piece:
     def move(self, to_row, to_col, board):
         if self.can_move_to(to_row, to_col, board):
             self.update_coordinates(to_row, to_col)
-            board[to_row][to_col] = self
+            set_piece(current_row, current_col, None)
+            board.set_piece(to_row, to_col, self)
             return True
         return False
 
