@@ -126,34 +126,34 @@ class Board:
         print(f"Piece moved from ({origin_row}, {origin_col}) to ({dest_row}, {dest_col})")
         return True
 
-    def get_state(self):
-        # Devuelve el estado del tablero como una lista de listas
-        # donde cada pieza se representa por "COLOR_TIPO" (por ejemplo, "WHITE_PAWN").
+    def get_state(self):       
+        # Returns the state of the board as a list of lists
+        # where each piece is represented by "COLOR_TYPE" (e.g. "WHITE_PAWN").
         return [[f"{piece.get_color()}_{piece.__class__.__name__.upper()}" if piece else None for piece in row] for row in self.squares]
 
 
-    def set_state(self, state):
+    def set_state(self, state):  
+        # Dictionary to map part types to their corresponding classes
+        piece_classes = {
+            "PAWN": Pawn,
+            "ROOK": Rook,
+            "KNIGHT": Knight,
+            "BISHOP": Bishop,
+            "QUEEN": Queen,
+            "KING": King
+        }
+
         # Establece el estado del tablero desde una lista de listas
         for i in range(8):
             for j in range(8):
                 piece_info = state[i][j]
                 if piece_info:
                     color, piece_type = piece_info.split('_')  # Por ejemplo, "WHITE_PAWN"
-                    # Crear la pieza según el tipo y el color
-                    if piece_type == "PAWN":
-                        self.squares[i][j] = Pawn(i, j, color)
-                    elif piece_type == "ROOK":
-                        self.squares[i][j] = Rook(i, j, color)
-                    elif piece_type == "KNIGHT":
-                        self.squares[i][j] = Knight(i, j, color)
-                    elif piece_type == "BISHOP":
-                        self.squares[i][j] = Bishop(i, j, color)
-                    elif piece_type == "QUEEN":
-                        self.squares[i][j] = Queen(i, j, color)
-                    elif piece_type == "KING":
-                        self.squares[i][j] = King(i, j, color)
+                    # Crear la pieza usando el diccionario de clases
+                    self.squares[i][j] = piece_classes[piece_type](i, j, color)
                 else:
                     self.squares[i][j] = None
+
 
 
 

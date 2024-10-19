@@ -14,18 +14,18 @@ class Bishop(Piece):
         return "♗" if self.get_color() == "WHITE" else "♝"
     
     def move(self, to_row, to_col, board):
+        # Attempts to move the bishop to the specified position (to_row, to_col).
+        # If the move is valid, it updates the board and the bishop's position.
         if self.is_valid_move(to_row, to_col, board):
             current_row, current_col = self.get_coordinates()
-            # Remueve la pieza de su posición actual en el tablero.
             board.set_piece(current_row, current_col, None)
-            # Actualiza las coordenadas de la pieza.
             self.update_coordinates(to_row, to_col)
-            # Coloca la pieza en la nueva posición.
             board.set_piece(to_row, to_col, self)
             return True
         return False
     
     def is_valid_move(self, to_row, to_col, board):
+        # Checks if the diagonal path to the destination position is free of obstacles.
         row_diff = abs(to_row - self.get_coordinates()[0])
         col_diff = abs(to_col - self.get_coordinates()[1])
         return row_diff == col_diff and self.can_move_to(to_row, to_col, board)
@@ -36,6 +36,8 @@ class Bishop(Piece):
         step_row = 1 if to_row > current_row else -1
         step_col = 1 if to_col > current_col else -1
 
+        # Iterate through each position between the current position and the target position.
+        # The loop stops just before reaching the destination, checking if each intermediate position is empty.
         while (current_row, current_col) != (to_row - step_row, to_col - step_col):
             current_row += step_row
             current_col += step_col

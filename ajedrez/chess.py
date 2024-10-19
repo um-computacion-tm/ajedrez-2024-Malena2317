@@ -10,16 +10,15 @@ import json
 
 class Chess:
     def __init__(self):
-        # Initialize the board and set the turn to white.
-        self.board = Board()  # Board representation
-        self.current_turn = "WHITE"  # White always starts
-        self.game_over = False  # Flag to indicate if the game is over
+        self.board = Board()  
+        self.current_turn = "WHITE" 
+        self.game_over = False  
         self.white_score = 0
         self.black_score = 0
     
 
-
     def save_game(self, filename="chess_game.json"):
+        #Saves the current game state to a JSON file.
         game_state = {
             "board": self.board.get_state(),  # Implementar get_state en Board para obtener el estado del tablero
             "current_turn": self.current_turn,
@@ -30,11 +29,13 @@ class Chess:
         print("Game saved.")
 
     def save_game_state(self):
+        #Saves the game state and confirms the action.
         self.save_game()
         print("Game state saved.")
 
 
     def load_game(self, filename="chess_game.json"):
+        #Loads the game state from a JSON file, handling errors if the file is not found or if there are JSON issues.
         try:
             with open(filename, 'r') as f:
                 game_state = json.load(f)
@@ -60,15 +61,15 @@ class Chess:
         print(f"{winner_color} wins the game. Congratulations!")
         self.game_over = True
 
-    def calculate_score(self, piece):
-        # Calcular la puntuación basada en el tipo de pieza
+    def calculate_score(self, piece):     
+        # Calculate score based on part type
         score_mapping = {
             "PAWN": 1,
             "KNIGHT": 3,
             "BISHOP": 3,
             "ROOK": 5,
             "QUEEN": 9,
-            "KING": 0  # El rey no tiene puntuación
+            "KING": 0  
         }
         return score_mapping.get(piece.__class__.__name__.upper(), 0)
 
@@ -78,14 +79,15 @@ class Chess:
         print("Welcome to Chess! The game begins.")
         load_choice = input("Would you like to load a saved game? (Y/N): ").strip().upper()
         if load_choice == "Y":
-            self.load_game()  # Cargar la partida guardada
+            self.load_game() 
         
-        self.board.print_board()  # Mostrar el tablero inicial
+        self.board.print_board()  
         while not self.game_over:
             self.play_turn()
         print("The game has ended. Thank you for playing!")
 
     def play_turn(self):
+        #Executes a player's turn in the chess game by prompting for move input, validating the move, updating scores if a piece is captured, switching turns, printing the board, and saving the game state.
         if self.game_over:
             print("The game is over. Thanks for playing!")
             return True 
@@ -105,22 +107,22 @@ class Chess:
         destination_row, destination_column = self.get_positions_from_notation(destination_position)
 
         if self.attempt_move(origin_row, origin_column, destination_row, destination_column):
-            # Si el movimiento es exitoso, actualizar puntuaciones
             piece_moved = self.board.get_piece(destination_row, destination_column)
             if piece_moved:
-                # Aumentar puntuación del jugador según la pieza capturada
+                # Increase player's score according to the captured piece
                 if piece_moved.get_color() == "WHITE":
                     self.black_score += self.calculate_score(piece_moved)
                 else:
                     self.white_score += self.calculate_score(piece_moved)
 
             self.switch_turn()
-            self.board.print_board()  # Mostrar el tablero actualizado
+            self.board.print_board()  
 
-            # Mostrar puntuaciones después del movimiento
+            
+            # Show scores after move
             print(f"Scores: White - {self.white_score}, Black - {self.black_score}")
 
-            self.save_game()  # Guardar el juego en Redis después de cada movimiento
+            self.save_game()  # Save the game in Redis after each move
         else:
             print("Invalid move. Try again.")
 
@@ -148,48 +150,51 @@ class Chess:
         print(f"Notación {notation} convertida a coordenadas: ({row}, {column})")
         return row, column
     
+    
+
     def attempt_move(self, origin_row, origin_column, destination_row, destination_column):
+        # Initially we assume that the move is not successfu
+        move_successful = False
+
         # Validate that the positions are within the board.
         if not (self.board.is_within_board(origin_row, origin_column) and 
                 self.board.is_within_board(destination_row, destination_column)):
-            print("El movimiento está fuera de los límites del tablero.")
-            return False
-
-        # Get the piece at the origin position.
-        piece = self.board.get_piece(origin_row, origin_column)
-        if not piece:
-            print("No hay pieza en la posición de origen.")
-            return False
-
-        # Check if it's the correct turn.
-        if piece.get_color() != self.current_turn:
-            print(f"Es el turno de {self.current_turn.lower()}, no de {piece.get_color().lower()}.")
-            return False
-
-        # Attempt to move the piece.
-        successful_move = self.board.move_piece(origin_row, origin_column, destination_row, destination_column)
-        if successful_move:
-            print("Movimiento exitoso.")
+            print("The move is outside the board boundaries.")
+        
+        else:
+            # Get the piece at the origin position.
+            piece = self.board.get_piece(origin_row, origin_column)
+            if not piece:
+                print("There is no piece in the origin position")
+                
             
-            # Check for pawn promotion if the piece is a pawn and it's in the promotion row
-            if isinstance(piece, Pawn) and (destination_row == 0 or destination_row == 7):
-                self.check_pawn_promotion()
+            # Check if it's the correct turn.
+            elif piece.get_color() != self.current_turn:
+                print(f"Es el turno de {self.current_turn.lower()}, no de {piece.get_color().lower()}.")
+            
+            # Attempt to move the piece.
+            else:
+                move_successful = self.board.move_piece(origin_row, origin_column, destination_row, destination_column)
+                if move_successful:
+                    print("Movimiento exitoso.")
+                    
+                    # Check for pawn promotion if the piece is a pawn and it's in the promotion row
+                    if isinstance(piece, Pawn) and (destination_row == 0 or destination_row == 7):
+                        self.check_pawn_promotion()
+        
+        return move_successful
 
-            return True
-
-        print("Movimiento no válido según el método move_piece.")
-        return False
 
     def check_pawn_promotion(self):
         # Check if any pawn has reached the other end of the board and needs to be promoted.
         for column in range(8):
             # Check if there are white pawns that need to be promoted.
-            pawn = self.board.get_piece(0, column)  # Para peones blancos en la fila 0
+            pawn = self.board.get_piece(0, column)  
             if isinstance(pawn, Pawn) and pawn.get_color() == "WHITE":
                 self.promote_pawn(0, column)
             
             # Check if there are black pawns that need to be promoted.
-            pawn = self.board.get_piece(7, column)  # Para peones negros en la fila 7
+            pawn = self.board.get_piece(7, column)  
             if isinstance(pawn, Pawn) and pawn.get_color() == "BLACK":
                 self.promote_pawn(7, column)
 
@@ -197,11 +202,11 @@ class Chess:
        
     # Ask the user to choose the piece to promote their pawn to.
         while True:
-            print(f"Promociona tu peón en {chr(column + ord('A'))}{8 - row}.")
+            print(f"Promote your pawn in {chr(column + ord('A'))}{8 - row}.")
             choice = input("Elige (Q)ueen, (R)ook, (B)ishop o (N)ight: ").strip().upper()
             if choice in {"Q", "R", "B", "N"}:
                 break
-            print("Elección inválida. Por favor, elige Q, R, B o N.")
+            print("Invalid choice. Please choose Q, R, B or N.")
 
         # Replace the pawn with the chosen piece.
         if choice == "Q":
@@ -213,7 +218,7 @@ class Chess:
         elif choice == "N":
             self.board.set_piece(row, column, Knight(self.current_turn, row, column))
 
-        print("¡Peón promocionado con éxito!")
+        print("Pawn successfully promoted!")
 
 
     def declare_winner(self):
@@ -231,5 +236,5 @@ class Chess:
 if __name__ == "__main__":
     game = Chess()
     game.start_game()
-    game.save_game("mi_partida.json")  # Guarda la partida
-    game.load_game("mi_partida.json")  # Carga la partida
+    game.save_game("mi_partida.json")  
+    game.load_game("mi_partida.json")  

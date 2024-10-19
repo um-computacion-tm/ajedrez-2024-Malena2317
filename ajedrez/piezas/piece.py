@@ -1,5 +1,4 @@
 
-# 77% chat 
 class Piece:
     def __init__(self, row, col, color):
         # Stores the piece's coordinates and its color.
@@ -59,4 +58,4 @@ class Piece:
 
     def is_valid_move(self, to_row, to_col, board):
         # This method must be implemented by each subclass to check the validity of the move.
-        raise NotImplementedError("Este método debe ser implementado por las subclases") 
+        raise NotImplementedError("This method should be overridden in subclasses.") 

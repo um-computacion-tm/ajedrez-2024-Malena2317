@@ -9,7 +9,6 @@ from tablero.board import Board
 class TestKnight(unittest.TestCase):
 
     def setUp(self):
-        # Crear un tablero vacío y un caballo
         self.board = Board ()
         self.knight = Knight(1, 1, "white")
         self.board[1][1] = self.knight
@@ -31,26 +30,26 @@ class TestKnight(unittest.TestCase):
                 self.assert_valid_move(move[0], move[1], False)
 
     def test_knight_movement(self):
-        # Probar que el caballo se mueve correctamente a una posición válida
+        # Test that the horse moves correctly to a valid position
         self.knight.move(3, 2, self.board)
         self.assertEqual((self.knight.get_coordinates()[0], self.knight.get_coordinates()[1]), (3, 2))
 
-    def test_move_to_occupied_square(self):
-        # Probar movimiento a una casilla ocupada por una pieza del mismo color
+    def test_move_to_occupied_square(self): 
+        # Try moving to a square occupied by a piece of the same color
         self.place_piece(3, 2, "white")
         self.assert_valid_move(3, 2, False)  # No debe poder mover
 
     def test_move_to_enemy_piece(self):
-        # Probar movimiento a una casilla ocupada por una pieza enemiga
+        # Try movement to a square occupied by an enemy piece
         self.place_piece(3, 2, "black")
-        self.assert_valid_move(3, 2, True)  # El caballo debería poder capturarla
+        self.assert_valid_move(3, 2, True)  
 
-    def test_move_to_same_position(self):
-        # Probar movimiento a la misma posición
+    def test_move_to_same_position(self): 
+        # Try moving to the same position   
         self.assert_valid_move(1, 1, False)
 
     def test_move_not_L_shape(self):
-        # Probar movimiento que no es en 'L' a (4, 4)
+        # Try movement that is not in 'L' a (4, 4)
         self.assert_valid_move(4, 4, False)
 
     def test_valid_L_shape_moves(self):

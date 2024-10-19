@@ -4,7 +4,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from piezas.bishop import Bishop
 from tablero.board import Board
-    # limpio 0%
+
 
 class TestBishop(unittest.TestCase):
 
@@ -20,6 +20,9 @@ class TestBishop(unittest.TestCase):
         self.board.set_piece(row, col, Bishop(row, col, color))
 
     def _assert_move(self, row, col, expected_valid):
+        #Checks if a move of a piece (in this case a bishop) to a position (row, col) is valid
+        #or not, and compare the result with the expected value (expected_valid
+
         if row < 0 or row >= 8 or col < 0 or col >= 8:
             self.assertFalse(expected_valid)
         else:

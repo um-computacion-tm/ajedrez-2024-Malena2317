@@ -3,7 +3,7 @@ from chess import Chess
 
 class CommandLineInterface:
     def __init__(self):
-        # Initialize the chess game instance.
+        # Initialize the chess game instance. 
         self.chess_game = Chess()
 
     def initiate(self):

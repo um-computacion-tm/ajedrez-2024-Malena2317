@@ -1,7 +1,7 @@
 import sys
 sys.path.insert(0, '/home/meli/Escritorio/computacion/ajedrez-2024-Malena2317/ajedrez')
 from piezas.piece import Piece 
- # 100 por ciento 
+
 class Knight(Piece):
      # Initializes the knight at its starting position.
     def __init__(self, row, col, color):

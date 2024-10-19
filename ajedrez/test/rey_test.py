@@ -14,68 +14,67 @@ class TestKing(unittest.TestCase):
 
     def assert_king_position(self, row, col, result):
         if result:
-            # Comprobar si el rey se movió a la posición correcta
+            # Check if the king moved to the correct position
             self.assertEqual(self.king.get_coordinates()[0], row)
             self.assertEqual(self.king.get_coordinates()[1], col)
 
     def move_and_assert(self, row, col, expected_result=True):
-        # Mover el rey existente y verificar el resultado
+        #Move the king to the position (row, col) and check if the move was successfu
         result = self.king.move(row, col, self.board)
         self.assertEqual(result, expected_result)
         self.assert_king_position(row, col, result)
 
     def place_piece_and_move(self, row, col, color, expected_result=True):
-        """Coloca una pieza en el tablero y prueba si puede moverse"""
+        """Place a piece on the board and test if it can move"""
         
         if color == "white" and (row, col) == (self.king.get_coordinates()[0], self.king.get_coordinates()[1]):
-            # Si es el mismo rey blanco en la misma posición, probar su movimiento
             result = self.king.move(row, col, self.board)
         else:
-            # Colocar una nueva pieza (rey negro) y probar el movimiento
             another_king = King(row, col, color)
-            self.board[row][col] = another_king  # Coloca el rey negro en el tablero
-            result = self.king.move(row, col, self.board)  # Intenta mover el rey blanco (mover actual rey)
+            self.board[row][col] = another_king  
+            result = self.king.move(row, col, self.board)  
             
-        self.assertEqual(result, expected_result)  # Compara resultado esperado
+        self.assertEqual(result, expected_result)  
 
-    def test_mover_una_casilla_hacia_abajo(self):
+    def test_move_one_square_down(self):
         self.move_and_assert(1, 4, True)
 
-    def test_mover_en_diagonal(self):
+    def test_move_diagonally(self):
         self.move_and_assert(1, 5, True)
 
-    def test_colocar_otra_pieza_y_moverla(self):
+    def test_place_another_piece_and_move(self):
         self.place_piece_and_move(1, 4, "white", False)
 
-    def test_mover_pieza_negra(self):
+    def test_move_black_piece(self):
         self.place_piece_and_move(1, 4, "black", True)
 
-    def test_mover_fuera_del_tablero(self):
+    def test_move_off_the_board(self):
         self.move_and_assert(8, 4, False)
 
-    def test_mover_a_una_posicion_invalida(self):
+    def test_move_to_an_invalid_position(self):
         self.move_and_assert(3, 4, False)
 
-    def test_mover_en_horizontal(self):
+    def test_move_horizontally(self):
         self.move_and_assert(0, 5, True)
 
-    def test_mover_en_vertical(self):
+    def test_move_vertically(self):
         self.move_and_assert(1, 4, True)
 
-    def test_mover_en_diagonal_hacia_la_izquierda(self):
+    def test_move_diagonally_to_the_left(self):
         self.move_and_assert(1, 3, True)
 
-    def test_mover_a_una_posicion_ocupada_por_una_pieza_del_mismo_color(self):
+    def test_move_to_a_position_occupied_by_a_piece_of_the_same_color(self):
         self.place_piece_and_move(0, 4, "white", False)
 
-    def test_mover_a_una_posicion_ocupada_por_una_pieza_de_diferente_color(self):
+    def test_move_to_a_position_occupied_by_a_piece_of_different_color(self):
         self.place_piece_and_move(0, 4, "black", True)
 
-    def test_mover_fuera_del_tablero_en_la_fila_superior(self):
+    def test_move_off_the_board_at_the_top_row(self):
         self.move_and_assert(-1, 4, False)
 
-    def test_mover_fuera_del_tablero_en_la_columna_izquierda(self):
+    def test_move_off_the_board_at_the_left_column(self):
         self.move_and_assert(0, -1, False)
+
 
 if __name__ == '__main__':
     unittest.main()

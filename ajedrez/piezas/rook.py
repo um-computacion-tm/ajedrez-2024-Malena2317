@@ -38,20 +38,17 @@ class Rook(Piece):
         
         return False
 
-    def _is_path_clear(self, from_row, from_col, to_row, to_col, board):
-    # Horizontal movement
-        if from_row == to_row:
-            step = 1 if to_col > from_col else -1
-            for col in range(from_col + step, to_col, step):
-                if board.get_piece(from_row, col) is not None:
-                    return False  # Obstacle found
+    def _is_path_clear(self, from_row, from_col, to_row, to_col, board): 
+        # Determine the direction of movement
+        step_row = 0 if from_row == to_row else (1 if to_row > from_row else -1)
+        step_col = 0 if from_col == to_col else (1 if to_col > from_col else -1)
 
-        # Vertical movement
-        elif from_col == to_col:
-            step = 1 if to_row > from_row else -1
-            for row in range(from_row + step, to_row, step):
-                if board.get_piece(row, from_col) is not None:
-                    return False  # Obstacle found
-
-        return True  # No obstacles found
+        # Iterate through intermediate positions
+        row, col = from_row + step_row, from_col + step_col
+        while row != to_row or col != to_col:
+            if board[row][col] is not None:
+                return False
+            row += step_row
+            col += step_col
+        return True
 

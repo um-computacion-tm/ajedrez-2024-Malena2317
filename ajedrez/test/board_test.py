@@ -17,14 +17,14 @@ class TestBoard(unittest.TestCase):
         self.board = Board()
 
     def test_initialization(self):
-        # Verifica que el tablero esté correctamente inicializado
+        # Verify that the board is correctly initialized
         self.assertIsNotNone(self.board)
         self.assertEqual(len(self.board.squares), 8)
         for row in self.board.squares:
             self.assertEqual(len(row), 8)
 
     def test_piece_placement(self):
-        # Verifica que las piezas estén en sus posiciones iniciales
+        # Verify that the pieces are in their initial positions
         self.assertIsInstance(self.board.get_piece(0, 0), Rook)
         self.assertIsInstance(self.board.get_piece(0, 1), Knight)
         self.assertIsInstance(self.board.get_piece(0, 2), Bishop)
@@ -34,39 +34,39 @@ class TestBoard(unittest.TestCase):
         self.assertIsInstance(self.board.get_piece(6, 0), Pawn)
         self.assertIsInstance(self.board.get_piece(7, 0), Rook)
 
-    def test_get_piece(self):
-        # Verifica que se obtenga la pieza correcta
+    def test_get_piece(self):    
+        # Verify that the correct part is obtained
         piece = self.board.get_piece(0, 0)
         self.assertIsInstance(piece, Rook)
         self.assertEqual(piece.get_color(), "BLACK")
 
     def test_set_piece(self):
-        # Verifica que se pueda colocar una pieza en el tablero
+        # Verifies that a piece can be placed on the board
         new_rook = Rook(4, 4, "WHITE")
         self.board.set_piece(4, 4, new_rook)
         self.assertIs(self.board.get_piece(4, 4), new_rook)
  
-    def test_is_within_board(self):
-        # Verifica si las coordenadas están dentro de los límites del tablero
+    def test_is_within_board(self): 
+        # Check if the coordinates are within the board boundaries
         self.assertTrue(self.board.is_within_board(0, 0))
         self.assertTrue(self.board.is_within_board(7, 7))
         self.assertFalse(self.board.is_within_board(-1, 0))
         self.assertFalse(self.board.is_within_board(8, 8))
         
     def test_invalid_move(self):
-        # Verifica que un movimiento inválido no cambie el estado del tablero
+        # Verify that an invalid move does not change the state of the board
         original_piece = self.board.get_piece(0, 0)
-        self.board.move_piece(0, 0, 0, 1)  # Movimiento inválido para una torre
-        self.assertIs(self.board.get_piece(0, 0), original_piece)  # La pieza original debe permanecer en su lugar
+        self.board.move_piece(0, 0, 0, 1)  
+        self.assertIs(self.board.get_piece(0, 0), original_piece)  
 
     def test_get_state(self):
-        # Verifica que el estado del tablero se devuelva correctamente
+        # Verify that the board state is returned correctly
         state = self.board.get_state()
         self.assertEqual(len(state), 8)
         self.assertEqual(len(state[0]), 8)
 
-    def test_set_state(self):
-        # Verifica que se pueda establecer el estado del tablero
+    def test_set_state(self): 
+        # Verify that the board state can be set
         state = [
             [None, None, None, None, None, None, None, None],
             [None, None, None, None, None, None, None, None],
@@ -78,7 +78,7 @@ class TestBoard(unittest.TestCase):
             [None, None, None, None, None, None, None, None],
         ]
         self.board.set_state(state)
-        self.assertIsNone(self.board.get_piece(0, 0))  # Verifica que la posición esté vacía
+        self.assertIsNone(self.board.get_piece(0, 0))  # Verify that the position is empty
 
 if __name__ == '__main__':
     unittest.main()
