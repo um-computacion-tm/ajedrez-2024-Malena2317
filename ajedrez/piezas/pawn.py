@@ -7,58 +7,68 @@ class Pawn(Piece):
 
     def __init__(self, color):
         super().__init__(0, 0, color)  # Inicializa la posición en (0, 0)
-        self.simbolo = '♙' if color == "WHITE" else '♟'
         self.has_moved = False
+        
+    def get_symbol(self):
+             # Returns the pawn's symbol based on its color.
+            return '♙' if self.get_color() == "WHITE" else '♟'
 
-    def move(self, to_row, to_col, board):
-        if self.is_valid_move(to_row, to_col, board):
-            return super().move(to_row, to_col, board)
-        return False
-
-    def is_valid_move(self, to_row, to_col, board):
-    current_row, current_col = self.get_coordinates()
-    direction = 1 if self.get_color() == "WHITE" else -1  # Blancas hacia adelante, negras hacia atrás
-
-    # Check forward movement
-    if self.is_forward_move(current_row, to_row, current_col, to_col, direction, board):
-        return True
-
+     def move(self, to_row, to_col, board):
+            if self.is_valid_move(to_row, to_col, board):
+                result = super().move(to_row, to_col, board)
+                if result:
+                    self.has_moved = True
+                    self.update_coordinates(to_row, to_col)
+                return result
+            return False
+         
+      def is_valid_move(self, to_row, to_col, board):
+            current_row, current_col = self.get_coordinates()
+            direction = -1 if self.get_color() == "WHITE" else 1
+            print(f"Trying to move from ({current_row}, {current_col}) to ({to_row}, {to_col})")
     
-    # Check capture motion
-    if self.is_capture_move(current_row, current_col, to_row, to_col, direction, board):
-        return True
-
-    return False
-
-    def is_forward_move(self, from_pos, to_pos, direction, board):
-    current_row, current_col = from_pos
-    to_row, to_col = to_pos
-
-        # Move forward one square
-        if current_col == to_col:
-            if to_row == current_row + direction and board.get_piece(to_row, to_col) is None:
+            # Movimiento hacia adelante
+            if self.is_forward_move((current_row, current_col), (to_row, to_col), direction, board):
+                print("Forward move is valid")
                 return True
-            # Movement of two squares from the initial position
-            if (current_row == 1 and self.get_color() == "WHITE" or
-                current_row == 6 and self.get_color() == "BLACK"):
-                if (to_row == current_row + 2 * direction and
-                    board.get_piece(to_row, to_col) is None and
-                    board.get_piece(current_row + direction, to_col) is None):
+    
+            # Movimiento de captura en diagonal
+            if self.is_capture_move((current_row, current_col), (to_row, to_col), direction, board):
+                print("Capture move is valid")
+                return True
+    
+            print("Move is not valid")
+            return False
+
+        def is_forward_move(self, from_pos, to_pos, direction, board):
+            current_row, current_col = from_pos
+            to_row, to_col = to_pos
+    
+            print(f"Current Position: ({current_row}, {current_col}), Target Position: ({to_row}, {to_col}), Direction: {direction}")
+    
+            # Movimiento de un espacio hacia adelante
+            if current_col == to_col:
+                if to_row == current_row + direction and board.get_piece(to_row, to_col) is None:
                     return True
     
-        return False
+                # Movimiento de dos espacios hacia adelante desde la posición inicial
+                if not self.has_moved and to_row == current_row + 2 * direction:
+                    if board.get_piece(to_row, to_col) is None and board.get_piece(current_row + direction, to_col) is None:
+                        return True
+    
+            return False
+            return False
 
-   def is_capture_move(self, from_pos, to_pos, direction, board):
-        current_row, current_col = from_pos
-        to_row, to_col = to_pos
-        
-        # Diagonal capture movement
-        if abs(current_col - to_col) == 1 and to_row == current_row + direction:
-            piece_at_destination = board.get_piece(to_row, to_col)
-            if piece_at_destination and piece_at_destination.get_color() != self.get_color():
-                return True
-        
-        return False
-
-        
+ 
+        def is_capture_move(self, from_pos, to_pos, direction, board):
+                current_row, current_col = from_pos
+                to_row, to_col = to_pos
+                
+                # Captura en diagonal
+                if abs(current_col - to_col) == 1 and to_row == current_row + direction:
+                    piece_at_destination = board.get_piece(to_row, to_col)
+                    if piece_at_destination and piece_at_destination.get_color() != self.get_color():
+                        return True
+                
+                return False
   
