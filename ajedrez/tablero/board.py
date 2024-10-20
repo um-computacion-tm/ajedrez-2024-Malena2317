@@ -6,7 +6,7 @@ from piezas.rey import King
 from piezas.reina import Queen
 from piezas.pawn import Pawn 
 from piezas.caballo import Knight
-from piezas.bishop import Alfil 
+from piezas.bishop import Bishop
 from piezas.pieza import Piece 
 
 
