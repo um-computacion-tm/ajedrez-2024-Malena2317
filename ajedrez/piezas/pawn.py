@@ -3,6 +3,7 @@ sys.path.insert(0, '/home/meli/Escritorio/computacion/ajedrez-2024-Malena2317/aj
 from piezas.piece import Piece 
 
 
+
 class Pawn(Piece):
     """
     A class representing a pawn piece in a chess game. The pawn can move forward and capture diagonally.

@@ -11,13 +11,14 @@ from piezas.bishop import Bishop
 from tablero.board import Board
 
 
+
+
 class TestBoard(unittest.TestCase):
     """Unit tests for the Board class."""
 
     def setUp(self):
         """Initialize a Board instance before each test."""
         self.board = Board()
-
     def test_initialization(self):
         """Test that the board is correctly initialized."""
         self.assertIsNotNone(self.board)

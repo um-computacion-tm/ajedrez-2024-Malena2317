@@ -15,12 +15,6 @@ class TestPawn(unittest.TestCase):
     """
 
     def setUp(self):
-        """
-        Sets up the test environment before each test case.
-
-        This includes creating a board and placing a white pawn and a black pawn
-        in their initial positions.
-        """
         self.white_pawn = Pawn(1, 0, "WHITE")
         self.black_pawn = Pawn(6, 0, "BLACK")
         self.board = Board() 

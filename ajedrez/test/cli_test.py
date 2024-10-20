@@ -21,12 +21,16 @@ class TestCommandLineInterface(unittest.TestCase):
 
     def setUp(self, mock_chess, mock_print, mock_input):
         """
+<<<<<<< HEAD
         Common setup for all test cases. It initializes the mock objects and the CLI instance.
         
         Args:
             mock_chess (MagicMock): Mocked Chess class instance.
             mock_print (MagicMock): Mocked print function to capture output.
             mock_input (MagicMock): Mocked input function to simulate user input.
+=======
+        Common setup for all test cases. It initializes the mock objects and the CLI instance. 
+>>>>>>> 38bcfbf (entrega)
         """
         self.mock_chess = mock_chess
         self.mock_print = mock_print

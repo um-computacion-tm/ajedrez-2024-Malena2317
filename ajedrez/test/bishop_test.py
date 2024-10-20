@@ -11,11 +11,6 @@ class TestBishop(unittest.TestCase):
     """
 
     def setUp(self):
-        """
-        Sets up the test environment before each test case.
-
-        This includes creating a board and placing a white bishop in the center.
-        """
         self.board = Board()
         self.bishop = Bishop(4, 4, "WHITE")
         self.board.set_piece(4, 4, self.bishop)

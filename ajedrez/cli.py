@@ -31,4 +31,4 @@ def main():
     cli.initiate() 
 
 if __name__ == '__main__':
-    main()  
+    main()  # Run the main function if the script is executed directly.
