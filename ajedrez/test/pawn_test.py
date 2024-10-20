@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from piezas.pawn import Pawn
 from tablero.board import Board
 
-from tablero.board import Board
+
 
 
 

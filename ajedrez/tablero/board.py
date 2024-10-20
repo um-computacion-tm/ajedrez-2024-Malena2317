@@ -9,6 +9,7 @@ from piezas.knight import Knight
 from piezas.bishop import Bishop
 
 
+
 class Board:
     def __init__(self):
         """Initializes the chessboard and places the pieces in their starting positions."""

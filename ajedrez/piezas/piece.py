@@ -1,5 +1,6 @@
 
 
+
 class Piece:
     """
     A class representing a chess piece. This serves as a base class for all chess pieces,

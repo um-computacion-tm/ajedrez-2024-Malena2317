@@ -4,6 +4,7 @@ from piezas.piece import Piece
 
 
 
+
 class Pawn(Piece):
     """
     A class representing a pawn piece in a chess game. The pawn can move forward and capture diagonally.

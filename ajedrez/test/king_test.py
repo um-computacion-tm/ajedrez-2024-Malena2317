@@ -6,6 +6,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from piezas.king import King
 from tablero.board import Board
 
+
+
 class TestKing(unittest.TestCase):
     """
     Test cases for the King chess piece.

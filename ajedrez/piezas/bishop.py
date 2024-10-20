@@ -3,6 +3,9 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from piezas.piece import Piece
 
+
+
+
 class Bishop(Piece):
     """Class representing a bishop in the chess game."""
 

@@ -2,6 +2,8 @@ import sys
 sys.path.insert(0, '/home/meli/Escritorio/computacion/ajedrez-2024-Malena2317/ajedrez')
 from piezas.piece import Piece 
 
+
+
 class Knight(Piece):
     """
     Represents a Knight piece in a chess game.

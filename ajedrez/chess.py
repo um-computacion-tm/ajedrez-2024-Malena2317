@@ -8,6 +8,8 @@ from  piezas.rook import Rook
 import json
 
 
+
+
 class Chess:
     def __init__(self):
      

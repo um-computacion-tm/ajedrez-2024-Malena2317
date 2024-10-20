@@ -1,5 +1,7 @@
 from chess import Chess
 
+
+
 class CommandLineInterface:
     """
     CommandLineInterface class for interacting with the chess game through a command-line interface.

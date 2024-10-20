@@ -8,7 +8,6 @@ from tablero.board import Board
 
 
 
-
 class TestRook(unittest.TestCase):
     """
     Test cases for the Rook chess piece. 
