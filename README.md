@@ -1,7 +1,4 @@
-# ajedrez-2024-Malena2317
-ajedrez-2024-Malena2317 created by GitHub Classroom
-
-MELINA NAVARRO
+# ajedrez-2024-Malena2317- MELINA NAVARRO
 
 How to Play Chess
 
